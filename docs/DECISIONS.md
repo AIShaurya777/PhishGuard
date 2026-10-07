@@ -28,6 +28,16 @@ Add yours in the same format and link the evidence. This file becomes the
 - **Result:** 234,204 rows: 134,849 legitimate (57.6%) and 99,355 phishing (42.4%).
 - **Evidence:** notebook §3b and §4.
 
+## D5 · Split 70/15/15 by site owner
+- **Context:** With a plain random split, 39% of phishing test URLs have a site owner (e.g. `evil.com` for `a.evil.com`) that also appears in training, so test scores would partly measure recognising the owner rather than detecting phishing.
+- **Options compared:**
+  - A: hostname (220k groups). Leaves the same-owner leak in place.
+  - B: registered domain (176k groups). Puts whole hosting platforms like `web.app` in one split, which tests a harder, different question.
+  - C: registered domain where customers of platforms on the public suffix list count separately (198k groups).
+- **Decision:** C. `get_splits()` shuffles owners within each class (seed 42) and fills test, then val, then train to 15/15/70% of that class's rows. Result: 163,944 / 35,130 / 35,130 rows, 42.4% phishing in each, no owner shared between splits. `tldextract` is pinned, because its bundled suffix list defines the groups.
+- **Rule:** tune on validation only; use test once, for the final table. Every model reports through `evaluate()` (phishing = positive class).
+- **Limitation:** Platforms missing from the suffix list (e.g. `weeblysite.com`, 3,079 URLs) still act as a single owner.
+- **Evidence:** `notebooks/01b_train_test_split.ipynb`, `tests/test_split.py`.
+
 ## Open questions (next milestone)
-- Which of the 54 provided columns may a URL-only model use? Every legitimate URL has `IsHTTPS = 1` and `URLSimilarityIndex = 100`, and many columns describe page content rather than the URL.
-- Split train and test by domain, so that the same site never appears in both.
+- Which of the 54 provided columns may a URL-only model use? Every legitimate URL has `IsHTTPS = 1` and `URLSimilarityIndex = 100`, and many columns describe page content rather than the URL. (Shaurya, D6)

@@ -7,6 +7,9 @@ dependencies = [
     "pandas>=2.0",
     "matplotlib",
     "seaborn",
+    "scikit-learn",
+    # Pinned: its bundled public suffix list decides the split groups (D5).
+    "tldextract==5.4.0",
 ]
 
 [project.optional-dependencies]
