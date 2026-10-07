@@ -1,6 +1,25 @@
 # PhishGuard
 # 🛡️ PhishResist
 
+## ⚙️ Setup
+
+```bash
+uv venv --python 3.12 .venv          # or: python3 -m venv .venv
+uv pip install --python .venv -e ".[dev]"   # or: .venv/bin/pip install -e ".[dev]"
+.venv/bin/pytest                     # all tests should pass
+```
+
+Every notebook loads data the same way:
+
+```python
+from phishguard.data import load_clean, TARGET   # TARGET = "is_phishing", 1 = phishing
+df = load_clean()
+```
+
+Cleaning decisions and the reasons for them are in [`docs/DECISIONS.md`](docs/DECISIONS.md). Start with [`notebooks/01_data_loading.ipynb`](notebooks/01_data_loading.ipynb).
+
+---
+
 ### Explainable Hybrid Machine Learning and Deep Learning for Phishing URL Detection
 
 **PhishResist** is a Machine Learning and Deep Learning based system for detecting phishing URLs by combining **handcrafted URL features** with **deep representations learned directly from raw URLs**.

@@ -1,0 +1,23 @@
+[project]
+name = "phishguard"
+version = "0.1.0"
+description = "Explainable hybrid ML/DL phishing URL detection"
+requires-python = ">=3.10"
+dependencies = [
+    "pandas>=2.0",
+    "matplotlib",
+    "seaborn",
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "jupyter", "ipykernel", "nbconvert"]
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
