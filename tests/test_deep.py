@@ -71,3 +71,16 @@ def test_hybrid_uses_the_features():
     prob = model.predict_proba(X)[:, 1]
     assert ((prob >= 0.5) == y.to_numpy()).mean() > 0.95
     assert model.feature_sd_[1] == 1.0          # a constant feature is left unscaled, not divided by 0
+
+
+def test_save_and_load_give_identical_predictions(tmp_path):
+    rng = np.random.default_rng(0)
+    n = 200
+    y = pd.Series(np.arange(n) % 2)
+    X = pd.DataFrame({"url": [f"{''.join(rng.choice(list('abcdefgh'), 6))}.{'top' if i % 2 else 'org'}" for i in range(n)],
+                      "signal": rng.random(n)})
+    model = CharURLClassifier(arch="hybrid", max_epochs=2, batch_size=32, device="cpu").fit(X, y)
+    model.save(tmp_path / "model.pt")
+    loaded = CharURLClassifier.load(tmp_path / "model.pt", device="cpu")
+    assert np.allclose(model.predict_proba(X), loaded.predict_proba(X))
+    assert loaded.arch_options == model.arch_options

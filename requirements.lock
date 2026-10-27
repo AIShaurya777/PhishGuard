@@ -36,7 +36,9 @@ cffi==2.1.1
 charset-normalizer==3.5.2
     # via requests
 cloudpickle==3.1.2
-    # via joblib
+    # via
+    #   joblib
+    #   shap
 comm==0.2.3
     # via
     #   ipykernel
@@ -219,6 +221,7 @@ numpy==2.5.4
     #   scikit-learn
     #   scipy
     #   seaborn
+    #   shap
     #   xgboost
 packaging==26.3
     # via
@@ -230,10 +233,12 @@ packaging==26.3
     #   matplotlib
     #   nbconvert
     #   pytest
+    #   shap
 pandas==3.1.0
     # via
     #   phishguard (pyproject.toml)
     #   seaborn
+    #   shap
 pandocfilters==1.5.1
     # via nbconvert
 parso==0.8.7
@@ -316,11 +321,14 @@ rpds-py==2026.9.1
     #   jsonschema
     #   referencing
 scikit-learn==1.9.1
-    # via phishguard (pyproject.toml)
+    # via
+    #   phishguard (pyproject.toml)
+    #   shap
 scipy==1.18.1
     # via
     #   phishguard (pyproject.toml)
     #   scikit-learn
+    #   shap
     #   xgboost
 seaborn==0.13.2
     # via phishguard (pyproject.toml)
@@ -328,10 +336,14 @@ send2trash==2.1.0
     # via jupyter-server
 setuptools==84.2.1
     # via torch
+shap==0.54.1
+    # via phishguard (pyproject.toml)
 six==1.17.0
     # via
     #   python-dateutil
     #   rfc3339-validator
+slicer==0.0.8
+    # via shap
 soupsieve==3.0.4
     # via beautifulsoup4
 stack-data==0.6.3
@@ -358,6 +370,8 @@ tornado==6.6
     #   jupyterlab
     #   notebook
     #   terminado
+tqdm==4.70.1
+    # via shap
 traitlets==5.16.1
     # via
     #   ipykernel

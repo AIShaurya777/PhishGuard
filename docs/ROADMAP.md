@@ -8,8 +8,8 @@
 | – | Senior review and fixes: 5-split evaluation, CIs, parsing fix (D11) | ✅ | all re-run | [review](review/senior_review_m1_m3.md) |
 | 4 | Deep learning on raw URLs: char-CNN, BiLSTM | ✅ | 08 | [04](guide/04_deep_models.md) |
 | 5 | Hybrid model: deep URL encoder + our handcrafted features | ✅ | 09 | [05](guide/05_hybrid.md) |
-| 6 | Explainability: SHAP for trees, character attributions for deep models | next | | |
-| 7 | Robustness: original vs modified phishing URLs, model not retrained | | | |
+| 6 | Explainability: SHAP for trees, character attributions for deep models | ✅ | 10 | [06](guide/06_explainability.md) |
+| 7 | Robustness: original vs modified phishing URLs, model not retrained | next | | |
 | 8 | Streamlit app | | | |
 | 9 | Report and slides | | | |
 
@@ -48,8 +48,20 @@ The README table is generated from `results/` (`python -m phishguard.report`), a
 - Late fusion (log-odds average of CNN + XGBoost) is worse than the CNN alone. Joint training is what makes the combination work.
 - On registered domains, the n-gram model is still best.
 
-## Milestone 6 plan
-- **Features branch:** SHAP for XGBoost on the 40 features (domain only and raw URL), plus permutation importance of the hybrid's feature inputs.
-- **Characters branch:** per-character attributions for the char-CNN/hybrid (gradient × input or occlusion: hide one character, see the probability change), shown as coloured URLs.
-- **N-gram model:** its top weights, as a sanity check that the explanations agree.
-- **Goal:** explanations the Streamlit app can show for any URL.
+## Milestone 6 outcome (D14)
+- `phishguard.explain`: exact TreeSHAP for XGBoost; character and feature occlusion plus permutation importance for the hybrid; `explain_url()` for the app.
+- Checked: SHAP adds up (gap 2·10⁻⁵). Deletion test: top-5 characters flip 20% of caught phishing, random 5 only 2.8%. The hybrid's suffix scores agree with the n-gram weights (ρ = 0.89).
+- Found: the raw-URL shortcut is visible in both explanations. The domain-only model flags legitimate subdomains (`accounts.google.com` → 0.999).
+- Saved `models/hybrid_domain_only.pt` for the app.
+
+## Milestone 7 plan
+- **Question:** how do the saved models react when a URL is changed in realistic ways? The model is **not** retrained.
+- **Phishing → evasion:** on caught phishing test domains, apply edits an attacker could make:
+  - swap a free TLD for `.com`;
+  - remove digits/hyphens;
+  - drop the subdomain;
+  - replace look-alike characters (`0→o`, `1→l`);
+  - move from a hosting platform to an own domain.
+  Measure how many are still caught.
+- **Legitimate → false alarms:** add a subdomain (`www`, `login.`, `mail.`) or change the TLD of legitimate test domains, and measure the false-alarm rate. This quantifies the `accounts.google.com` problem.
+- **Models:** hybrid, char-CNN and n-gram (domain only), all on the seed-42 split. Report the detection rate before → after per edit, with explanations for a few flipped examples.

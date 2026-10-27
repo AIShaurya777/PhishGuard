@@ -11,8 +11,8 @@
 | 3 | Shortcut analysis: why the scores are so high | ✅ Done |
 | 4 | Char-CNN and BiLSTM on raw URLs and shortcut-reduced views | ✅ Done |
 | 5 | Hybrid model (char-CNN + handcrafted features) | ✅ Done |
-| 6 | Explainability (SHAP, character attributions) | ⏳ Next |
-| 7 | Robustness: original vs modified URLs | ⏳ Planned |
+| 6 | Explainability (SHAP, character attributions) | ✅ Done |
+| 7 | Robustness: original vs modified URLs | ⏳ Next |
 | 8 | Streamlit app | ⏳ Planned |
 
 Details: [`docs/ROADMAP.md`](docs/ROADMAP.md).

@@ -13,6 +13,7 @@ dependencies = [
     # Pinned: its bundled public suffix list decides the split groups (D5).
     "tldextract==5.4.0",
     "torch",
+    "shap",
 ]
 
 [project.optional-dependencies]

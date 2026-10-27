@@ -157,6 +157,26 @@ Add yours in the same format and link the evidence. This file becomes the
 - **Consequence:** the **domain-only hybrid** is the model to explain (Milestone 6) and to test for robustness (Milestone 7). The n-gram model stays as the simple baseline and is the best model on registered domains.
 - **Evidence:** `notebooks/09_hybrid.ipynb`, `results/m5_hybrid/`, `tests/test_deep.py`.
 
+## D14 · Explanations: TreeSHAP for XGBoost, occlusion for the hybrid (Milestone 6)
+- **Decision:** `phishguard.explain` provides three methods, all in log-odds:
+  - `tree_shap`: exact SHAP values for XGBoost.
+  - `char_occlusion`: hide one character (all-zero PAD input) and measure the change in the hybrid's log-odds.
+  - `feature_occlusion`: set one feature to its training mean.
+  - Plus permutation importance (ROC-AUC drop) for the hybrid's features, and `explain_url()` for the app.
+- **Why occlusion, not SHAP, for the network:** exact SHAP is only cheap for trees. Occlusion asks a direct counterfactual question and can be verified with a deletion test.
+- **Bug found and fixed:** the first version explained `logit(probability)`. For confident URLs the float32 sigmoid rounds to exactly 1.0, so every score came out as 0. Explanations now use the network's raw log-odds (`predict_encoded(..., logits=True)`), and a test covers it.
+- **Environment:** on macOS, torch and xgboost load different OpenMP libraries, and both running threads in one process segfaults or hangs. `phishguard.deep` sets `OMP_NUM_THREADS=1` on macOS; `tests/conftest.py` imports it first. XGBoost is ~2× slower; GPU training is unaffected.
+- **Checks:**
+  - SHAP values add up to XGBoost's log-odds (max gap 2·10⁻⁵).
+  - Deletion test on 2,000 caught phishing domains: hiding the top-5 characters flips 20% to legitimate, 5 random characters only 2.8%.
+  - The hybrid's TLD scores agree with the n-gram weights (Spearman 0.89, 38 suffixes).
+- **Findings:**
+  - On the raw URL, the explanations show the shortcut: `is_https` and `has_www` dominate SHAP, and `https://www.` is blue character by character.
+  - On domains, the hybrid's features branch is used for **structure** (`num_subdomains`, `on_hosting_platform`), and its characters branch for **TLDs and names** (free TLDs `.gq/.ml/.cf/.ga` → phishing; `.gov`, `.ac.uk`, `.edu` → legitimate).
+- **Limitation found:** the domain-only model flags legitimate subdomains: `accounts.google.com` gets P = 0.999, mainly from `num_subdomains`, because only ~6% of legitimate training domains have any structure (D10). The app must state this, and Milestone 7 measures it.
+- **Artifact:** `models/hybrid_domain_only.pt` + `.json` (seed-42 train split, dropout 0.5, threshold 0.54, test accuracy 87.8%) for the Streamlit app.
+- **Evidence:** `notebooks/10_explainability.ipynb`, `tests/test_explain.py`.
+
 ## Reporting protocol from Milestone 4 on (fixed in advance)
 To avoid choosing what to report after seeing test results, every new model reports exactly this, and nothing is dropped if it looks bad:
 - **raw URL, domain only, registered domain** views (D10)

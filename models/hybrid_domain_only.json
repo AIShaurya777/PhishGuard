@@ -1,0 +1,9 @@
+{
+  "view": "domain only",
+  "threshold": 0.54,
+  "trained_on": "seed-42 train split",
+  "settings": {
+    "dropout": 0.5
+  },
+  "test_accuracy": 0.8777682892115002
+}

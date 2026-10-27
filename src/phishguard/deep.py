@@ -13,7 +13,16 @@ DataFrame with a "url" column plus the feature columns.
 """
 
 import copy
+import os
+import sys
 import time
+
+if sys.platform == "darwin":
+    # On macOS, torch and xgboost each bring their own OpenMP library. Two OpenMP
+    # runtimes in one process crash or hang once both start worker threads, so
+    # each gets one OpenMP thread (training runs on the Apple GPU anyway).
+    # Import this module before running any xgboost model.
+    os.environ.setdefault("OMP_NUM_THREADS", "1")
 
 import numpy as np
 import pandas as pd
@@ -229,10 +238,56 @@ class CharURLClassifier:
         return self
 
     def predict_proba(self, X) -> np.ndarray:
+        prob = self.predict_encoded(*self.encode(X))
+        return np.column_stack([1 - prob, prob])
+
+    def encode(self, X) -> tuple[np.ndarray, np.ndarray, np.ndarray | None]:
+        """Input → (character ids, lengths, scaled features or None), as the network sees it.
+
+        Explanations (phishguard.explain) edit these, e.g. hide one character,
+        and call predict_encoded() on the result.
+        """
         urls, features = _split_input(X)
         ids, lengths = self.vocab_.encode(urls, self.max_len)
-        prob = self._predict(ids, lengths, None if features is None else self._scale(features))
-        return np.column_stack([1 - prob, prob])
+        return ids, lengths, None if features is None else self._scale(features)
+
+    def predict_encoded(self, ids: np.ndarray, lengths: np.ndarray, features=None, logits: bool = False) -> np.ndarray:
+        """Probability of phishing for already-encoded input, or the raw log-odds with logits=True.
+
+        Explanations use the log-odds: for very confident URLs the probability
+        rounds to exactly 1.0, so hiding a character could never change it.
+        """
+        return self._predict(ids, lengths, features, logits)
+
+    def save(self, path) -> None:
+        """Save everything needed to predict: settings, vocabulary, feature scaling, weights."""
+        state = {
+            "settings": {"arch": self.arch, "max_len": self.max_len, "max_epochs": self.max_epochs,
+                         "patience": self.patience, "batch_size": self.batch_size, "lr": self.lr,
+                         "seed": self.seed, **self.arch_options},
+            "vocab": self.vocab_.ids, "min_count": self.vocab_.min_count,
+            "weights": {k: v.cpu() for k, v in self.net_.state_dict().items()},
+            "history": self.history_, "best_epoch": self.best_epoch_,
+        }
+        if hasattr(self, "feature_mean_"):
+            state["feature_mean"] = torch.from_numpy(self.feature_mean_)
+            state["feature_sd"] = torch.from_numpy(self.feature_sd_)
+        torch.save(state, path)
+
+    @classmethod
+    def load(cls, path, device=None) -> "CharURLClassifier":
+        state = torch.load(path, weights_only=True)         # weights_only: never runs code from the file
+        model = cls(device=device, **state["settings"])
+        model.vocab_ = CharVocab(state["min_count"])
+        model.vocab_.ids = state["vocab"]
+        options = dict(model.arch_options)
+        if "feature_mean" in state:
+            model.feature_mean_, model.feature_sd_ = state["feature_mean"].numpy(), state["feature_sd"].numpy()
+            options["n_features"] = len(model.feature_mean_)
+        model.net_ = ARCHITECTURES[model.arch](len(model.vocab_), **options).to(model.device)
+        model.net_.load_state_dict(state["weights"])
+        model.history_, model.best_epoch_ = state["history"], state["best_epoch"]
+        return model
 
     def _scale(self, features: np.ndarray) -> np.ndarray:
         return ((np.log1p(features.astype(np.float64)) - self.feature_mean_) / self.feature_sd_).astype(np.float32)
@@ -246,12 +301,13 @@ class CharURLClassifier:
         return self.net_(*inputs)
 
     @torch.no_grad()
-    def _predict(self, ids: np.ndarray, lengths: np.ndarray, features=None) -> np.ndarray:
+    def _predict(self, ids: np.ndarray, lengths: np.ndarray, features=None, logits: bool = False) -> np.ndarray:
         self.net_.eval()
-        prob = np.empty(len(lengths), dtype=np.float64)
+        out = np.empty(len(lengths), dtype=np.float64)
         for batch in _length_batches(lengths, 1024):
-            prob[batch] = torch.sigmoid(self._forward(ids[batch], lengths[batch], _rows(features, batch))).cpu().numpy()
-        return prob
+            scores = self._forward(ids[batch], lengths[batch], _rows(features, batch))
+            out[batch] = (scores if logits else torch.sigmoid(scores)).cpu().numpy()
+        return out
 
 
 def _split_input(X) -> tuple[pd.Series, np.ndarray | None]:

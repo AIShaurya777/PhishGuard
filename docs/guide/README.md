@@ -9,6 +9,7 @@ Read these in order. Each one explains one part of the project in plain words, s
 | 3 | [Shortcuts (Milestone 3)](03_shortcuts.md) | Why the scores are so high, and the shortcut-reduced URL-only number |
 | 4 | [Deep learning (Milestone 4)](04_deep_models.md) | Char-CNN and BiLSTM: how they read a URL, how they're trained, results |
 | 5 | [Hybrid model (Milestone 5)](05_hybrid.md) | Combining the CNN with handcrafted features: joint network vs averaging |
+| 6 | [Explainability (Milestone 6)](06_explainability.md) | SHAP, permutation importance, character highlighting, and checking the explanations are right |
 
 ## The project in one minute
 - **Problem:** given a URL, say whether it is phishing (a fake site that steals passwords or money) or legitimate.
@@ -21,8 +22,8 @@ Read these in order. Each one explains one part of the project in plain words, s
   5. Made every number trustworthy: each model is trained and tested on **5 different splits**, and we report mean ± standard deviation (after a senior review, `docs/review/`).
   6. Trained deep learning models that read URLs character by character (a CNN and a BiLSTM). They tie with the n-gram model on raw URLs (~99.7%). On domain only, the CNN is at most slightly better (86.6%, fewer false alarms). On the registered domain, the simpler n-gram model wins.
   7. Built a **hybrid** network that reads the characters (CNN) *and* our 40 handcrafted features, trained together. On domain names it's our best URL model (86.7%), slightly but consistently ahead of the n-gram model and the CNN.
+  8. Explained the models with **SHAP** and **character highlighting**, and checked the explanations are faithful. They expose the raw-URL shortcut and a real weakness: the domain model flags legitimate subdomains like `accounts.google.com`.
 - **What's next:**
-  - Explanations with SHAP.
   - A robustness test with modified URLs.
   - The Streamlit app.
 
@@ -47,6 +48,8 @@ Read these in order. Each one explains one part of the project in plain words, s
 | **Epoch** | One pass of training over all training URLs |
 | **Early stopping** | Stop training when a held-out set stops improving, and keep the best weights |
 | **Dropout** | Randomly switching off neurons during training so the network can't rely on any single one |
+| **Log-odds** | log(p / (1 − p)): the probability on a scale where contributions from different inputs add up |
+| **SHAP value** | A feature's fair share of one prediction (from game theory); all shares add up to the model's output |
 
 ## Where things are
 ```
