@@ -10,6 +10,7 @@ Read these in order. Each one explains one part of the project in plain words, s
 | 4 | [Deep learning (Milestone 4)](04_deep_models.md) | Char-CNN and BiLSTM: how they read a URL, how they're trained, results |
 | 5 | [Hybrid model (Milestone 5)](05_hybrid.md) | Combining the CNN with handcrafted features: joint network vs averaging |
 | 6 | [Explainability (Milestone 6)](06_explainability.md) | SHAP, permutation importance, character highlighting, and checking the explanations are right |
+| 7 | [Robustness (Milestone 7)](07_robustness.md) | Edited phishing URLs, legitimate subdomains, and popular real websites outside the dataset |
 
 ## The project in one minute
 - **Problem:** given a URL, say whether it is phishing (a fake site that steals passwords or money) or legitimate.
@@ -23,8 +24,8 @@ Read these in order. Each one explains one part of the project in plain words, s
   6. Trained deep learning models that read URLs character by character (a CNN and a BiLSTM). They tie with the n-gram model on raw URLs (~99.7%). On domain only, the CNN is at most slightly better (86.6%, fewer false alarms). On the registered domain, the simpler n-gram model wins.
   7. Built a **hybrid** network that reads the characters (CNN) *and* our 40 handcrafted features, trained together. On domain names it's our best URL model (86.7%), slightly but consistently ahead of the n-gram model and the CNN.
   8. Explained the models with **SHAP** and **character highlighting**, and checked the explanations are faithful. They expose the raw-URL shortcut and a real weakness: the domain model flags legitimate subdomains like `accounts.google.com`.
+  9. Tested **robustness** without retraining. The raw-URL model is fooled just by switching to HTTPS. The domain-only models resist that, but cheap domain changes evade them, and on 25,000 popular real websites they flag 15–81% (depending on subdomains). The simple n-gram model copes best with edits and subdomains.
 - **What's next:**
-  - A robustness test with modified URLs.
   - The Streamlit app.
 
 ## Words you'll hear

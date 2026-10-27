@@ -78,6 +78,7 @@ Add yours in the same format and link the evidence. This file becomes the
   - XGBoost on URL columns without `IsHTTPS`: still 99.61 ± 0.06%. `URLLength` minus the counted characters is 12 (`https://www.`) for all but 4 of 134,849 legitimate URLs, and `URLLength` also keeps the trailing slash we removed (D3).
 - **Decision:** Column groups are defined in `src/phishguard/columns.py` (19 URL, 3 statistic, 28 page). The all-column results are reported as a *reproduction* of published work, not as evidence of phishing detection. The app and the hybrid model use only our own URL features, never the provided columns.
 - **Protocol note:** The rules were first noticed while exploring the full dataset (notebook 01), which is stated openly. Scoring them on test is a check, not a tuned result.
+- **Independent confirmation:** several later-found audits report the same shortcuts: the `URLSimilarityIndex` rule (99.67%), the `https://www.` rule (98.96–99.7%), and the prefix being recoverable from `URLLength` (ollivianguy, Yoyagm, phish-drift; `docs/references.md`, *Independent audits*). They are not peer-reviewed.
 - **Evidence:** `notebooks/06_shortcut_audit.ipynb`.
 
 ## D10 · Report every URL model on the raw URL and on shortcut-reduced views
@@ -97,6 +98,7 @@ Add yours in the same format and link the evidence. This file becomes the
 - **Limitations:**
   - Compromised legitimate sites (`smithtony.co.uk`) can't be recognised from the domain name by any URL-only model.
   - At a 1% phishing rate, the domain-only model's precision would be about 15%.
+- **Comparison:** a host-name-only model in an independent audit (Yoyagm; `docs/references.md`) reports ROC-AUC 0.919 on PhiUSIIL and 0.937 on Tranco + later PhishTank URLs, close to our domain-only ROC-AUC (~0.92). That suggests the shortcut-reduced number is realistic.
 - **Evidence:** `notebooks/07_url_views.ipynb`.
 
 ## D11 · Results are mean ± sd over 5 splits; URL parsing fixed; split re-made once
@@ -174,8 +176,33 @@ Add yours in the same format and link the evidence. This file becomes the
   - On the raw URL, the explanations show the shortcut: `is_https` and `has_www` dominate SHAP, and `https://www.` is blue character by character.
   - On domains, the hybrid's features branch is used for **structure** (`num_subdomains`, `on_hosting_platform`), and its characters branch for **TLDs and names** (free TLDs `.gq/.ml/.cf/.ga` → phishing; `.gov`, `.ac.uk`, `.edu` → legitimate).
 - **Limitation found:** the domain-only model flags legitimate subdomains: `accounts.google.com` gets P = 0.999, mainly from `num_subdomains`, because only ~6% of legitimate training domains have any structure (D10). The app must state this, and Milestone 7 measures it.
+- **Known elsewhere:** the same false alarm (`accounts.google.com/signin`) is reported for another URL model (valezion model card), and `login.microsoftonline.com` for a model whose legitimate data held only main domains (NclRsi46). See `docs/references.md`.
 - **Artifact:** `models/hybrid_domain_only.pt` + `.json` (seed-42 train split, dropout 0.5, threshold 0.54, test accuracy 87.8%) for the Streamlit app.
 - **Evidence:** `notebooks/10_explainability.ipynb`, `tests/test_explain.py`.
+
+## D15 · Robustness: edited URLs and popular real websites, no retraining (Milestone 7)
+- **Decision:** test the seed-42 models as they are (threshold from validation) against:
+  1. the raw-URL attack from an independent audit (`http`→`https`; `https://www.<host>` with no path);
+  2. six attacker edits to phishing **domains** (`phishguard.robustness.PHISHING_EDITS`; each applies only where realistic, e.g. no TLD change on a hosting platform; distinct domains, each counted once);
+  3. common subdomains added to legitimate test domains;
+  4. popular real websites not in PhiUSIIL: CrUX top-10k origins (with subdomains) and Tranco top-20k registered domains (`DataSets/external/README.md`). Every site whose owner appears in PhiUSIIL is excluded.
+- **Results:**
+  - **Raw URL:** HTTPS alone drops the raw-URL n-gram from 100% to 35.5% caught; `https://www.` + no path to 17.8%. Domain-only inputs are unchanged by these edits (checked: 100%).
+  - **Domain edits** (caught before → after): drop subdomain, hybrid 99% → 54%; leave hosting platform, 100% → 72%; TLD → `.com`, 74% → 51%. All edits together: hybrid 86% → 20%, n-gram 83% → 32%, XGBoost 77% → 4%.
+  - **Legitimate + subdomain:** the hybrid's false-alarm rate rises from 3.3% to 74–95%; the n-gram's to 21–73%.
+  - **Real websites flagged as phishing:**
+
+    | | Hybrid | n-gram |
+    |---|---|---|
+    | CrUX bare domains | 15% | 22% |
+    | CrUX with a subdomain | 81% | 52% |
+    | Tranco top domains | 19% | 26% |
+
+    For comparison, PhiUSIIL's own test domains: 3.3% (hybrid) and 4.3% (n-gram).
+  - **Country priors:** popular `.ru`, `.ir` and `.in` sites are flagged 33–37% of the time, matching their phishing share in PhiUSIIL's training split (79%, 78%, 50%). Popular `.org`/`.de` sites: 0%.
+- **Interpretation:** the domain-only models resist the prefix shortcut but learned other collection artefacts (no subdomains on the legitimate side, country mix of the phishing feed). Against edits and subdomains the n-gram model is the most robust, though on popular bare domains it raises more false alarms than the hybrid (22% vs 15%). The hybrid's test-split advantage partly rests on the subdomain/hosting features that these edits break. The remedy is legitimate data that looks like the real web, not a larger model.
+- **Limitation of the test:** "own domain" is decided with the Public Suffix List. Shared gateways that aren't on it (e.g. `ipfs.io`) are treated as attacker-owned, which makes some edits (`ipfs.io → ipfs.com`) unrealistic. Each such domain counts once among ~11,600.
+- **Evidence:** `notebooks/11_robustness.ipynb`, `src/phishguard/robustness.py`, `tests/test_robustness.py`. It agrees with the independent audits in `docs/references.md`.
 
 ## Reporting protocol from Milestone 4 on (fixed in advance)
 To avoid choosing what to report after seeing test results, every new model reports exactly this, and nothing is dropped if it looks bad:

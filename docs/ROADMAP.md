@@ -9,8 +9,8 @@
 | 4 | Deep learning on raw URLs: char-CNN, BiLSTM | ✅ | 08 | [04](guide/04_deep_models.md) |
 | 5 | Hybrid model: deep URL encoder + our handcrafted features | ✅ | 09 | [05](guide/05_hybrid.md) |
 | 6 | Explainability: SHAP for trees, character attributions for deep models | ✅ | 10 | [06](guide/06_explainability.md) |
-| 7 | Robustness: original vs modified phishing URLs, model not retrained | next | | |
-| 8 | Streamlit app | | | |
+| 7 | Robustness: original vs modified phishing URLs, model not retrained | ✅ | 11 | [07](guide/07_robustness.md) |
+| 8 | Streamlit app | next | | |
 | 9 | Report and slides | | | |
 
 ## Headline results (test accuracy, mean ± sd over 5 site-owner splits)
@@ -54,14 +54,17 @@ The README table is generated from `results/` (`python -m phishguard.report`), a
 - Found: the raw-URL shortcut is visible in both explanations. The domain-only model flags legitimate subdomains (`accounts.google.com` → 0.999).
 - Saved `models/hybrid_domain_only.pt` for the app.
 
-## Milestone 7 plan
-- **Question:** how do the saved models react when a URL is changed in realistic ways? The model is **not** retrained.
-- **Phishing → evasion:** on caught phishing test domains, apply edits an attacker could make:
-  - swap a free TLD for `.com`;
-  - remove digits/hyphens;
-  - drop the subdomain;
-  - replace look-alike characters (`0→o`, `1→l`);
-  - move from a hosting platform to an own domain.
-  Measure how many are still caught.
-- **Legitimate → false alarms:** add a subdomain (`www`, `login.`, `mail.`) or change the TLD of legitimate test domains, and measure the false-alarm rate. This quantifies the `accounts.google.com` problem.
-- **Models:** hybrid, char-CNN and n-gram (domain only), all on the seed-42 split. Report the detection rate before → after per edit, with explanations for a few flipped examples.
+## Milestone 7 outcome (D15)
+- The raw-URL model is evaded by switching to HTTPS (100% → 35.5% caught). The domain-only models are immune by construction.
+- Cheap domain edits evade the domain-only models (all edits: hybrid 86% → 20%, n-gram 83% → 32%).
+- On popular real websites outside PhiUSIIL, the hybrid flags 15% of bare domains and 81% of hosts with a subdomain. Country priors from the phishing feed (`.ru`, `.ir`, `.in`) explain part of it.
+- Against edits and subdomains the n-gram model is the most robust (it flags more popular bare domains, 22% vs 15%). The fix is better legitimate data.
+
+## Milestone 8 plan: Streamlit app
+- **Input:** a URL. **Shown:** the domain the model sees, P(phishing) from the hybrid **and** the n-gram model (most robust to edits and subdomains), the verdict at the validation threshold, the character highlighting and the top features (`explain_url`).
+- **Honest warnings, computed for each URL:**
+  - the URL has a subdomain (the models flag 81% of popular such sites);
+  - its suffix had a high phishing share in training (country prior);
+  - the raw-URL model would be fooled by HTTPS, which is why we don't use it.
+- **A "limits" page** with the numbers from D15 and the audits.
+- Loads `models/hybrid_domain_only.pt` (and a saved n-gram model); no training in the app.

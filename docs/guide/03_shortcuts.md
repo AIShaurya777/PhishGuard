@@ -107,5 +107,8 @@ A: Even the domain still differs in structure between the classes (6% vs 57% hav
 **Q: Why do n-grams beat XGBoost on the domain?**
 A: The information is in the characters (`.cf`, `paypa1`, random strings). Our 40 features are mostly counts, which lose that detail. That's why we try character-level deep learning next.
 
+**Q: Has anyone else found this?**
+A: Yes. Several independent audits on GitHub report the same `https://www.` and `URLSimilarityIndex` shortcuts with almost identical numbers, and one also found the prefix hidden in `URLLength`. They aren't peer-reviewed, and many published papers still report ~99.9% with the leaking columns. Our list is in `docs/references.md`.
+
 **Q: What would fix the dataset?**
 A: Legitimate URLs with real paths, not only homepages, collected the same way as the phishing URLs, and no columns computed against reference lists of legitimate sites.
