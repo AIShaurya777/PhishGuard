@@ -1,47 +1,68 @@
-# PhishGuard
-# 🛡️ PhishResist
+# 🛡️ PhishGuard
+
+**Phishing URL detection on the PhiUSIIL dataset:** classical ML, deep learning on raw URLs, a hybrid model, explanations, and a robustness test against modified URLs. A university ML course project by Manan, Shaurya and Abhishek.
+
+## 📍 Status
+
+| # | Milestone | Status |
+|---|---|---|
+| 1 | Data loading, label direction, cleaning, split by site owner | ✅ Done |
+| 2 | Reproduce published ≥99.9%; URL-only models | ✅ Done |
+| 3 | Shortcut analysis: why the scores are so high | ✅ Done |
+| 4 | Char-CNN and BiLSTM on raw URLs | ⏳ Next |
+| 5 | Hybrid model | ⏳ Planned |
+| 6 | Explainability (SHAP, character attributions) | ⏳ Planned |
+| 7 | Robustness: original vs modified URLs | ⏳ Planned |
+| 8 | Streamlit app | ⏳ Planned |
+
+Details: [`docs/ROADMAP.md`](docs/ROADMAP.md).
 
 ## ⚙️ Setup
 
 ```bash
-uv venv --python 3.12 .venv          # or: python3 -m venv .venv
-uv pip install --python .venv -e ".[dev]"   # or: .venv/bin/pip install -e ".[dev]"
-.venv/bin/pytest                     # all tests should pass
+uv venv --python 3.12 .venv
+uv pip sync --python .venv requirements.lock      # exact versions we used
+uv pip install --python .venv --no-deps -e .
+.venv/bin/pytest                                  # all tests should pass
 ```
 
-Every notebook loads data the same way:
+Every notebook loads, splits and evaluates data the same way:
 
 ```python
 from phishguard.data import load_clean, TARGET   # TARGET = "is_phishing", 1 = phishing
+from phishguard.experiment import run            # tune → threshold on validation → test, over 5 splits
 df = load_clean()
 ```
 
 - **New to the project?** Read [`docs/guide/`](docs/guide/README.md), which explains every part simply, with likely viva questions.
-- **Every decision and why:** [`docs/DECISIONS.md`](docs/DECISIONS.md).
-- **Notebooks:** run them in order (`01` → `05`).
+- **Every decision and why:** [`docs/DECISIONS.md`](docs/DECISIONS.md). **Sources:** [`docs/references.md`](docs/references.md).
+- **Notebooks:** run in the order listed in [`notebooks/readme.md`](notebooks/readme.md).
 
-## 📊 Results so far (test set, 35,130 URLs, split by site owner)
+## 📊 Results so far
 
-| Model | Input | Accuracy |
-|---|---|---|
-| XGBoost | all provided columns | 100.000% |
-| Random Forest | all provided columns | 99.997% |
-| Logistic Regression | all provided columns | 99.994% |
-| Average: char n-gram + XGBoost | URL only | 99.707% |
-| Char n-gram Logistic Regression | URL only | 99.695% |
-| Random Forest / XGBoost | URL features | 99.68% |
-| *One-line rule:* `URLSimilarityIndex < 100` | 1 column | 99.72% |
-| Char n-gram Logistic Regression | **domain only** (shortcuts removed) | **88.59%** |
+<!-- RESULTS:START -->
+Test accuracy, **mean ± sd over 5 site-owner splits**, and the seed-42 split with its 95% confidence interval.
 
-Every legitimate URL in PhiUSIIL is a bare `https://www.` homepage, so the near-perfect scores mostly reflect how the dataset was built. The domain-only number is the honest one ([shortcut analysis](docs/guide/03_shortcuts.md)).
+| Model | Input | Accuracy (5 splits) | Seed 42 [95% CI] | ROC-AUC |
+|---|---|---|---|---|
+| XGBoost (all columns) | all provided columns | 100.00% ± 0.00% | 100.00% [100.00%, 100.00%] | 1.0000 |
+| Random Forest (all columns) | all provided columns | 100.00% ± 0.00% | 100.00% [100.00%, 100.00%] | 1.0000 |
+| LogReg (all columns) | all provided columns | 99.99% ± 0.00% | 99.99% [99.98%, 100.00%] | 1.0000 |
+| Average: n-gram + XGBoost (URL only) | raw URL + URL features | 99.70% ± 0.03% | 99.75% [99.68%, 99.80%] | 0.9986 |
+| Char n-gram LogReg (raw URL) | raw URL | 99.69% ± 0.05% | 99.75% [99.69%, 99.80%] | 0.9986 |
+| XGBoost (URL features) | raw URL → 40 features | 99.63% ± 0.03% | 99.68% [99.62%, 99.74%] | 0.9973 |
+| Char n-gram LogReg | **domain only** (shortcut-reduced) | 86.27% ± 0.89% | 87.33% [86.14%, 88.57%] | 0.9162 |
+| Char n-gram LogReg | **registered domain** (shortcut-reduced) | 82.49% ± 1.93% | 85.03% [83.38%, 86.71%] | 0.8945 |
+| XGBoost URL features | **domain only** (shortcut-reduced) | 81.43% ± 1.15% | 80.19% [74.55%, 83.56%] | 0.8473 |
 
-Details: [`notebooks/05_m2_results.ipynb`](notebooks/05_m2_results.ipynb), [`notebooks/07_url_views.ipynb`](notebooks/07_url_views.ipynb). Plan and status: [`docs/ROADMAP.md`](docs/ROADMAP.md).
+Every legitimate URL in PhiUSIIL is a bare `https://www.` homepage, so the near-perfect scores mostly reflect how the dataset was built ([shortcut analysis](docs/guide/03_shortcuts.md)). The shortcut-reduced rows show what a URL-only model can do from the domain name.
+<!-- RESULTS:END -->
 
 ---
 
 ### Explainable Hybrid Machine Learning and Deep Learning for Phishing URL Detection
 
-**PhishResist** is a Machine Learning and Deep Learning based system for detecting phishing URLs by combining **handcrafted URL features** with **deep representations learned directly from raw URLs**.
+**PhishGuard** is a Machine Learning and Deep Learning based system for detecting phishing URLs by combining **handcrafted URL features** with **deep representations learned directly from raw URLs**.
 
 The project compares traditional ML models, deep learning models, and a hybrid ML-DL model. It also investigates **why URLs are classified as phishing** and evaluates the model's robustness against **realistic URL manipulations** by comparing predictions on original and modified URLs.
 
@@ -221,7 +242,7 @@ The hybrid model combines:
 
 **Handcrafted URL features**
 
-*
++
 
 **Deep features learned from raw URLs**
 
@@ -472,12 +493,11 @@ The objective is to measure how much the model's performance changes after URL m
 
 The models will be evaluated using:
 
-* Accuracy
-* Precision
-* Recall
-* F1-score
-* ROC-AUC
-* Confusion Matrix
+* Accuracy, Precision, Recall, F1-score, Confusion Matrix
+* ROC-AUC and PR-AUC (threshold-free)
+* MCC (Matthews correlation coefficient)
+* Share of phishing caught at 1% and 0.1% false alarms
+* Mean ± standard deviation over 5 site-owner splits, and a 95% confidence interval that resamples whole site owners
 
 For robustness evaluation:
 
@@ -633,21 +653,21 @@ Deploy the model as a browser extension that can analyze URLs before users visit
 ---
 
 
-# 📌 Current Scope vs Future Scope
+# 📌 Scope: in this project vs future work
 
 | Component                  |   Status  |
 | -------------------------- | :-------: |
-| URL preprocessing          | ✅ Current |
-| URL feature engineering    | ✅ Current |
-| Random Forest              | ✅ Current |
-| XGBoost                    | ✅ Current |
-| CNN                        | ✅ Current |
-| BiLSTM                     | ✅ Current |
-| Hybrid ML-DL model         | ✅ Current |
-| Explainability / SHAP      | ✅ Current |
-| Original vs Modified URL   | ✅ Current |
-| Robustness testing         | ✅ Current |
-| Performance drop analysis  | ✅ Current |
+| URL preprocessing          | ✅ Done |
+| URL feature engineering    | ✅ Done |
+| Random Forest              | ✅ Done |
+| XGBoost                    | ✅ Done |
+| CNN                        | ⏳ Planned |
+| BiLSTM                     | ⏳ Planned |
+| Hybrid ML-DL model         | ⏳ Planned |
+| Explainability / SHAP      | ⏳ Planned |
+| Original vs Modified URL   | ⏳ Planned |
+| Robustness testing         | ⏳ Planned |
+| Performance drop analysis  | ⏳ Planned |
 | Adversarial training       | 🔮 Future |
 | HTML/DOM analysis          | 🔮 Future |
 | Screenshot-based detection | 🔮 Future |
@@ -659,7 +679,7 @@ Deploy the model as a browser extension that can analyze URLs before users visit
 
 # 🚀 Expected Outcome
 
-PhishResist aims to develop a phishing URL detection system that:
+PhishGuard aims to develop a phishing URL detection system that:
 
 1. Accurately distinguishes phishing URLs from legitimate URLs.
 2. Compares traditional ML and deep learning approaches.

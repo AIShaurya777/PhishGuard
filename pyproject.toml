@@ -2,12 +2,13 @@
 name = "phishguard"
 version = "0.1.0"
 description = "Explainable hybrid ML/DL phishing URL detection"
-requires-python = ">=3.10"
+requires-python = ">=3.12,<3.13"
 dependencies = [
     "pandas>=2.0",
     "matplotlib",
     "seaborn",
     "scikit-learn",
+    "scipy",
     "xgboost",
     # Pinned: its bundled public suffix list decides the split groups (D5).
     "tldextract==5.4.0",

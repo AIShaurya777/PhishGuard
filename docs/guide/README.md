@@ -15,7 +15,8 @@ Read these in order. Each one explains one part of the project in plain words, s
   1. Cleaned the data and split it so that **no website owner appears in both training and testing**.
   2. Reproduced the published accuracy: **99.99–100%** using all the dataset's columns.
   3. Built models that use **only the URL**, because that's all our app gets from a user: **~99.7%**.
-  4. Found out *why* the scores are so high. Every legitimate URL in the dataset is a bare `https://www.` homepage, and some columns nearly contain the answer. With those shortcuts removed, the honest URL-only score is **~88.6%** from the domain name alone.
+  4. Found out *why* the scores are so high. Every legitimate URL in the dataset is a bare `https://www.` homepage, and some columns nearly contain the answer. With those shortcuts removed, a URL-only model gets **~86%** from the domain name alone.
+  5. Made every number trustworthy: each model is trained and tested on **5 different splits**, and we report mean ± standard deviation (after a senior review, `docs/review/`).
 - **What's next:**
   - Deep learning models (CNN, BiLSTM) on the raw URL and on the domain only.
   - A hybrid model.
@@ -34,6 +35,10 @@ Read these in order. Each one explains one part of the project in plain words, s
 | **F1** | One number balancing precision and recall |
 | **ROC-AUC** | How well the model *ranks* phishing above legitimate, regardless of threshold (1.0 = perfect) |
 | **Threshold** | The cut-off on the model's probability: above it = phishing |
+| **Mean ± sd over 5 splits** | We repeat the whole train/validate/test on 5 different splits; ± is how much the score moves between them |
+| **95% confidence interval (CI)** | The range the true accuracy probably lies in, given our test set |
+| **McNemar test / p-value** | Checks whether two models really differ, using only the URLs they disagree on. p > 0.05 means "could be chance" |
+| **PR-AUC, MCC** | Scores that stay honest when one class is rare |
 | **Data leakage** | The model sees information in training that it wouldn't have in real use, which makes scores look better than they are |
 | **Shortcut** | A pattern that predicts the label in this dataset but not in the real world |
 

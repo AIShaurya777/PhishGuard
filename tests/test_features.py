@@ -42,6 +42,34 @@ def test_url_without_scheme_still_parses_host():
     assert f["host_length"] == len("bit.ly")
 
 
+@pytest.mark.parametrize("url", [
+    "http://3232235521/login",          # decimal form of 192.168.0.1
+    "http://0x7f.0x0.0x0.0x1/x",        # hex form of 127.0.0.1
+    "http://[2001:db8::1]/login",       # IPv6
+])
+def test_has_ip_recognises_other_ip_forms(url):
+    assert features_of(url)["has_ip"] == 1
+
+
+def test_ipv6_brackets_are_not_a_port():
+    assert features_of("http://[2001:db8::1]/login")["has_port"] == 0
+
+
+def test_suspicious_words_match_whole_words_only():
+    assert features_of("https://www.freedomhouse.org")["suspicious_words"] == 0
+    assert features_of("http://free-bonus.top/login")["suspicious_words"] == 3
+
+
+def test_punycode_host():
+    assert features_of("http://xn--pypal-4ve.com")["has_punycode"] == 1
+
+
+def test_counts_ignore_the_scheme_and_www_prefix():
+    a, b = extract_features(pd.Series(["https://www.example.com", "http://example.com"])).to_dict("records")
+    differing = {k for k in a if a[k] != b[k]}
+    assert differing == {"is_https", "has_www", "host_length", "host_dots", "num_subdomains", "host_entropy"}
+
+
 def test_entropy_is_higher_for_random_strings():
     plain, random_ = extract_features(pd.Series(["http://aaaa.com", "http://x7q9kz.com"]))["url_entropy"]
     assert random_ > plain

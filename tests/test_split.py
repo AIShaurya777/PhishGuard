@@ -1,3 +1,5 @@
+import hashlib
+
 import numpy as np
 import pandas as pd
 import pytest
@@ -14,9 +16,12 @@ def test_site_owner_groups_subdomains_but_not_platform_customers():
         "https://foo.web.app",
         "https://bar.web.app",
         "http://192.168.0.1:8080/admin",
+        "http://www.paypal.com:911@evil.top/fix-account",   # really goes to evil.top
+        "www.no-scheme.com/x",
     ])
     assert site_owner(urls).tolist() == [
         "evil.com", "evil.com", "evil.co.uk", "foo.web.app", "bar.web.app", "192.168.0.1",
+        "evil.top", "no-scheme.com",
     ]
 
 
@@ -57,3 +62,18 @@ def test_same_seed_gives_same_split(real):
     assert all(np.array_equal(a, b) for a, b in zip(splits, again))
     other = get_splits(df, seed=7)
     assert not np.array_equal(splits[2], other[2])
+
+
+# Fingerprints of the seed-42 reference split (decision D11). If this test
+# fails, the split changed: every saved result is then out of date. Change
+# the split only on purpose, log it in docs/DECISIONS.md and re-run notebooks.
+REFERENCE_FINGERPRINTS = {"train": "af8220940c56b351", "val": "69838e1a331058a6", "test": "10b36a5065ec1869"}
+
+
+def test_reference_split_is_unchanged(real):
+    df, splits = real
+    fingerprints = {
+        name: hashlib.sha256(",".join(sorted(df.loc[idx, "URL"])).encode()).hexdigest()[:16]
+        for name, idx in zip(["train", "val", "test"], splits)
+    }
+    assert fingerprints == REFERENCE_FINGERPRINTS

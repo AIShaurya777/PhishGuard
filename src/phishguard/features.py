@@ -5,36 +5,49 @@ columns, so the same features can be computed for any URL typed into the app.
 See decision D7 in docs/DECISIONS.md.
 """
 
+import ipaddress
 import math
 import re
 from collections import Counter
-from urllib.parse import urlsplit
 
 import pandas as pd
 
-from phishguard.urls import TLD_EXTRACT
+from phishguard.urls import TLD_EXTRACT, split_url, strip_prefix
 
-SUSPICIOUS_WORDS = [
+SUSPICIOUS_WORDS = {
     "login", "signin", "logon", "verify", "account", "secure", "update", "password",
     "bank", "confirm", "paypal", "wallet", "webscr", "billing", "support", "unlock",
     "suspend", "recover", "invoice", "free", "bonus",
-]
+}
 SHORTENERS = {
     "bit.ly", "goo.gl", "tinyurl.com", "t.co", "ow.ly", "is.gd", "buff.ly",
     "cutt.ly", "rb.gy", "shorturl.at", "tiny.cc", "rebrand.ly", "t.ly",
 }
-_IPV4 = re.compile(r"^\d{1,3}(\.\d{1,3}){3}$")
 _TOKEN = re.compile(r"[A-Za-z0-9]+")
 
 
-def _split(url: str):
-    """urlsplit that also accepts URLs without a scheme and malformed IPv6 hosts."""
-    if "://" not in url:
-        url = "//" + url
+def _is_ip(host: str) -> bool:
+    """IPv4/IPv6 in any form a browser accepts: 1.2.3.4, 3232235521, 0x7f.0.0.1, ::1."""
     try:
-        return urlsplit(url)
+        ipaddress.ip_address(host)
+        return True
     except ValueError:
-        return urlsplit(url.replace("[", "").replace("]", ""))
+        pass
+    parts = host.split(".")
+    if not 1 <= len(parts) <= 4:
+        return False
+    try:
+        values = [int(p, 0) if p.lower().startswith("0x") else int(p) for p in parts]
+    except ValueError:
+        return False
+    return all(v >= 0 for v in values) and values[-1] < 2 ** (8 * (5 - len(parts)))
+
+
+def _has_port(parts) -> int:
+    try:
+        return int(parts.port is not None)
+    except ValueError:  # a port that isn't a valid number is still a port
+        return 1
 
 
 def _entropy(text: str) -> float:
@@ -45,12 +58,12 @@ def _entropy(text: str) -> float:
     return -sum(c / n * math.log2(c / n) for c in Counter(text).values())
 
 
-def _url_features(url: str) -> dict:
-    parts = _split(url)
+def _url_features(url: str, body: str) -> dict:
+    parts = split_url(url)
     host = (parts.hostname or "").lower()
     ext = TLD_EXTRACT(host)
     path_segments = [s for s in parts.path.split("/") if s]
-    lower = url.lower()
+    tokens = _TOKEN.findall(body.lower())
 
     return {
         "host_length": len(host),
@@ -62,29 +75,35 @@ def _url_features(url: str) -> dict:
         "num_subdomains": len(ext.subdomain.split(".")) if ext.subdomain else 0,
         "domain_length": len(ext.domain),
         "tld_length": len(ext.suffix),
-        "is_https": int(parts.scheme == "https"),
+        "is_https": int(parts.scheme.lower() == "https"),
         "has_www": int(host.startswith("www.")),
-        "has_ip": int(bool(_IPV4.match(host))),
-        "has_port": int(":" in parts.netloc.rsplit("@", 1)[-1]),
+        "has_ip": int(_is_ip(host)),
+        "has_port": _has_port(parts),
+        "has_punycode": int("xn--" in host),
         "on_hosting_platform": int(ext.is_private),
         "is_shortener": int(ext.top_domain_under_public_suffix in SHORTENERS),
         "path_depth": len(path_segments),
         "num_query_params": len([q for q in parts.query.split("&") if q]),
         "has_fragment": int(bool(parts.fragment)),
         "double_slash_in_path": int("//" in parts.path),
-        "suspicious_words": sum(word in lower for word in SUSPICIOUS_WORDS),
-        "longest_token": max((len(t) for t in _TOKEN.findall(url)), default=0),
-        "url_entropy": _entropy(url),
+        "suspicious_words": sum(t in SUSPICIOUS_WORDS for t in tokens),
+        "longest_token": max((len(t) for t in tokens), default=0),
+        "url_entropy": _entropy(body),
         "host_entropy": _entropy(host),
     }
 
 
 def extract_features(urls: pd.Series) -> pd.DataFrame:
-    """One row of numeric features per URL, with the same index as `urls`."""
+    """One row of numeric features per URL, with the same index as `urls`.
+
+    Counts, ratios and entropy use the URL without its scheme and "www.", so
+    only `is_https` and `has_www` carry the prefix (see D9).
+    """
     urls = urls.astype(str)
-    length = urls.str.len()
-    letters = urls.str.count(r"[A-Za-z]")
-    digits = urls.str.count(r"\d")
+    body = strip_prefix(urls)
+    length = body.str.len()
+    letters = body.str.count(r"[A-Za-z]")
+    digits = body.str.count(r"\d")
 
     counts = pd.DataFrame({
         "url_length": length,
@@ -93,17 +112,17 @@ def extract_features(urls: pd.Series) -> pd.DataFrame:
         "letter_ratio": letters / length.clip(lower=1),
         "digit_ratio": digits / length.clip(lower=1),
         "special_ratio": (length - letters - digits) / length.clip(lower=1),
-        "num_dots": urls.str.count(r"\."),
-        "num_hyphens": urls.str.count("-"),
-        "num_underscores": urls.str.count("_"),
-        "num_slashes": urls.str.count("/"),
-        "num_at": urls.str.count("@"),
-        "num_question": urls.str.count(r"\?"),
-        "num_equals": urls.str.count("="),
-        "num_ampersand": urls.str.count("&"),
-        "num_percent": urls.str.count("%"),
-        "num_tilde": urls.str.count("~"),
+        "num_dots": body.str.count(r"\."),
+        "num_hyphens": body.str.count("-"),
+        "num_underscores": body.str.count("_"),
+        "num_slashes": body.str.count("/"),
+        "num_at": body.str.count("@"),
+        "num_question": body.str.count(r"\?"),
+        "num_equals": body.str.count("="),
+        "num_ampersand": body.str.count("&"),
+        "num_percent": body.str.count("%"),
+        "num_tilde": body.str.count("~"),
     }, index=urls.index)
 
-    parsed = pd.DataFrame([_url_features(u) for u in urls], index=urls.index)
+    parsed = pd.DataFrame([_url_features(u, b) for u, b in zip(urls, body)], index=urls.index)
     return pd.concat([counts, parsed], axis=1)
