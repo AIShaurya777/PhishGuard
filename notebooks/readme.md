@@ -13,5 +13,6 @@ Run them in this order. Each one is saved with its outputs, so you can also just
 | `06_shortcut_audit` | 3 | Why the scores are so high: one-line rules, column groups, hidden leaks |
 | `07_url_views` | 3 | URL-only models with the shortcuts removed (raw → registered domain) |
 | `08_deep_models` | 4 | Char-CNN and BiLSTM on raw URL / domain only / registered domain, McNemar vs n-gram (Apple GPU, ~2 h) |
+| `09_hybrid` | 5 | Hybrid network (char-CNN + 40 URL features) and log-odds average (CNN + XGBoost), vs n-gram and CNN (~1.5 h) |
 
-Every model runs on 5 site-owner splits (seeds 42, 0, 1, 2, 3) and reports mean ± sd (D11). Results are saved in `results/<milestone>/`. Running everything takes roughly three hours on a laptop; notebooks 08 and 03 are the slowest.
+Every model runs on 5 site-owner splits (seeds 42, 0, 1, 2, 3) and reports mean ± sd (D11). Results are saved in `results/<milestone>/`. Running everything takes roughly four to five hours on a laptop; notebooks 08, 09 and 03 are the slowest.

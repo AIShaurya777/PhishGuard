@@ -135,6 +135,28 @@ Add yours in the same format and link the evidence. This file becomes the
 - **Consequence:** the **char-CNN** is the deep component for the hybrid model (Milestone 5): it is as good as or better than the BiLSTM everywhere and up to 3× faster. The n-gram model remains the baseline to beat.
 - **Evidence:** `notebooks/08_deep_models.ipynb`, `results/m4_deep/`.
 
+## D13 · Hybrid model: char-CNN + handcrafted features, trained jointly (Milestone 5)
+- **Context:** The char-CNN reads character patterns. Our 40 features (D7) describe counts and structure. If they make different errors, combining them could help.
+- **Decision:** two combinations, both through `experiment.run()` on 3 views × 5 splits:
+  1. **Hybrid network** (`CharURLClassifier(arch="hybrid")`, `HybridNet`): the CNN's 512 pooled pattern scores and the 40 features are concatenated inside one network (features → 64 units), then dense 128 → logit, trained end to end. Features are `log1p`-scaled and standardised on training rows only; near-constant features (sd < 1e-6) are left unscaled. Dropout ∈ {0.3, 0.5} is tuned on validation.
+  2. **Log-odds average** of a char-CNN and an XGBoost on the features (`LogitAverage`, late fusion). The CNN's dropout ∈ {0.3, 0.5} is tuned on validation; XGBoost uses `max_depth=6`, which it chose on every split and view in notebook 07.
+  - Features are always computed **from the same view** the model reads, so the domain views can't see the prefix or path.
+- **Results** (test accuracy, mean ± sd over 5 splits):
+
+  | View | n-gram | Char-CNN | **Hybrid** | Average CNN + XGBoost |
+  |---|---|---|---|---|
+  | raw URL | 99.69 ± 0.05% | 99.68 ± 0.03% | 99.68 ± 0.03% | 99.68 ± 0.03% |
+  | domain only | 86.27 ± 0.89% | 86.58 ± 0.92% | **86.72 ± 0.99%** | 85.70 ± 0.99% |
+  | registered domain | **82.49 ± 1.93%** | 80.85 ± 1.53% | 82.01 ± 0.85% | 80.97 ± 1.80% |
+
+  - **Domain only:** the hybrid beats the n-gram model on 4/5 splits (+0.45 points; seed 42 p < 0.0001; ROC-AUC higher on 3/5) and the CNN on 4/5 (+0.14; ROC-AUC 4/5; p = 0.027). This is a small but consistent gain, smaller than the split-to-split sd.
+  - **Registered domain:** the hybrid beats the CNN on 5/5 splits (+1.16), but the n-gram model remains better (ROC-AUC higher on 5/5).
+  - **Raw URL:** no differences (p ≥ 0.31).
+  - **Averaging is worse than the CNN alone** on domain only (0/5 splits). An equal vote for the weaker XGBoost (81.4%) hurts, whereas joint training learns how much to trust each input.
+  - **Permutation test (seed 42, domain only):** shuffling the features drops accuracy from 88.1% to 77.9%, and shuffling the URL text drops it to 65.4%. Both inputs are used, with the characters carrying more.
+- **Consequence:** the **domain-only hybrid** is the model to explain (Milestone 6) and to test for robustness (Milestone 7). The n-gram model stays as the simple baseline and is the best model on registered domains.
+- **Evidence:** `notebooks/09_hybrid.ipynb`, `results/m5_hybrid/`, `tests/test_deep.py`.
+
 ## Reporting protocol from Milestone 4 on (fixed in advance)
 To avoid choosing what to report after seeing test results, every new model reports exactly this, and nothing is dropped if it looks bad:
 - **raw URL, domain only, registered domain** views (D10)

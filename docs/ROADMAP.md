@@ -7,8 +7,8 @@
 | 3 | Shortcut analysis: why the scores are so high | ✅ | 06, 07 | [03](guide/03_shortcuts.md) |
 | – | Senior review and fixes: 5-split evaluation, CIs, parsing fix (D11) | ✅ | all re-run | [review](review/senior_review_m1_m3.md) |
 | 4 | Deep learning on raw URLs: char-CNN, BiLSTM | ✅ | 08 | [04](guide/04_deep_models.md) |
-| 5 | Hybrid model: deep URL encoder + our handcrafted features | next | | |
-| 6 | Explainability: SHAP for trees, character attributions for deep models | | | |
+| 5 | Hybrid model: deep URL encoder + our handcrafted features | ✅ | 09 | [05](guide/05_hybrid.md) |
+| 6 | Explainability: SHAP for trees, character attributions for deep models | next | | |
 | 7 | Robustness: original vs modified phishing URLs, model not retrained | | | |
 | 8 | Streamlit app | | | |
 | 9 | Report and slides | | | |
@@ -26,6 +26,8 @@
 | Char-CNN | domain only | 86.58 ± 0.92% (≈ n-gram: same ROC-AUC, fewer false alarms) |
 | BiLSTM | domain only | 85.55 ± 1.35% |
 | Char-CNN / BiLSTM | registered domain | 80.85 ± 1.53% / 80.95 ± 0.62% (n-gram better) |
+| **Hybrid CNN + features** | **domain only** | **86.72 ± 0.99%** (best URL model; > n-gram and CNN on 4/5 splits) |
+| Hybrid CNN + features | registered domain | 82.01 ± 0.85% (n-gram still better) |
 
 The README table is generated from `results/` (`python -m phishguard.report`), and a test keeps it in sync.
 
@@ -41,6 +43,13 @@ The README table is generated from `results/` (`python -m phishguard.report`), a
 - On raw URLs every URL-only model ties (~99.7%). On domain only, the CNN is at most slightly better than the n-gram model (same ROC-AUC, fewer false alarms). On registered domain, the n-gram model is better.
 - The CNN goes forward to the hybrid model: never worse than the BiLSTM, and up to 3× faster.
 
-## Milestone 5 plan
-- **Hybrid:** the char-CNN branch (its 512 pooled filter scores) concatenated with our 40 standardised URL features, then a dense layer, trained end to end. Compare with the log-odds average of CNN + XGBoost, which needs no new training.
-- Same protocol: 3 views × 5 splits, McNemar against the n-gram model **and** against the CNN alone.
+## Milestone 5 outcome (D13)
+- The **hybrid network** (char-CNN + 40 features, trained jointly) is the best domain-only model: 86.72 ± 0.99%. It beats the n-gram model and the CNN on 4/5 splits. The gain is small but consistent.
+- Late fusion (log-odds average of CNN + XGBoost) is worse than the CNN alone. Joint training is what makes the combination work.
+- On registered domains, the n-gram model is still best.
+
+## Milestone 6 plan
+- **Features branch:** SHAP for XGBoost on the 40 features (domain only and raw URL), plus permutation importance of the hybrid's feature inputs.
+- **Characters branch:** per-character attributions for the char-CNN/hybrid (gradient × input or occlusion: hide one character, see the probability change), shown as coloured URLs.
+- **N-gram model:** its top weights, as a sanity check that the explanations agree.
+- **Goal:** explanations the Streamlit app can show for any URL.

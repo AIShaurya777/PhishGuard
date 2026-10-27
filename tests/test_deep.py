@@ -3,7 +3,7 @@ import pandas as pd
 import pytest
 import torch
 
-from phishguard.deep import PAD, UNK, BiLSTM, CharCNN, CharURLClassifier, CharVocab, _length_batches
+from phishguard.deep import PAD, UNK, BiLSTM, CharCNN, CharURLClassifier, CharVocab, HybridNet, _length_batches
 
 
 def test_vocab_is_built_from_training_urls_only():
@@ -49,3 +49,25 @@ def test_classifier_learns_a_simple_pattern_and_keeps_row_order():
     assert prob.shape == (600,)
     assert ((prob >= 0.5) == y.to_numpy()).mean() > 0.95
     assert model.best_epoch_ == min(model.history_, key=lambda h: h["stop_loss"])["epoch"]
+
+
+def test_hybrid_padding_does_not_change_the_prediction():
+    torch.manual_seed(0)
+    net = HybridNet(vocab_size=10, n_features=3).eval()
+    features = torch.tensor([[0.5, -1.0, 2.0]])
+    alone = net(torch.tensor([[2, 3, 4, 5, 6, 7, 8]]), torch.tensor([7]), features)
+    in_batch = net(torch.tensor([[2, 3, 4, 5, 6, 7, 8, PAD, PAD, PAD]]), torch.tensor([7]), features)
+    assert torch.allclose(alone, in_batch, atol=1e-6)
+
+
+def test_hybrid_uses_the_features():
+    # Identical-looking URLs: only the feature column tells the classes apart.
+    rng = np.random.default_rng(0)
+    n = 600
+    y = pd.Series(np.arange(n) % 2, index=range(1000, 1000 + n))
+    X = pd.DataFrame({"url": [f"{''.join(rng.choice(list('abcdefgh'), 8))}.com" for _ in range(n)],
+                      "signal": y * 5.0 + rng.random(n), "constant": 3.0}, index=y.index)
+    model = CharURLClassifier(arch="hybrid", max_epochs=5, batch_size=32, device="cpu").fit(X, y)
+    prob = model.predict_proba(X)[:, 1]
+    assert ((prob >= 0.5) == y.to_numpy()).mean() > 0.95
+    assert model.feature_sd_[1] == 1.0          # a constant feature is left unscaled, not divided by 0

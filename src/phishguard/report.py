@@ -27,6 +27,8 @@ HEADLINE = [
     ("m4_deep", "Char-CNN | domain only", "**domain only** (shortcut-reduced)"),
     ("m4_deep", "Char-CNN | registered domain", "**registered domain** (shortcut-reduced)"),
     ("m4_deep", "BiLSTM | domain only", "**domain only** (shortcut-reduced)"),
+    ("m5_hybrid", "Hybrid CNN + features | domain only", "**domain only** (shortcut-reduced)"),
+    ("m5_hybrid", "Hybrid CNN + features | registered domain", "**registered domain** (shortcut-reduced)"),
 ]
 
 

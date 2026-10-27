@@ -7,6 +7,9 @@ wrapped as scikit-learn-style estimators (`fit` / `predict_proba`), so
 
     model = CharURLClassifier(arch="cnn").fit(train_urls, train_labels)
     model.predict_proba(test_urls)[:, 1]      # probability of phishing
+
+The hybrid model (Milestone 5) adds our handcrafted URL features: pass a
+DataFrame with a "url" column plus the feature columns.
 """
 
 import copy
@@ -79,6 +82,10 @@ class CharCNN(nn.Module):
         self.min_len = max(widths)
 
     def forward(self, ids: torch.Tensor, lengths: torch.Tensor) -> torch.Tensor:
+        return self.head(self.encode(ids, lengths)).squeeze(1)
+
+    def encode(self, ids: torch.Tensor, lengths: torch.Tensor) -> torch.Tensor:
+        """One score per filter: how strongly its pattern appears anywhere in the URL."""
         x = self.embed(ids).transpose(1, 2)                 # (batch, embed_dim, characters)
         pooled = []
         for conv in self.convs:
@@ -88,7 +95,7 @@ class CharCNN(nn.Module):
             last = (lengths - conv.kernel_size[0] + 1).clamp(min=1)
             valid = torch.arange(h.size(2), device=h.device)[None, :] < last[:, None]
             pooled.append(h.masked_fill(~valid[:, None, :], 0.0).max(dim=2).values)
-        return self.head(torch.cat(pooled, dim=1)).squeeze(1)
+        return torch.cat(pooled, dim=1)                     # (batch, filters × number of widths)
 
 
 class BiLSTM(nn.Module):
@@ -116,11 +123,41 @@ class BiLSTM(nn.Module):
         return self.head(out.max(dim=1).values).squeeze(1)
 
 
-ARCHITECTURES = {"cnn": CharCNN, "bilstm": BiLSTM}
+class HybridNet(nn.Module):
+    """Char-CNN pattern scores + our handcrafted URL features → dense → logit (Milestone 5).
+
+    The CNN part reads the characters. The feature part gets the 40 numbers
+    from `extract_features` (log-scaled and standardised by the classifier).
+    Both are concatenated and trained together, so the network can learn how
+    they complement each other.
+    """
+
+    def __init__(self, vocab_size: int, n_features: int, feature_hidden: int = 64, hidden: int = 128,
+                 dropout: float = 0.5, **cnn_options):
+        super().__init__()
+        self.chars = CharCNN(vocab_size, dropout=dropout, **cnn_options)
+        char_width = self.chars.head[1].in_features
+        self.chars.head = nn.Identity()                     # only the CNN's pattern scores are used
+        self.features = nn.Sequential(nn.Linear(n_features, feature_hidden), nn.ReLU())
+        self.head = nn.Sequential(
+            nn.Dropout(dropout), nn.Linear(char_width + feature_hidden, hidden), nn.ReLU(),
+            nn.Dropout(dropout), nn.Linear(hidden, 1),
+        )
+        self.min_len = self.chars.min_len
+
+    def forward(self, ids: torch.Tensor, lengths: torch.Tensor, features: torch.Tensor) -> torch.Tensor:
+        both = torch.cat([self.chars.encode(ids, lengths), self.features(features)], dim=1)
+        return self.head(both).squeeze(1)
+
+
+ARCHITECTURES = {"cnn": CharCNN, "bilstm": BiLSTM, "hybrid": HybridNet}
 
 
 class CharURLClassifier:
-    """Train a CharCNN or BiLSTM like a scikit-learn classifier (decision D12).
+    """Train a CharCNN, BiLSTM or HybridNet like a scikit-learn classifier (D12, D13).
+
+    Input: a Series of URLs, or (for "hybrid") a DataFrame with a "url" column
+    plus numeric feature columns.
 
     `fit` holds out 10% of the training *site owners* as an early-stopping set:
     after every epoch we measure its log-loss and keep the best epoch's weights.
@@ -136,17 +173,27 @@ class CharURLClassifier:
         self.device = torch.device(device) if device else pick_device()
         self.arch_options = arch_options
 
-    def fit(self, urls: pd.Series, y: pd.Series) -> "CharURLClassifier":
+    def fit(self, X, y: pd.Series) -> "CharURLClassifier":
         torch.manual_seed(self.seed)
         rng = np.random.default_rng(self.seed)
-        urls, y = urls.reset_index(drop=True), y.to_numpy(dtype=np.float32)
+        urls, features = _split_input(X)
+        y = y.to_numpy(dtype=np.float32)
 
         holdout = GroupShuffleSplit(n_splits=1, test_size=0.1, random_state=self.seed)
         fit_rows, stop_rows = next(holdout.split(urls, groups=site_owner(urls)))
         self.vocab_ = CharVocab().fit(urls.iloc[fit_rows])
         ids, lengths = self.vocab_.encode(urls, self.max_len)
+        options = dict(self.arch_options)
+        if features is not None:
+            # Counts like url_length are heavily skewed: log-scale, then standardise on training rows only.
+            logged = np.log1p(features[fit_rows].astype(np.float64))
+            self.feature_mean_, self.feature_sd_ = logged.mean(axis=0), logged.std(axis=0)
+            # Constant features (e.g. no paths in a domain view): rounding leaves a tiny sd, don't divide by it.
+            self.feature_sd_[self.feature_sd_ < 1e-6] = 1.0
+            features = self._scale(features)
+            options["n_features"] = features.shape[1]
 
-        self.net_ = ARCHITECTURES[self.arch](len(self.vocab_), **self.arch_options).to(self.device)
+        self.net_ = ARCHITECTURES[self.arch](len(self.vocab_), **options).to(self.device)
         optimiser = torch.optim.Adam(self.net_.parameters(), lr=self.lr)
         loss_fn = nn.BCEWithLogitsLoss()
 
@@ -158,13 +205,13 @@ class CharURLClassifier:
             for batch in _length_batches(lengths[fit_rows], self.batch_size, rng):
                 rows = fit_rows[batch]
                 optimiser.zero_grad()
-                loss = loss_fn(self._forward(ids[rows], lengths[rows]),
+                loss = loss_fn(self._forward(ids[rows], lengths[rows], _rows(features, rows)),
                                torch.from_numpy(y[rows]).to(self.device))
                 loss.backward()
                 optimiser.step()
                 total += loss.item() * len(rows)
 
-            stop_prob = self._predict(ids[stop_rows], lengths[stop_rows])
+            stop_prob = self._predict(ids[stop_rows], lengths[stop_rows], _rows(features, stop_rows))
             stop_loss = _log_loss(y[stop_rows], stop_prob)
             self.history_.append({"epoch": epoch, "train_loss": total / len(fit_rows),
                                   "stop_loss": stop_loss, "seconds": round(time.perf_counter() - start, 1)})
@@ -181,23 +228,41 @@ class CharURLClassifier:
         self.best_epoch_ = min(self.history_, key=lambda h: h["stop_loss"])["epoch"]
         return self
 
-    def predict_proba(self, urls: pd.Series) -> np.ndarray:
-        ids, lengths = self.vocab_.encode(urls.reset_index(drop=True), self.max_len)
-        prob = self._predict(ids, lengths)
+    def predict_proba(self, X) -> np.ndarray:
+        urls, features = _split_input(X)
+        ids, lengths = self.vocab_.encode(urls, self.max_len)
+        prob = self._predict(ids, lengths, None if features is None else self._scale(features))
         return np.column_stack([1 - prob, prob])
 
-    def _forward(self, ids: np.ndarray, lengths: np.ndarray) -> torch.Tensor:
+    def _scale(self, features: np.ndarray) -> np.ndarray:
+        return ((np.log1p(features.astype(np.float64)) - self.feature_mean_) / self.feature_sd_).astype(np.float32)
+
+    def _forward(self, ids: np.ndarray, lengths: np.ndarray, features=None) -> torch.Tensor:
         width = max(lengths.max(), self.net_.min_len)        # pad only up to the longest URL in the batch
-        return self.net_(torch.from_numpy(ids[:, :width].astype(np.int64)).to(self.device),
-                         torch.from_numpy(lengths).to(self.device))
+        inputs = [torch.from_numpy(ids[:, :width].astype(np.int64)).to(self.device),
+                  torch.from_numpy(lengths).to(self.device)]
+        if features is not None:
+            inputs.append(torch.from_numpy(features).to(self.device))
+        return self.net_(*inputs)
 
     @torch.no_grad()
-    def _predict(self, ids: np.ndarray, lengths: np.ndarray) -> np.ndarray:
+    def _predict(self, ids: np.ndarray, lengths: np.ndarray, features=None) -> np.ndarray:
         self.net_.eval()
         prob = np.empty(len(lengths), dtype=np.float64)
         for batch in _length_batches(lengths, 1024):
-            prob[batch] = torch.sigmoid(self._forward(ids[batch], lengths[batch])).cpu().numpy()
+            prob[batch] = torch.sigmoid(self._forward(ids[batch], lengths[batch], _rows(features, batch))).cpu().numpy()
         return prob
+
+
+def _split_input(X) -> tuple[pd.Series, np.ndarray | None]:
+    """A Series of URLs → (urls, None); a DataFrame with a "url" column → (urls, other columns as floats)."""
+    if isinstance(X, pd.Series):
+        return X.reset_index(drop=True), None
+    return X["url"].reset_index(drop=True), X.drop(columns="url").to_numpy(dtype=np.float32)
+
+
+def _rows(features, rows):
+    return None if features is None else features[rows]
 
 
 def _length_batches(lengths: np.ndarray, batch_size: int, rng=None) -> list[np.ndarray]:

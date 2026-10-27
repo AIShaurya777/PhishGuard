@@ -8,6 +8,7 @@ Read these in order. Each one explains one part of the project in plain words, s
 | 2 | [Models (Milestone 2)](02_models.md) | The 7 models, how we trained them fairly, and the results |
 | 3 | [Shortcuts (Milestone 3)](03_shortcuts.md) | Why the scores are so high, and the shortcut-reduced URL-only number |
 | 4 | [Deep learning (Milestone 4)](04_deep_models.md) | Char-CNN and BiLSTM: how they read a URL, how they're trained, results |
+| 5 | [Hybrid model (Milestone 5)](05_hybrid.md) | Combining the CNN with handcrafted features: joint network vs averaging |
 
 ## The project in one minute
 - **Problem:** given a URL, say whether it is phishing (a fake site that steals passwords or money) or legitimate.
@@ -19,8 +20,8 @@ Read these in order. Each one explains one part of the project in plain words, s
   4. Found out *why* the scores are so high. Every legitimate URL in the dataset is a bare `https://www.` homepage, and some columns nearly contain the answer. With those shortcuts removed, a URL-only model gets **~86%** from the domain name alone.
   5. Made every number trustworthy: each model is trained and tested on **5 different splits**, and we report mean ± standard deviation (after a senior review, `docs/review/`).
   6. Trained deep learning models that read URLs character by character (a CNN and a BiLSTM). They tie with the n-gram model on raw URLs (~99.7%). On domain only, the CNN is at most slightly better (86.6%, fewer false alarms). On the registered domain, the simpler n-gram model wins.
+  7. Built a **hybrid** network that reads the characters (CNN) *and* our 40 handcrafted features, trained together. On domain names it's our best URL model (86.7%), slightly but consistently ahead of the n-gram model and the CNN.
 - **What's next:**
-  - A hybrid model: the CNN plus our handcrafted URL features.
   - Explanations with SHAP.
   - A robustness test with modified URLs.
   - The Streamlit app.
