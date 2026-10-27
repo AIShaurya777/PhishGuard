@@ -9,8 +9,8 @@
 | 1 | Data loading, label direction, cleaning, split by site owner | ✅ Done |
 | 2 | Reproduce published ≥99.9%; URL-only models | ✅ Done |
 | 3 | Shortcut analysis: why the scores are so high | ✅ Done |
-| 4 | Char-CNN and BiLSTM on raw URLs | ⏳ Next |
-| 5 | Hybrid model | ⏳ Planned |
+| 4 | Char-CNN and BiLSTM on raw URLs and shortcut-reduced views | ✅ Done |
+| 5 | Hybrid model | ⏳ Next |
 | 6 | Explainability (SHAP, character attributions) | ⏳ Planned |
 | 7 | Robustness: original vs modified URLs | ⏳ Planned |
 | 8 | Streamlit app | ⏳ Planned |
@@ -54,6 +54,10 @@ Test accuracy, **mean ± sd over 5 site-owner splits**, and the seed-42 split wi
 | Char n-gram LogReg | **domain only** (shortcut-reduced) | 86.27% ± 0.89% | 87.33% [86.14%, 88.57%] | 0.9162 |
 | Char n-gram LogReg | **registered domain** (shortcut-reduced) | 82.49% ± 1.93% | 85.03% [83.38%, 86.71%] | 0.8945 |
 | XGBoost URL features | **domain only** (shortcut-reduced) | 81.43% ± 1.15% | 80.19% [74.55%, 83.56%] | 0.8473 |
+| Char-CNN | raw URL | 99.68% ± 0.03% | 99.73% [99.66%, 99.78%] | 0.9982 |
+| Char-CNN | **domain only** (shortcut-reduced) | 86.58% ± 0.92% | 87.83% [86.83%, 89.06%] | 0.9165 |
+| Char-CNN | **registered domain** (shortcut-reduced) | 80.85% ± 1.53% | 83.14% [81.21%, 85.04%] | 0.8793 |
+| BiLSTM | **domain only** (shortcut-reduced) | 85.55% ± 1.35% | 87.21% [85.88%, 88.57%] | 0.9093 |
 
 Every legitimate URL in PhiUSIIL is a bare `https://www.` homepage, so the near-perfect scores mostly reflect how the dataset was built ([shortcut analysis](docs/guide/03_shortcuts.md)). The shortcut-reduced rows show what a URL-only model can do from the domain name.
 <!-- RESULTS:END -->

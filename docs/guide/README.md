@@ -6,7 +6,8 @@ Read these in order. Each one explains one part of the project in plain words, s
 |---|---|---|
 | 1 | [Data and split](01_data_and_split.md) | The dataset, cleaning, label direction, train/validation/test split |
 | 2 | [Models (Milestone 2)](02_models.md) | The 7 models, how we trained them fairly, and the results |
-| 3 | [Shortcuts (Milestone 3)](03_shortcuts.md) | Why the scores are so high, and the honest URL-only number |
+| 3 | [Shortcuts (Milestone 3)](03_shortcuts.md) | Why the scores are so high, and the shortcut-reduced URL-only number |
+| 4 | [Deep learning (Milestone 4)](04_deep_models.md) | Char-CNN and BiLSTM: how they read a URL, how they're trained, results |
 
 ## The project in one minute
 - **Problem:** given a URL, say whether it is phishing (a fake site that steals passwords or money) or legitimate.
@@ -17,9 +18,9 @@ Read these in order. Each one explains one part of the project in plain words, s
   3. Built models that use **only the URL**, because that's all our app gets from a user: **~99.7%**.
   4. Found out *why* the scores are so high. Every legitimate URL in the dataset is a bare `https://www.` homepage, and some columns nearly contain the answer. With those shortcuts removed, a URL-only model gets **~86%** from the domain name alone.
   5. Made every number trustworthy: each model is trained and tested on **5 different splits**, and we report mean ± standard deviation (after a senior review, `docs/review/`).
+  6. Trained deep learning models that read URLs character by character (a CNN and a BiLSTM). They tie with the n-gram model on raw URLs (~99.7%). On domain only, the CNN is at most slightly better (86.6%, fewer false alarms). On the registered domain, the simpler n-gram model wins.
 - **What's next:**
-  - Deep learning models (CNN, BiLSTM) on the raw URL and on the domain only.
-  - A hybrid model.
+  - A hybrid model: the CNN plus our handcrafted URL features.
   - Explanations with SHAP.
   - A robustness test with modified URLs.
   - The Streamlit app.
@@ -41,6 +42,10 @@ Read these in order. Each one explains one part of the project in plain words, s
 | **PR-AUC, MCC** | Scores that stay honest when one class is rare |
 | **Data leakage** | The model sees information in training that it wouldn't have in real use, which makes scores look better than they are |
 | **Shortcut** | A pattern that predicts the label in this dataset but not in the real world |
+| **Embedding** | A learned vector of numbers for each character |
+| **Epoch** | One pass of training over all training URLs |
+| **Early stopping** | Stop training when a held-out set stops improving, and keep the best weights |
+| **Dropout** | Randomly switching off neurons during training so the network can't rely on any single one |
 
 ## Where things are
 ```

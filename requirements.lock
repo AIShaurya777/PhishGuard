@@ -54,11 +54,15 @@ executing==2.3.0
 fastjsonschema==2.22.2
     # via nbformat
 filelock==4.2.4
-    # via tldextract
+    # via
+    #   tldextract
+    #   torch
 fonttools==4.67.0
     # via matplotlib
 fqdn==1.6.0
     # via jsonschema
+fsspec==2026.9.0
+    # via torch
 h11==0.16.0
     # via httpcore
 httpcore==1.0.9
@@ -99,6 +103,7 @@ jinja2==3.1.6
     #   jupyterlab
     #   jupyterlab-server
     #   nbconvert
+    #   torch
 joblib==1.6.0
     # via scikit-learn
 json5==0.17.3
@@ -180,6 +185,8 @@ matplotlib-inline==0.2.2
     #   ipython
 mistune==3.4.0
     # via nbconvert
+mpmath==1.3.0
+    # via sympy
 narwhals==2.27.1
     # via scikit-learn
 nbclient==0.11.0
@@ -196,6 +203,8 @@ nbformat==5.11.1
     #   nbconvert
 nest-asyncio2==1.7.4
     # via ipykernel
+networkx==3.7
+    # via torch
 notebook==7.6.3
     # via jupyter
 notebook-shim==0.2.4
@@ -317,6 +326,8 @@ seaborn==0.13.2
     # via phishguard (pyproject.toml)
 send2trash==2.1.0
     # via jupyter-server
+setuptools==84.2.1
+    # via torch
 six==1.17.0
     # via
     #   python-dateutil
@@ -325,6 +336,8 @@ soupsieve==3.0.4
     # via beautifulsoup4
 stack-data==0.6.3
     # via ipython
+sympy==1.14.0
+    # via torch
 terminado==0.18.1
     # via
     #   jupyter-server
@@ -334,6 +347,8 @@ threadpoolctl==3.7.0
 tinycss2==1.5.1
     # via bleach
 tldextract==5.4.0
+    # via phishguard (pyproject.toml)
+torch==2.14.1
     # via phishguard (pyproject.toml)
 tornado==6.6
     # via
@@ -365,6 +380,7 @@ typing-extensions==4.16.0
     #   beautifulsoup4
     #   jupyter-client
     #   referencing
+    #   torch
 tzdata==2026.5
     # via
     #   arrow

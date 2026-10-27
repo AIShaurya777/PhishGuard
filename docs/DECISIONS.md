@@ -113,6 +113,28 @@ Add yours in the same format and link the evidence. This file becomes the
 - **Effect:** URL features 99.68% → 99.63 ± 0.03%; domain-only n-gram 88.59% → 86.27 ± 0.89%. All-column models are unchanged (≈100%).
 - **Evidence:** `src/phishguard/{urls,experiment,stats,evaluate}.py`, `tests/`, all notebooks re-run.
 
+## D12 · Character-level deep models: char-CNN and BiLSTM (Milestone 4)
+- **Context:** On every view, the char n-gram model beat XGBoost on our features (D10), so the signal is in the characters. Character-level networks learn their own character patterns.
+- **Decision:** `phishguard.deep.CharURLClassifier` wraps a **char-CNN** (embedding 32 → convolutions of width 3/4/5/6 × 128 filters → max-pool → dense 128) and a **BiLSTM** (embedding 32 → 64 units per direction → max-pool → dense 64) as scikit-learn-style estimators, run through `experiment.run()`.
+  - **Vocabulary:** built on training URLs only; lowercased; characters seen fewer than 10 times map to UNK; inputs cut at 200 characters.
+  - **Padding can't leak:** the CNN zeroes windows that only cover padding, and the LSTM uses packed sequences. `tests/test_deep.py` checks that padding never changes a prediction.
+  - **Training:** Adam, learning rate 0.001, batches of 256 similar-length URLs, binary cross-entropy.
+  - **Early stopping:** on 10% of the *training* site owners (grouped, so no owner is on both sides), at most 15 epochs, patience 2. The validation split is used only for tuning (dropout ∈ {0.3, 0.5}) and the threshold, as for every model.
+  - **Hardware:** Apple GPU (MPS). It isn't bit-for-bit deterministic, so a re-run can differ in the last decimals.
+- **Results** (test accuracy, mean ± sd over 5 splits; the n-gram model from D10 for comparison):
+
+  | View | Char n-gram LogReg | Char-CNN | BiLSTM |
+  |---|---|---|---|
+  | raw URL | 99.69 ± 0.05% | 99.68 ± 0.03% | 99.68 ± 0.04% |
+  | domain only | 86.27 ± 0.89% | **86.58 ± 0.92%** | 85.55 ± 1.35% |
+  | registered domain | **82.49 ± 1.93%** | 80.85 ± 1.53% | 80.95 ± 0.62% |
+
+  - **Raw URL:** no difference (McNemar p = 0.15 / 0.47). Every model reads the prefix shortcut.
+  - **Domain only:** the CNN's accuracy is higher on 4 of 5 splits (+0.31 points) and significant on seed 42 (1,074 vs 898, p = 0.0001). Its ROC-AUC is equal (0.9165 vs 0.9162, higher on only 3 of 5 splits). The gain comes from fewer false alarms at the threshold (3.3% vs 4.3%) at the same recall (~73%). We call it **a small gain at the threshold, not a better ranking**. The BiLSTM is lower than the n-gram model on all 5 splits.
+  - **Registered domain:** the n-gram model is better (CNN lower on all 5 splits; both significant on seed 42). On ~14-character inputs, a regularised linear model over n-grams generalises better than 60–140k learned weights.
+- **Consequence:** the **char-CNN** is the deep component for the hybrid model (Milestone 5): it is as good as or better than the BiLSTM everywhere and up to 3× faster. The n-gram model remains the baseline to beat.
+- **Evidence:** `notebooks/08_deep_models.ipynb`, `results/m4_deep/`.
+
 ## Reporting protocol from Milestone 4 on (fixed in advance)
 To avoid choosing what to report after seeing test results, every new model reports exactly this, and nothing is dropped if it looks bad:
 - **raw URL, domain only, registered domain** views (D10)

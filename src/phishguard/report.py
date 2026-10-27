@@ -23,6 +23,10 @@ HEADLINE = [
     ("m3_views", "Char n-gram LogReg | domain only", "**domain only** (shortcut-reduced)"),
     ("m3_views", "Char n-gram LogReg | registered domain", "**registered domain** (shortcut-reduced)"),
     ("m3_views", "XGBoost URL features | domain only", "**domain only** (shortcut-reduced)"),
+    ("m4_deep", "Char-CNN | raw URL", "raw URL"),
+    ("m4_deep", "Char-CNN | domain only", "**domain only** (shortcut-reduced)"),
+    ("m4_deep", "Char-CNN | registered domain", "**registered domain** (shortcut-reduced)"),
+    ("m4_deep", "BiLSTM | domain only", "**domain only** (shortcut-reduced)"),
 ]
 
 
