@@ -8,6 +8,7 @@ dependencies = [
     "matplotlib",
     "seaborn",
     "scikit-learn",
+    "xgboost",
     # Pinned: its bundled public suffix list decides the split groups (D5).
     "tldextract==5.4.0",
 ]

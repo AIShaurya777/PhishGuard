@@ -7,25 +7,21 @@ than by detecting phishing. See decision D5 in docs/DECISIONS.md.
 
 import numpy as np
 import pandas as pd
-import tldextract
 
 from phishguard.data import TARGET
+from phishguard.urls import TLD_EXTRACT, hostnames
 
 SEED = 42
 TEST_SIZE = 0.15
 VAL_SIZE = 0.15
 
-# Uses the public suffix list bundled with tldextract (no network access), so
-# everyone gets the same groups. The private section of the list makes
-# customers of hosting platforms separate owners: x.web.app != y.web.app.
-_extract = tldextract.TLDExtract(suffix_list_urls=(), include_psl_private_domains=True)
-
-
 def site_owner(urls: pd.Series) -> pd.Series:
-    """Map each URL to its registered domain, e.g. http://a.evil.co.uk/x -> evil.co.uk."""
-    hosts = urls.str.extract(r"^[a-zA-Z][a-zA-Z0-9+.-]*://([^/:?#]+)", expand=False).str.lower()
+    """Map each URL to its registered domain, e.g. http://a.evil.co.uk/x -> evil.co.uk.
+
+    Customers of hosting platforms count as separate owners (see urls.py).
+    """
     # Hosts with no registrable domain (IP addresses, "localhost") are their own owner.
-    return hosts.map(lambda h: _extract(h).top_domain_under_public_suffix or h)
+    return hostnames(urls).map(lambda h: TLD_EXTRACT(h).top_domain_under_public_suffix or h)
 
 
 def get_splits(df: pd.DataFrame, seed: int = SEED) -> tuple[np.ndarray, np.ndarray, np.ndarray]:

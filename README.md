@@ -16,7 +16,22 @@ from phishguard.data import load_clean, TARGET   # TARGET = "is_phishing", 1 = p
 df = load_clean()
 ```
 
-Cleaning decisions and the reasons for them are in [`docs/DECISIONS.md`](docs/DECISIONS.md). Start with [`notebooks/01_data_loading.ipynb`](notebooks/01_data_loading.ipynb).
+- **New to the project?** Read [`docs/guide/`](docs/guide/README.md), which explains every part simply, with likely viva questions.
+- **Every decision and why:** [`docs/DECISIONS.md`](docs/DECISIONS.md).
+- **Notebooks:** run them in order (`01` → `05`).
+
+## 📊 Results so far (test set, 35,130 URLs, split by site owner)
+
+| Model | Input | Accuracy |
+|---|---|---|
+| XGBoost | all provided columns | 100.000% |
+| Random Forest | all provided columns | 99.997% |
+| Logistic Regression | all provided columns | 99.994% |
+| Average: char n-gram + XGBoost | URL only | 99.707% |
+| Char n-gram Logistic Regression | URL only | 99.695% |
+| Random Forest / XGBoost | URL features | 99.68% |
+
+Details: [`notebooks/05_m2_results.ipynb`](notebooks/05_m2_results.ipynb).
 
 ---
 

@@ -1,0 +1,14 @@
+{
+  "model": "LogReg (all columns)",
+  "features": "all provided columns",
+  "threshold": 0.12,
+  "accuracy": 0.9999430686023342,
+  "precision": 0.9998658528405661,
+  "recall": 1.0,
+  "f1": 0.9999329219211162,
+  "roc_auc": 1.0,
+  "tn": 20221,
+  "fp": 2,
+  "fn": 0,
+  "tp": 14907
+}

@@ -9,3 +9,5 @@ __pycache__/
 data/processed/
 *.parquet
 phiusiil_cleaned*.csv
+# Unzipped copy of the raw data (54 MB); the repo keeps only the .zip
+DataSets/*.csv

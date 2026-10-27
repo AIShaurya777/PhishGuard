@@ -39,5 +39,32 @@ Add yours in the same format and link the evidence. This file becomes the
 - **Limitation:** Platforms missing from the suffix list (e.g. `weeblysite.com`, 3,079 URLs) still act as a single owner.
 - **Evidence:** `notebooks/01b_train_test_split.ipynb`, `tests/test_split.py`.
 
-## Open questions (next milestone)
-- Which of the 54 provided columns may a URL-only model use? Every legitimate URL has `IsHTTPS = 1` and `URLSimilarityIndex = 100`, and many columns describe page content rather than the URL. (Shaurya, D6)
+## D6 · One protocol for every model: tune on validation, threshold on validation, test once
+- **Context:** Published results on PhiUSIIL are hard to compare, because papers use different splits and some choose settings using the test set.
+- **Decision:**
+  - Every model goes through `phishguard.modeling`. `tune()` fits each setting on train and scores it on validation. `fit_and_test()` fits the chosen setting on train, picks the decision threshold that minimises validation errors (`best_threshold()`), and scores test exactly once.
+  - Test scores are saved to `results/*.json`. Notebook 05 only reads them.
+- **Why choose the threshold too:** The default 0.5 is arbitrary. The char n-gram model, for example, had the fewest validation errors at 0.16. Choosing it on validation and not on test keeps the test score honest.
+- **Evidence:** `src/phishguard/modeling.py`, `tests/test_modeling.py`, notebooks 02–05.
+
+## D7 · URL features are computed from the URL string only
+- **Context:** The app receives only a URL. It can't supply page-content columns (`LineOfCode`, `NoOfImage`, …) or `URLSimilarityIndex`, which compares the URL against a list of known legitimate URLs.
+- **Decision:**
+  - `extract_features()` computes 39 numeric features from the URL string: sizes, character counts and ratios, host structure (subdomains, IP, port, `www`), scheme, hosting platform or shortener, path and query structure, suspicious words, and entropy.
+  - No network calls and no dataset columns, so the same code runs in the app.
+- **Deliberately included:** the `is_https` and `has_www` features. Our first target is the highest accuracy we can get (M2_PLAN). Whether these are shortcuts is tested in Milestone 3.
+- **Evidence:** `src/phishguard/features.py`, `tests/test_features.py`, `notebooks/03_url_feature_models.ipynb`.
+
+## D8 · Milestone 2 results
+- **All provided columns:** LogReg 99.994%, Random Forest 99.997%, XGBoost 100% test accuracy (0–2 errors out of 35,130). This reproduces the published 99.79% (Prasad & Chandra 2024) and 99.99% (Bao et al. 2026).
+- **URL only:**
+  - Random Forest and XGBoost on URL features: 99.68%.
+  - Char n-gram LogReg: 99.70%.
+  - Average of n-gram + XGBoost: 99.71%.
+  - Published URL-only results are 99.62–99.84% (Frontiers in Computer Science, 2026).
+- **Remaining errors:** nearly all are phishing sites shaped like a bare `https://www.<domain>` homepage, which is the shape of every legitimate URL in the dataset.
+- **Evidence:** `notebooks/05_m2_results.ipynb`.
+
+## Open questions (Milestone 3)
+- **How strong are the dataset's shortcuts?** Every legitimate URL starts with `https://www.` (2.4% of phishing URLs do), has no path, and has `URLSimilarityIndex = 100`. The char n-gram model's strongest weights are `p://` (phishing) and `www`/`s://` (legitimate).
+- **How much accuracy is left without them?** A first check: char n-gram LogReg drops from 99.73% to 90.42% on validation when `https://www.` is removed from every URL.

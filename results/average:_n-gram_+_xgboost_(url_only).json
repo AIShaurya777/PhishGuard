@@ -1,0 +1,14 @@
+{
+  "model": "Average: n-gram + XGBoost (URL only)",
+  "features": "raw URL + URL features",
+  "threshold": 0.3,
+  "accuracy": 0.9970680330202106,
+  "precision": 0.9992580601645757,
+  "recall": 0.9938284027638022,
+  "f1": 0.9965358356035382,
+  "roc_auc": 0.9985884363254587,
+  "tn": 20212,
+  "fp": 11,
+  "fn": 92,
+  "tp": 14815
+}

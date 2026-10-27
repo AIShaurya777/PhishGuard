@@ -1,6 +1,6 @@
 import pytest
 
-from phishguard.evaluate import evaluate
+from phishguard.evaluate import best_threshold, evaluate
 
 
 def test_metrics_treat_phishing_as_positive():
@@ -14,6 +14,14 @@ def test_metrics_treat_phishing_as_positive():
     assert m["accuracy"] == pytest.approx(4 / 5)
     # 6 (phishing, legitimate) pairs; only (0.2, 0.3) is ranked the wrong way.
     assert m["roc_auc"] == pytest.approx(5 / 6)
+
+
+def test_best_threshold_minimises_errors():
+    y_true = [0, 0, 1, 1]
+    y_prob = [0.1, 0.2, 0.25, 0.9]  # 0.5 would miss the 0.25 phishing URL
+    t = best_threshold(y_true, y_prob)
+    assert 0.2 < t <= 0.25
+    assert evaluate(y_true, y_prob, threshold=t)["accuracy"] == 1.0
 
 
 def test_threshold_changes_predictions_not_auc():

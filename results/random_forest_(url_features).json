@@ -1,0 +1,14 @@
+{
+  "model": "Random Forest (URL features)",
+  "features": "URL features",
+  "threshold": 0.66,
+  "accuracy": 0.9968118417307145,
+  "precision": 0.999662276258021,
+  "recall": 0.9928221640839874,
+  "f1": 0.996230479267636,
+  "roc_auc": 0.9974614188180669,
+  "tn": 20218,
+  "fp": 5,
+  "fn": 107,
+  "tp": 14800
+}

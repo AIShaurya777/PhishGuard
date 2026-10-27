@@ -1,0 +1,14 @@
+{
+  "model": "Char n-gram LogReg (raw URL)",
+  "features": "raw URL",
+  "threshold": 0.16,
+  "accuracy": 0.996954170224879,
+  "precision": 0.9987867349689943,
+  "recall": 0.9940296504997652,
+  "f1": 0.9964025148774501,
+  "roc_auc": 0.9987356444882202,
+  "tn": 20205,
+  "fp": 18,
+  "fn": 89,
+  "tp": 14818
+}
