@@ -1,0 +1,14 @@
+{
+  "model": "XGBoost: statistic columns only",
+  "features": "statistic columns only",
+  "threshold": 0.27,
+  "accuracy": 0.9969257045260461,
+  "precision": 0.999325190633646,
+  "recall": 0.9934259072918763,
+  "f1": 0.9963668169279418,
+  "roc_auc": 0.9970044326415197,
+  "tn": 20213,
+  "fp": 10,
+  "fn": 98,
+  "tp": 14809
+}

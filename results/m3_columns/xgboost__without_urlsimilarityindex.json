@@ -1,0 +1,14 @@
+{
+  "model": "XGBoost: without URLSimilarityIndex",
+  "features": "without URLSimilarityIndex",
+  "threshold": 0.09,
+  "accuracy": 0.9997438087105038,
+  "precision": 0.9995975855130784,
+  "recall": 0.999798752264037,
+  "f1": 0.9996981587684878,
+  "roc_auc": 0.9999994825257247,
+  "tn": 20217,
+  "fp": 6,
+  "fn": 3,
+  "tp": 14904
+}

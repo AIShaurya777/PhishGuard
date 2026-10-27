@@ -52,15 +52,16 @@ def best_threshold(y_true, y_prob) -> float:
     return float(candidates[int(np.argmin(errors))])
 
 
-def save_result(model: str, features: str, threshold: float, metrics: dict) -> None:
-    """Record a model's test metrics in results/<model>.json for the comparison table."""
-    RESULTS_DIR.mkdir(exist_ok=True)
+def save_result(model: str, features: str, threshold: float, metrics: dict, group: str = "m2") -> None:
+    """Record a model's test metrics in results/<group>/<model>.json for the comparison tables."""
+    folder = RESULTS_DIR / group
+    folder.mkdir(parents=True, exist_ok=True)
     record = {"model": model, "features": features, "threshold": threshold, **metrics}
-    path = RESULTS_DIR / f"{model.lower().replace(' ', '_')}.json"
-    path.write_text(json.dumps(record, indent=2))
+    slug = "".join(ch if ch.isalnum() else "_" for ch in model.lower()).strip("_")
+    (folder / f"{slug}.json").write_text(json.dumps(record, indent=2))
 
 
-def load_results() -> pd.DataFrame:
-    """All recorded test results, best accuracy first."""
-    records = [json.loads(p.read_text()) for p in sorted(RESULTS_DIR.glob("*.json"))]
+def load_results(group: str = "m2") -> pd.DataFrame:
+    """All recorded test results of one group, best accuracy first."""
+    records = [json.loads(p.read_text()) for p in sorted((RESULTS_DIR / group).glob("*.json"))]
     return pd.DataFrame(records).sort_values("accuracy", ascending=False, ignore_index=True)

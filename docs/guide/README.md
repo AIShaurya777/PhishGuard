@@ -6,6 +6,7 @@ Read these in order. Each one explains one part of the project in plain words, s
 |---|---|---|
 | 1 | [Data and split](01_data_and_split.md) | The dataset, cleaning, label direction, train/validation/test split |
 | 2 | [Models (Milestone 2)](02_models.md) | The 7 models, how we trained them fairly, and the results |
+| 3 | [Shortcuts (Milestone 3)](03_shortcuts.md) | Why the scores are so high, and the honest URL-only number |
 
 ## The project in one minute
 - **Problem:** given a URL, say whether it is phishing (a fake site that steals passwords or money) or legitimate.
@@ -14,9 +15,9 @@ Read these in order. Each one explains one part of the project in plain words, s
   1. Cleaned the data and split it so that **no website owner appears in both training and testing**.
   2. Reproduced the published accuracy: **99.99–100%** using all the dataset's columns.
   3. Built models that use **only the URL**, because that's all our app gets from a user: **~99.7%**.
+  4. Found out *why* the scores are so high. Every legitimate URL in the dataset is a bare `https://www.` homepage, and some columns nearly contain the answer. With those shortcuts removed, the honest URL-only score is **~88.6%** from the domain name alone.
 - **What's next:**
-  - Find out *why* the scores are so high (shortcuts in the dataset).
-  - Deep learning models (CNN, BiLSTM) on the raw URL.
+  - Deep learning models (CNN, BiLSTM) on the raw URL and on the domain only.
   - A hybrid model.
   - Explanations with SHAP.
   - A robustness test with modified URLs.

@@ -30,8 +30,12 @@ df = load_clean()
 | Average: char n-gram + XGBoost | URL only | 99.707% |
 | Char n-gram Logistic Regression | URL only | 99.695% |
 | Random Forest / XGBoost | URL features | 99.68% |
+| *One-line rule:* `URLSimilarityIndex < 100` | 1 column | 99.72% |
+| Char n-gram Logistic Regression | **domain only** (shortcuts removed) | **88.59%** |
 
-Details: [`notebooks/05_m2_results.ipynb`](notebooks/05_m2_results.ipynb).
+Every legitimate URL in PhiUSIIL is a bare `https://www.` homepage, so the near-perfect scores mostly reflect how the dataset was built. The domain-only number is the honest one ([shortcut analysis](docs/guide/03_shortcuts.md)).
+
+Details: [`notebooks/05_m2_results.ipynb`](notebooks/05_m2_results.ipynb), [`notebooks/07_url_views.ipynb`](notebooks/07_url_views.ipynb). Plan and status: [`docs/ROADMAP.md`](docs/ROADMAP.md).
 
 ---
 

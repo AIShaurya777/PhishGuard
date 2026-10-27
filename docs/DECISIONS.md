@@ -52,7 +52,7 @@ Add yours in the same format and link the evidence. This file becomes the
 - **Decision:**
   - `extract_features()` computes 39 numeric features from the URL string: sizes, character counts and ratios, host structure (subdomains, IP, port, `www`), scheme, hosting platform or shortener, path and query structure, suspicious words, and entropy.
   - No network calls and no dataset columns, so the same code runs in the app.
-- **Deliberately included:** the `is_https` and `has_www` features. Our first target is the highest accuracy we can get (M2_PLAN). Whether these are shortcuts is tested in Milestone 3.
+- **Deliberately included:** the `is_https` and `has_www` features. Our first target is the highest accuracy we can get (docs/ROADMAP.md, Milestone 2). Whether these are shortcuts is tested in Milestone 3.
 - **Evidence:** `src/phishguard/features.py`, `tests/test_features.py`, `notebooks/03_url_feature_models.ipynb`.
 
 ## D8 · Milestone 2 results
@@ -65,6 +65,27 @@ Add yours in the same format and link the evidence. This file becomes the
 - **Remaining errors:** nearly all are phishing sites shaped like a bare `https://www.<domain>` homepage, which is the shape of every legitimate URL in the dataset.
 - **Evidence:** `notebooks/05_m2_results.ipynb`.
 
-## Open questions (Milestone 3)
-- **How strong are the dataset's shortcuts?** Every legitimate URL starts with `https://www.` (2.4% of phishing URLs do), has no path, and has `URLSimilarityIndex = 100`. The char n-gram model's strongest weights are `p://` (phishing) and `www`/`s://` (legitimate).
-- **How much accuracy is left without them?** A first check: char n-gram LogReg drops from 99.73% to 90.42% on validation when `https://www.` is removed from every URL.
+## D9 · The provided columns are dominated by shortcuts
+- **Context:** In Milestone 2 even Logistic Regression reached 99.99% on the provided columns.
+- **Findings (notebook 06, test set):**
+  - `URLSimilarityIndex < 100 → phishing` alone: 99.72% accuracy.
+  - "Doesn't start with `https://www.` → phishing" alone: 99.16%. Every legitimate URL starts with it; only 2.4% of phishing URLs do.
+  - Page columns only: 99.64%. They measure what the crawler downloaded.
+  - URL columns without `IsHTTPS`: still 99.56%, because `URLLength` minus the counted characters is exactly 12 (`https://www.`) for legitimate URLs.
+- **Decision:** Column groups are defined in `src/phishguard/columns.py` (19 URL, 3 statistic, 28 page). The all-column results are reported as a *reproduction* of published work, not as evidence of phishing detection. The app can't use statistic or page columns.
+- **Evidence:** `notebooks/06_shortcut_audit.ipynb`, `tests/test_urls.py`.
+
+## D10 · Report every URL model on the raw URL and on the domain only
+- **Context:** URL-only models reach 99.7% mostly from the prefix and from whether there's a path.
+- **Findings (notebook 07, test accuracy):**
+
+  | View | Char n-gram LogReg | XGBoost (URL features) |
+  |---|---|---|
+  | raw URL | 99.70% | 99.68% |
+  | no scheme/www | 90.89% | 87.97% |
+  | domain only | 88.59% | 81.42% |
+
+- **Decision:** `phishguard.urls.URL_VIEWS` defines the three inputs. Every later URL model (CNN, BiLSTM, hybrid) is reported on **raw URL**, for comparison with published work, and **domain only**, the honest number.
+- **Why n-grams win on the domain:** the signal lies in the characters of the name (cheap TLDs such as `.cf`/`.ga`/`.top`, digits, hyphens, free-hosting subdomains), which counts miss. That motivates the character-level deep models.
+- **Limitation:** compromised legitimate sites (`cama.it`) can't be recognised from the domain name by any URL-only model.
+- **Evidence:** `notebooks/07_url_views.ipynb`.

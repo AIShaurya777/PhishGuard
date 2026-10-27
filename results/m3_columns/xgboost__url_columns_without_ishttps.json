@@ -1,0 +1,14 @@
+{
+  "model": "XGBoost: URL columns without IsHTTPS",
+  "features": "URL columns without IsHTTPS",
+  "threshold": 0.53,
+  "accuracy": 0.9955878166808995,
+  "precision": 0.9958988839585855,
+  "recall": 0.9936942376064936,
+  "f1": 0.9947953393102985,
+  "roc_auc": 0.9984924199688135,
+  "tn": 20162,
+  "fp": 61,
+  "fn": 94,
+  "tp": 14813
+}

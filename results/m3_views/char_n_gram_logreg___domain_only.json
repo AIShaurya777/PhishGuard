@@ -1,0 +1,14 @@
+{
+  "model": "Char n-gram LogReg | domain only",
+  "features": "domain only",
+  "threshold": 0.56,
+  "accuracy": 0.8859379447765443,
+  "precision": 0.940653298835705,
+  "recall": 0.7804387200643993,
+  "f1": 0.8530889092575619,
+  "roc_auc": 0.9309734811318148,
+  "tn": 19489,
+  "fp": 734,
+  "fn": 3273,
+  "tp": 11634
+}

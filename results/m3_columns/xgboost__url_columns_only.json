@@ -1,0 +1,14 @@
+{
+  "model": "XGBoost: URL columns only",
+  "features": "URL columns only",
+  "threshold": 0.35,
+  "accuracy": 0.9975234842015371,
+  "precision": 0.9995281110961305,
+  "recall": 0.9946333937076541,
+  "f1": 0.9970747453010995,
+  "roc_auc": 0.9986384007887422,
+  "tn": 20216,
+  "fp": 7,
+  "fn": 80,
+  "tp": 14827
+}
