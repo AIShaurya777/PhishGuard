@@ -204,6 +204,21 @@ Add yours in the same format and link the evidence. This file becomes the
 - **Limitation of the test:** "own domain" is decided with the Public Suffix List. Shared gateways that aren't on it (e.g. `ipfs.io`) are treated as attacker-owned, which makes some edits (`ipfs.io → ipfs.com`) unrealistic. Each such domain counts once among ~11,600.
 - **Evidence:** `notebooks/11_robustness.ipynb`, `src/phishguard/robustness.py`, `tests/test_robustness.py`. It agrees with the independent audits in `docs/references.md`.
 
+## D16 · The project website: a FastAPI server and a hand-written page, not Streamlit (Milestone 8)
+- **Decision:** the app is a small website. `phishguard.web` (FastAPI) serves the page in `web/` (plain HTML, CSS and JavaScript, no build step) and two endpoints: `POST /api/check` and `GET /api/numbers`. It replaces the Streamlit plan in the roadmap.
+- **Why not Streamlit:** we wanted the page to explain the results as much as show a score, with the link drawn letter by letter and the ignored parts crossed out. That needs full control of the layout. Streamlit's fixed widgets would have made the explanation the hard part. The cost is a few hundred lines of JavaScript, which `tests/test_web.py` covers through the API.
+- **What it serves:** the hybrid from notebook 10 and a character n-gram model, both domain only and trained on the seed-42 split. `python -m phishguard.serving` trains the n-gram model (`C` as chosen in notebook 07) and writes `models/ngram_domain_only.joblib`, `models/train_owners.csv.gz` and `models/site_numbers.json`. The website never trains.
+- **Numbers on the page are never typed by hand:**
+  - accuracy comes from `results/` (same files as the README table);
+  - robustness numbers are recomputed by `phishguard.serving` from the same saved models with the method of notebook 11, and they match it (15% / 81% / 19% flagged, all edits 86% → 20%, HTTPS 100% → 35.5%).
+- **Per-link warnings,** each backed by a measured number:
+  - the site's owner is in the training split (the model may remember it);
+  - the link has a subdomain (81% of popular such sites flagged);
+  - the suffix had a lopsided phishing share in training (≥ 60% or ≤ 15%, with at least 30 training rows);
+  - the two models disagree.
+- **Found while building it:** all 782 `google.com` rows in PhiUSIIL are labelled phishing. They are phishing pages hosted on `docs.google.com` (526), `sites.google.com` (180) and Google Cloud Storage, plus 7 on `accounts.google.com` itself. So the hybrid's 0.999 on `accounts.google.com` (D14) isn't only the subdomain shortcut: in the domain-only view, the training labels say exactly that. A domain-only model can't separate a phishing form on Google Docs from Google's own sign-in page.
+- **Safety:** the page says on every screen that it's a course project and can't tell whether a link is safe. The server only listens on `127.0.0.1`. The n-gram model is a pickle (joblib), so only load files we built ourselves.
+
 ## Reporting protocol from Milestone 4 on (fixed in advance)
 To avoid choosing what to report after seeing test results, every new model reports exactly this, and nothing is dropped if it looks bad:
 - **raw URL, domain only, registered domain** views (D10)

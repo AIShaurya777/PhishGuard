@@ -5,6 +5,9 @@ from itertools import product
 
 import numpy as np
 import pandas as pd
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.linear_model import LogisticRegression
+from sklearn.pipeline import make_pipeline
 
 from phishguard.evaluate import best_threshold, evaluate
 
@@ -65,4 +68,12 @@ def fit_and_test(model, X, y, splits, already_fitted: bool = False) -> Fit:
         test_metrics=evaluate(y.loc[test_idx], test_prob, threshold),
         val_prob=val_prob,
         test_prob=test_prob,
+    )
+
+
+def char_ngram_model(C: float):
+    """Character 1–4-gram TF-IDF + logistic regression, as in notebooks 04 and 07."""
+    return make_pipeline(
+        TfidfVectorizer(analyzer="char", ngram_range=(1, 4), min_df=2, sublinear_tf=True, dtype=np.float32),
+        LogisticRegression(C=C, solver="liblinear", max_iter=3000),
     )

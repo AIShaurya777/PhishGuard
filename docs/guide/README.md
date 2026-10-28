@@ -11,6 +11,7 @@ Read these in order. Each one explains one part of the project in plain words, s
 | 5 | [Hybrid model (Milestone 5)](05_hybrid.md) | Combining the CNN with handcrafted features: joint network vs averaging |
 | 6 | [Explainability (Milestone 6)](06_explainability.md) | SHAP, permutation importance, character highlighting, and checking the explanations are right |
 | 7 | [Robustness (Milestone 7)](07_robustness.md) | Edited phishing URLs, legitimate subdomains, and popular real websites outside the dataset |
+| 8 | [The website (Milestone 8)](08_website.md) | How the link checker works, where its numbers come from, and how to run it |
 
 ## The project in one minute
 - **Problem:** given a URL, say whether it is phishing (a fake site that steals passwords or money) or legitimate.
@@ -25,8 +26,9 @@ Read these in order. Each one explains one part of the project in plain words, s
   7. Built a **hybrid** network that reads the characters (CNN) *and* our 40 handcrafted features, trained together. On domain names it's our best URL model (86.7%), slightly but consistently ahead of the n-gram model and the CNN.
   8. Explained the models with **SHAP** and **character highlighting**, and checked the explanations are faithful. They expose the raw-URL shortcut and a real weakness: the domain model flags legitimate subdomains like `accounts.google.com`.
   9. Tested **robustness** without retraining. The raw-URL model is fooled just by switching to HTTPS. The domain-only models resist that, but cheap domain changes evade them, and on 25,000 popular real websites they flag 15–81% (depending on subdomains). The simple n-gram model copes best with edits and subdomains.
+  10. Built the **project website**. You paste a link and it shows which part the model reads, how each letter pushed the score, and which of our measured weak spots apply. While building it we found that every `google.com` link in the dataset is labelled phishing.
 - **What's next:**
-  - The Streamlit app.
+  - The report and slides.
 
 ## Words you'll hear
 | Word | Meaning |
@@ -55,6 +57,8 @@ Read these in order. Each one explains one part of the project in plain words, s
 ## Where things are
 ```
 src/phishguard/   ← reusable code (every notebook imports from here)
+web/              ← the website's page (HTML, CSS, JavaScript)
+models/           ← saved models the website loads
 notebooks/        ← experiments, numbered in order, with outputs saved
 tests/            ← automatic checks (run: .venv/bin/pytest)
 results/          ← test scores of every model (JSON)

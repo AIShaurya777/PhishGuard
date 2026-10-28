@@ -14,10 +14,13 @@ dependencies = [
     "tldextract==5.4.0",
     "torch",
     "shap",
+    # The project website (phishguard.web)
+    "fastapi",
+    "uvicorn",
 ]
 
 [project.optional-dependencies]
-dev = ["pytest", "jupyter", "ipykernel", "nbconvert"]
+dev = ["pytest", "jupyter", "ipykernel", "nbconvert", "httpx"]
 
 [build-system]
 requires = ["setuptools>=61"]

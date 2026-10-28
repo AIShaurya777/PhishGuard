@@ -66,6 +66,8 @@ The domain-only models never see the scheme, `www.` or the path, so their input 
 
 **Conclusion:** inside PhiUSIIL the domain-only models reach ~88%. On the real web they would raise many false alarms and miss phishing on cheap `.com` domains. Against edits and subdomains the **n-gram model is the most robust**, though it flags more popular *bare* domains than the hybrid (22% vs 15%). The fix is better legitimate data, not a bigger model.
 
+**Later finding (Milestone 8):** all 782 `google.com` links in PhiUSIIL are labelled phishing (pages hosted on Google Docs, Sites and Cloud Storage, and 7 on `accounts.google.com`). So flagging `accounts.google.com` also follows the training labels, not only the subdomain shortcut. See D16.
+
 ## Likely viva questions
 **Q: So your best model doesn't work in the real world?**
 A: Within PhiUSIIL it reaches ~88% on domains alone, but it doesn't transfer. It flags 15% of popular plain domains and 81% of popular sites with a subdomain, because PhiUSIIL's legitimate list has almost no subdomains and its phishing feed over-represents some countries. We measured this ourselves on 25,000 real websites, and independent audits report the same. Showing *why* a model fails is part of the result.

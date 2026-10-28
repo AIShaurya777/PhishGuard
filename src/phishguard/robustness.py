@@ -13,7 +13,11 @@ because it has a subdomain?".
 import re
 from urllib.parse import urlsplit
 
-from phishguard.urls import TLD_EXTRACT, split_url
+import pandas as pd
+
+from phishguard.data import REPO_ROOT
+from phishguard.split import site_owner
+from phishguard.urls import TLD_EXTRACT, URL_VIEWS, split_url
 
 _IP = re.compile(r"^\d{1,3}(\.\d{1,3}){3}$")
 _LOOK_ALIKE = str.maketrans("0134578", "oleastb")
@@ -124,3 +128,32 @@ def https_www_root(url: str) -> str | None:
 def switch_to_https(url: str) -> str | None:
     """http://… → https://… (free certificates make this trivial)."""
     return "https://" + url[len("http://"):] if urlsplit(url).scheme.lower() == "http" else None
+
+
+EXTERNAL_DIR = REPO_ROOT / "DataSets" / "external"
+
+
+def site_kind(host: str) -> str:
+    """'bare domain', 'with a subdomain' or 'on a hosting platform'."""
+    ext = TLD_EXTRACT(host)
+    if ext.is_private:
+        return "on a hosting platform"
+    return "with a subdomain" if ext.subdomain else "bare domain"
+
+
+def external_sites(phiusiil_owners: set[str]) -> dict[str, pd.Series]:
+    """Popular real websites (domain-only view) whose owner is nowhere in PhiUSIIL, as in notebook 11.
+
+    CrUX origins are grouped by site_kind(); Tranco gives registered domains.
+    """
+    crux = pd.read_csv(EXTERNAL_DIR / "crux_top10k_2026-10.csv")
+    tranco = pd.read_csv(EXTERNAL_DIR / "tranco_GQ3QK_top20k.csv")
+    sets = {}
+    crux_hosts = URL_VIEWS["domain only"](crux["origin"]).drop_duplicates()
+    crux_hosts = crux_hosts[~site_owner(crux_hosts).isin(phiusiil_owners)]
+    for group, hosts in crux_hosts.groupby(crux_hosts.map(site_kind)):
+        sets[f"CrUX top 10k: {group}"] = hosts.reset_index(drop=True)
+    tranco_domains = tranco["domain"].drop_duplicates()
+    sets["Tranco top 20k: registered domains"] = (
+        tranco_domains[~site_owner(tranco_domains).isin(phiusiil_owners)].reset_index(drop=True))
+    return sets

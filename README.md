@@ -13,7 +13,8 @@
 | 5 | Hybrid model (char-CNN + handcrafted features) | ✅ Done |
 | 6 | Explainability (SHAP, character attributions) | ✅ Done |
 | 7 | Robustness: original vs modified URLs, popular real websites | ✅ Done |
-| 8 | Streamlit app | ⏳ Next |
+| 8 | Project website: link checker with explanations and warnings | ✅ Done |
+| 9 | Report and slides | ⏳ Next |
 
 Details: [`docs/ROADMAP.md`](docs/ROADMAP.md).
 
@@ -33,6 +34,14 @@ from phishguard.data import load_clean, TARGET   # TARGET = "is_phishing", 1 = p
 from phishguard.experiment import run            # tune → threshold on validation → test, over 5 splits
 df = load_clean()
 ```
+
+**Run the website** (after setup):
+
+```bash
+.venv/bin/python -m phishguard.web               # then open http://127.0.0.1:8000
+```
+
+It needs the files in `models/`, which are in the repo. To rebuild them from the data: `.venv/bin/python -m phishguard.serving` (a few minutes).
 
 - **New to the project?** Read [`docs/guide/`](docs/guide/README.md), which explains every part simply, with likely viva questions.
 - **Every decision and why:** [`docs/DECISIONS.md`](docs/DECISIONS.md). **Sources:** [`docs/references.md`](docs/references.md).

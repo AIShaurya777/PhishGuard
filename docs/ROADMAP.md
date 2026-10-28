@@ -10,8 +10,8 @@
 | 5 | Hybrid model: deep URL encoder + our handcrafted features | ✅ | 09 | [05](guide/05_hybrid.md) |
 | 6 | Explainability: SHAP for trees, character attributions for deep models | ✅ | 10 | [06](guide/06_explainability.md) |
 | 7 | Robustness: original vs modified phishing URLs, model not retrained | ✅ | 11 | [07](guide/07_robustness.md) |
-| 8 | Streamlit app | next | | |
-| 9 | Report and slides | | | |
+| 8 | Project website: link checker with explanations and honest warnings | ✅ | – | [08](guide/08_website.md) |
+| 9 | Report and slides | next | | |
 
 ## Headline results (test accuracy, mean ± sd over 5 site-owner splits)
 | Model | Input | Accuracy |
@@ -60,11 +60,8 @@ The README table is generated from `results/` (`python -m phishguard.report`), a
 - On popular real websites outside PhiUSIIL, the hybrid flags 15% of bare domains and 81% of hosts with a subdomain. Country priors from the phishing feed (`.ru`, `.ir`, `.in`) explain part of it.
 - Against edits and subdomains the n-gram model is the most robust (it flags more popular bare domains, 22% vs 15%). The fix is better legitimate data.
 
-## Milestone 8 plan: Streamlit app
-- **Input:** a URL. **Shown:** the domain the model sees, P(phishing) from the hybrid **and** the n-gram model (most robust to edits and subdomains), the verdict at the validation threshold, the character highlighting and the top features (`explain_url`).
-- **Honest warnings, computed for each URL:**
-  - the URL has a subdomain (the models flag 81% of popular such sites);
-  - its suffix had a high phishing share in training (country prior);
-  - the raw-URL model would be fooled by HTTPS, which is why we don't use it.
-- **A "limits" page** with the numbers from D15 and the audits.
-- Loads `models/hybrid_domain_only.pt` (and a saved n-gram model); no training in the app.
+## Milestone 8 outcome (D16)
+- A website instead of Streamlit: `phishguard.web` (FastAPI) and `web/` (HTML, CSS, JavaScript). Run `.venv/bin/python -m phishguard.web`, open http://127.0.0.1:8000.
+- It checks a link with the hybrid and the n-gram model, crosses out what the models ignore, shades each letter by its effect, lists the features that moved the hybrid, and warns when one of our measured weak spots applies.
+- "What we found" tells the project's story with numbers read from `results/` and recomputed from the saved models.
+- Found: every `google.com` row in PhiUSIIL is labelled phishing (Docs/Sites-hosted phishing). That explains part of the `accounts.google.com` false alarm.

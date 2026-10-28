@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PhishGuard</title>
+  <meta name="description" content="A course project on phishing link detection: what the model reads, how well it does, and where it fails.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231a2230'/%3E%3Crect x='6' y='13' width='6' height='6' fill='%23235fa3'/%3E%3Crect x='13' y='13' width='6' height='6' fill='%23b8322a'/%3E%3Crect x='20' y='13' width='6' height='6' fill='%23235fa3'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:wght@400;500&family=Atkinson+Hyperlegible+Next:ital,wght@0,400;0,500;0,700;1,400&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip" href="#check">Skip to the link checker</a>
+
+  <header class="site-header">
+    <div class="wrap header-row">
+      <a class="wordmark" href="#check" aria-label="PhishGuard, back to the link checker">
+        <span class="wordmark-mark" aria-hidden="true"><i></i><i></i><i></i></span>PhishGuard
+      </a>
+      <nav aria-label="Sections">
+        <a href="#check">Check a link</a>
+        <a href="#findings">What we found</a>
+        <a href="#method">How it works</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="check" class="hero" aria-labelledby="hero-title">
+      <div class="wrap">
+        <h1 id="hero-title">What does a phishing detector actually look at?</h1>
+        <p class="lede">Paste a link. Our model reads only its domain name, then shows which letters pushed it
+          towards phishing and which towards legitimate.</p>
+
+        <form id="check-form" class="check-form" novalidate>
+          <label for="url" class="visually-hidden">Link to check</label>
+          <input id="url" name="url" type="text" inputmode="url" autocomplete="off" autocapitalize="off"
+                 spellcheck="false" placeholder="Paste a link, e.g. https://example.com/login" maxlength="2000">
+          <button type="submit" id="check-button">Check link</button>
+        </form>
+
+        <div class="examples">
+          <span id="examples-label">Or try one of these</span>
+          <ul aria-labelledby="examples-label">
+            <li><button type="button" data-url="http://account-verify-update.top/login.php">account-verify-update.top</button></li>
+            <li><button type="button" data-url="https://github.com">github.com</button></li>
+            <li><button type="button" data-url="https://accounts.google.com/signin">accounts.google.com</button></li>
+            <li><button type="button" data-url="https://mail.yahoo.com">mail.yahoo.com</button></li>
+            <li><button type="button" data-url="https://my-wallet-sync.web.app">my-wallet-sync.web.app</button></li>
+          </ul>
+        </div>
+
+        <p class="caveat">This is a university course project trained on one public dataset. It can’t tell you whether
+          a link is safe, and the section below explains why.</p>
+
+        <p id="error" class="error" role="alert" hidden></p>
+        <div id="result" class="result" aria-live="polite" hidden></div>
+      </div>
+    </section>
+
+    <section id="findings" class="findings" aria-labelledby="findings-title">
+      <div class="wrap">
+        <h2 id="findings-title">What we found</h2>
+        <p class="lede">We trained models from logistic regression to neural networks on PhiUSIIL, a public dataset of
+          234,000 labelled links. The question changed as we went: from “how accurate can we get?” to “what has the
+          model really learned?”</p>
+
+        <ol class="steps">
+          <li class="step">
+            <h3>On full links, every model looks near-perfect</h3>
+            <p>Models given the full link scored 99.7%, and 100.0% with all 50 of the dataset’s columns. But a one-line rule does almost as well: “if the link doesn’t
+              start with <code>https://www.</code>, call it phishing” is right 99.1% of the time. Every legitimate link in
+              the dataset is a bare homepage like this. Only 2.4% of the phishing links are.</p>
+            <div class="shortcut" aria-label="How the two kinds of link look in the dataset">
+              <div class="shortcut-row">
+                <span class="shortcut-label">Legitimate, all of them</span>
+                <span class="url-sample"><b>https://www.</b>example.org</span>
+              </div>
+              <div class="shortcut-row">
+                <span class="shortcut-label">Phishing, most of them</span>
+                <span class="url-sample"><b>http://</b>secure-login.example.top<b>/verify.php?id=7</b></span>
+              </div>
+            </div>
+            <p>So the models learned how the dataset was collected, not what phishing looks like. To make the task honest,
+              we removed the scheme, <code>www.</code> and the path, and kept only the domain.</p>
+          </li>
+
+          <li class="step">
+            <h3>On the domain alone, the honest score is about 87%</h3>
+            <p>Test accuracy, averaged over five different splits. Each split keeps every site’s links together, so
+              a model is never tested on a site it trained on.</p>
+            <figure class="chart" id="accuracy-chart" aria-busy="true">
+              <p class="loading">Loading results…</p>
+            </figure>
+            <p>Our hybrid model, which reads the characters and 40 measured properties of the domain together, is the best
+              on the domain alone. But its lead over plain character n-grams is small, under half a percentage point.</p>
+          </li>
+
+          <li class="step">
+            <h3>On real websites, it raises false alarms and misses edited phishing</h3>
+            <p>We tested the saved models on about 25,000 popular websites that aren’t in the dataset, and on phishing
+              domains changed in cheap ways an attacker could choose.</p>
+            <figure class="chart" id="real-sites-chart" aria-busy="true">
+              <p class="loading">Loading results…</p>
+            </figure>
+            <div id="attacks-table"></div>
+          </li>
+
+          <li class="step">
+            <h3>The cause is the data, not the model</h3>
+            <p>The dataset’s legitimate side is a list of homepages, almost none with a subdomain. Its phishing side comes
+              from feeds that over-represent some countries’ domains. A model can only learn the difference it’s shown, so
+              it learned “subdomain means phishing” and “<code>.ru</code> means phishing”. A bigger model learns the
+              same thing faster. The fix is legitimate data that looks like the real web.</p>
+            <p>The labels add to it. All 782 <code>google.com</code> links in the dataset are labelled phishing: they are
+              phishing pages hosted on Google Docs and Sites, and 7 are on <code>accounts.google.com</code> itself. A model
+              that reads only the domain can’t tell those apart from Google’s real sign-in page.</p>
+            <p>Independent audits of this dataset report the same shortcuts and the same false alarm on
+              <code>accounts.google.com</code>. Our <a href="https://github.com/AIShaurya777/PhishGuard/blob/main/docs/references.md">reference
+              list</a> cites them.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="method" class="method" aria-labelledby="method-title">
+      <div class="wrap">
+        <h2 id="method-title">How it works</h2>
+        <dl class="method-list">
+          <div>
+            <dt>Data</dt>
+            <dd>PhiUSIIL (Prasad and Chandra, <cite>Computers &amp; Security</cite>, 2024): 235,795 links, 234,204 after
+              cleaning. 58% legitimate, 42% phishing.</dd>
+          </div>
+          <div>
+            <dt>Testing</dt>
+            <dd>70% train, 15% validation, 15% test. All links from the same site stay in the same part. Settings and the
+              decision threshold are chosen on validation. The test part is scored once, on five different splits.</dd>
+          </div>
+          <div>
+            <dt>Models on this page</dt>
+            <dd><strong>Hybrid:</strong> a character CNN reads the domain letter by letter, and its output is joined with
+              40 measured properties such as length, hyphens and number of subdomains. <strong>Character n-grams:</strong>
+              logistic regression on every 1 to 4 letter chunk. Both were trained on the same split and never retrained
+              for this site.</dd>
+          </div>
+          <div>
+            <dt>Explanations</dt>
+            <dd>For each letter, we blank it out and measure how much the hybrid’s score changes. For each property, we
+              reset it to the average and do the same. We checked that this is faithful: on phishing domains the model caught,
+              blanking the five most “phishing” letters flips the verdict for 20% of them, and blanking five random
+              letters for 2.8%.</dd>
+          </div>
+          <div>
+            <dt>Team</dt>
+            <dd>Manan, Shaurya and Abhishek. Machine learning course project, 2026.</dd>
+          </div>
+          <div>
+            <dt>Code and write-up</dt>
+            <dd><a href="https://github.com/AIShaurya777/PhishGuard">github.com/AIShaurya777/PhishGuard</a>, with
+              notebooks, decision log and a plain-language guide for every step.</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>PhishGuard is a teaching project. Don’t use it to decide whether a link is safe.</p>
+    </div>
+  </footer>
+
+  <script src="app.js" type="module"></script>
+</body>
+</html>

@@ -1,0 +1,6996 @@
+{
+  "split": "seed 42",
+  "models": {
+    "hybrid": {
+      "threshold": 0.54,
+      "test_accuracy": 0.8777682892115002
+    },
+    "ngram": {
+      "C": 3.0,
+      "threshold": 0.52,
+      "test_accuracy": 0.8732991744947338
+    }
+  },
+  "real_sites": {
+    "CrUX top 10k: bare domain": {
+      "sites": 5975,
+      "hybrid": 0.15313807531380752,
+      "ngram": 0.21573221757322175
+    },
+    "CrUX top 10k: on a hosting platform": {
+      "sites": 16,
+      "hybrid": 0.75,
+      "ngram": 0.375
+    },
+    "CrUX top 10k: with a subdomain": {
+      "sites": 2584,
+      "hybrid": 0.8080495356037152,
+      "ngram": 0.5178018575851393
+    },
+    "Tranco top 20k: registered domains": {
+      "sites": 16840,
+      "hybrid": 0.18812351543942993,
+      "ngram": 0.2609263657957245
+    }
+  },
+  "legit_with_subdomain": {
+    "domains": 20225,
+    "original": {
+      "hybrid": 0.03312731767614339,
+      "ngram": 0.04257107540173053
+    },
+    "www2": {
+      "hybrid": 0.9463897131552917,
+      "ngram": 0.7155291790306627
+    },
+    "mail": {
+      "hybrid": 0.8923837784371909,
+      "ngram": 0.7056874381800198
+    },
+    "blog": {
+      "hybrid": 0.7380811078140455,
+      "ngram": 0.21097922848664688
+    },
+    "shop": {
+      "hybrid": 0.8204253214638971,
+      "ngram": 0.36305637982195843
+    },
+    "login": {
+      "hybrid": 0.9503956478733927,
+      "ngram": 0.7343719090009891
+    },
+    "accounts": {
+      "hybrid": 0.8615232443125618,
+      "ngram": 0.6179030662710188
+    }
+  },
+  "all_edits": {
+    "domains": 9531,
+    "hybrid": {
+      "before": 0.8551043961808834,
+      "after": 0.19672647151400693
+    },
+    "ngram": {
+      "before": 0.8344350015738118,
+      "after": 0.31874934424509493
+    }
+  },
+  "raw_url_attacks": {
+    "switch to HTTPS": {
+      "urls": 7771,
+      "before": 1.0,
+      "after": 0.3554240123536224
+    },
+    "https://www. + no path": {
+      "urls": 11112,
+      "before": 0.9996400287976962,
+      "after": 0.17755579553635709
+    }
+  },
+  "suffix_priors": {
+    "123hjemmeside.no": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "16-b.it": {
+      "train_rows": 3,
+      "phishing_share": 1.0
+    },
+    "2.azurestaticapps.net": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "32-b.it": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "3utilities.com": {
+      "train_rows": 4,
+      "phishing_share": 1.0
+    },
+    "64-b.it": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "a.run.app": {
+      "train_rows": 48,
+      "phishing_share": 1.0
+    },
+    "a2hosted.com": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "ab.ca": {
+      "train_rows": 9,
+      "phishing_share": 0.0
+    },
+    "aberdeen.sch.uk": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "ac": {
+      "train_rows": 11,
+      "phishing_share": 0.6364
+    },
+    "ac.ae": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "ac.at": {
+      "train_rows": 13,
+      "phishing_share": 0.0
+    },
+    "ac.bd": {
+      "train_rows": 6,
+      "phishing_share": 0.1667
+    },
+    "ac.be": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "ac.bw": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "ac.cn": {
+      "train_rows": 5,
+      "phishing_share": 0.0
+    },
+    "ac.cr": {
+      "train_rows": 3,
+      "phishing_share": 0.0
+    },
+    "ac.fj": {
+      "train_rows": 3,
+      "phishing_share": 0.0
+    },
+    "ac.id": {
+      "train_rows": 77,
+      "phishing_share": 0.2597
+    },
+    "ac.il": {
+      "train_rows": 12,
+      "phishing_share": 0.0
+    },
+    "ac.in": {
+      "train_rows": 80,
+      "phishing_share": 0.025
+    },
+    "ac.ir": {
+      "train_rows": 16,
+      "phishing_share": 0.0
+    },
+    "ac.jp": {
+      "train_rows": 110,
+      "phishing_share": 0.0091
+    },
+    "ac.ke": {
+      "train_rows": 3,
+      "phishing_share": 0.0
+    },
+    "ac.lk": {
+      "train_rows": 3,
+      "phishing_share": 0.0
+    },
+    "ac.ma": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "ac.me": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "ac.mz": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "ac.nz": {
+      "train_rows": 18,
+      "phishing_share": 0.0
+    },
+    "ac.pa": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "ac.rs": {
+      "train_rows": 9,
+      "phishing_share": 0.1111
+    },
+    "ac.th": {
+      "train_rows": 16,
+      "phishing_share": 0.4375
+    },
+    "ac.tz": {
+      "train_rows": 3,
+      "phishing_share": 0.0
+    },
+    "ac.ug": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "ac.uk": {
+      "train_rows": 356,
+      "phishing_share": 0.0
+    },
+    "ac.za": {
+      "train_rows": 18,
+      "phishing_share": 0.0
+    },
+    "ac.zw": {
+      "train_rows": 5,
+      "phishing_share": 0.0
+    },
+    "academy": {
+      "train_rows": 11,
+      "phishing_share": 0.6364
+    },
+    "accesscam.org": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "acessorapidolu.my.canva.site": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "act.edu.au": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "ad": {
+      "train_rows": 6,
+      "phishing_share": 0.0
+    },
+    "ad.jp": {
+      "train_rows": 3,
+      "phishing_share": 0.0
+    },
+    "adv.br": {
+      "train_rows": 3,
+      "phishing_share": 1.0
+    },
+    "ae": {
+      "train_rows": 84,
+      "phishing_share": 0.3452
+    },
+    "aero": {
+      "train_rows": 22,
+      "phishing_share": 0.0
+    },
+    "aeroport.fr": {
+      "train_rows": 4,
+      "phishing_share": 0.0
+    },
+    "af": {
+      "train_rows": 3,
+      "phishing_share": 0.6667
+    },
+    "africa": {
+      "train_rows": 8,
+      "phishing_share": 0.625
+    },
+    "ag": {
+      "train_rows": 6,
+      "phishing_share": 0.5
+    },
+    "agency": {
+      "train_rows": 15,
+      "phishing_share": 0.7333
+    },
+    "agrigento.it": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "ai": {
+      "train_rows": 44,
+      "phishing_share": 0.2045
+    },
+    "aichi.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "aizuwakamatsu.fukushima.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "ak.us": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "al": {
+      "train_rows": 28,
+      "phishing_share": 0.5
+    },
+    "altervista.org": {
+      "train_rows": 5,
+      "phishing_share": 0.8
+    },
+    "alwaysdata.net": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "am": {
+      "train_rows": 67,
+      "phishing_share": 0.209
+    },
+    "am.gov.br": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "amplifyapp.com": {
+      "train_rows": 13,
+      "phishing_share": 1.0
+    },
+    "ams3.digitaloceanspaces.com": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "amsterdam": {
+      "train_rows": 2,
+      "phishing_share": 0.5
+    },
+    "an.r.appspot.com": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "ao": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "ao.it": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "ap-south-1.compute.amazonaws.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "ap-southeast-2.compute.amazonaws.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "ap.gov.pl": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "ap.ngrok.io": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "app": {
+      "train_rows": 230,
+      "phishing_share": 0.5609
+    },
+    "appspot.com": {
+      "train_rows": 18,
+      "phishing_share": 1.0
+    },
+    "aq.it": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "ar": {
+      "train_rows": 6,
+      "phishing_share": 0.3333
+    },
+    "archi": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "arezzo.it": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "arq.br": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "art": {
+      "train_rows": 39,
+      "phishing_share": 0.7436
+    },
+    "art.br": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "art.pl": {
+      "train_rows": 5,
+      "phishing_share": 0.2
+    },
+    "as": {
+      "train_rows": 4,
+      "phishing_share": 0.5
+    },
+    "asia": {
+      "train_rows": 45,
+      "phishing_share": 0.5333
+    },
+    "asn.au": {
+      "train_rows": 24,
+      "phishing_share": 0.2917
+    },
+    "aso.kumamoto.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "asso.fr": {
+      "train_rows": 8,
+      "phishing_share": 0.125
+    },
+    "associates": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "at": {
+      "train_rows": 327,
+      "phishing_share": 0.2141
+    },
+    "ath.cx": {
+      "train_rows": 4,
+      "phishing_share": 1.0
+    },
+    "au": {
+      "train_rows": 5,
+      "phishing_share": 0.0
+    },
+    "audio": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "augustow.pl": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "auto": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "autos": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "av.tr": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "aw": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "ax": {
+      "train_rows": 4,
+      "phishing_share": 0.0
+    },
+    "az": {
+      "train_rows": 29,
+      "phishing_share": 0.1379
+    },
+    "azureedge.net": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "azurefd.net": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "azurewebsites.net": {
+      "train_rows": 35,
+      "phishing_share": 1.0
+    },
+    "ba": {
+      "train_rows": 36,
+      "phishing_share": 0.25
+    },
+    "ba.gov.br": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "band": {
+      "train_rows": 3,
+      "phishing_share": 0.0
+    },
+    "bank": {
+      "train_rows": 10,
+      "phishing_share": 0.0
+    },
+    "bar": {
+      "train_rows": 6,
+      "phishing_share": 1.0
+    },
+    "barcelona": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "bari.it": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "barrell-of-knowledge.info": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "basketball": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "bathnes.sch.uk": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "bayern": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "bc.ca": {
+      "train_rows": 9,
+      "phishing_share": 0.0
+    },
+    "be": {
+      "train_rows": 479,
+      "phishing_share": 0.0939
+    },
+    "beauty": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "bedzin.pl": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "beer": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "bel.tr": {
+      "train_rows": 44,
+      "phishing_share": 0.0
+    },
+    "bergamo.it": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "berlin": {
+      "train_rows": 4,
+      "phishing_share": 0.25
+    },
+    "best": {
+      "train_rows": 11,
+      "phishing_share": 0.9091
+    },
+    "bet": {
+      "train_rows": 4,
+      "phishing_share": 0.5
+    },
+    "better-than.tv": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "bf": {
+      "train_rows": 3,
+      "phishing_share": 0.0
+    },
+    "bg": {
+      "train_rows": 105,
+      "phishing_share": 0.0476
+    },
+    "bh": {
+      "train_rows": 2,
+      "phishing_share": 0.5
+    },
+    "bham.sch.uk": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "bialystok.pl": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "bid": {
+      "train_rows": 14,
+      "phishing_share": 1.0
+    },
+    "bike": {
+      "train_rows": 3,
+      "phishing_share": 0.0
+    },
+    "bio": {
+      "train_rows": 68,
+      "phishing_share": 0.9559
+    },
+    "bitbucket.io": {
+      "train_rows": 4,
+      "phishing_share": 1.0
+    },
+    "biz": {
+      "train_rows": 268,
+      "phishing_share": 0.7575
+    },
+    "biz.id": {
+      "train_rows": 13,
+      "phishing_share": 1.0
+    },
+    "biz.tr": {
+      "train_rows": 3,
+      "phishing_share": 1.0
+    },
+    "biz.ua": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "biz.vn": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "bizen.okayama.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "bj": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "bl.it": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "blob.core.windows.net": {
+      "train_rows": 27,
+      "phishing_share": 1.0
+    },
+    "blog": {
+      "train_rows": 10,
+      "phishing_share": 0.2
+    },
+    "blog.br": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "blogdns.net": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "blogsite.org": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "blogspot.com": {
+      "train_rows": 180,
+      "phishing_share": 1.0
+    },
+    "blogsyte.com": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "bm": {
+      "train_rows": 8,
+      "phishing_share": 0.0
+    },
+    "bo": {
+      "train_rows": 5,
+      "phishing_share": 0.2
+    },
+    "bo.it": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "boldlygoingnowhere.org": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "bologna.it": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "bolzano.it": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "bond": {
+      "train_rows": 4,
+      "phishing_share": 1.0
+    },
+    "bounceme.net": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "boutique": {
+      "train_rows": 3,
+      "phishing_share": 0.6667
+    },
+    "bplaced.net": {
+      "train_rows": 5,
+      "phishing_share": 1.0
+    },
+    "br": {
+      "train_rows": 32,
+      "phishing_share": 0.0625
+    },
+    "br.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "brasilia.me": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "brescia.it": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "broke-it.net": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "bromley.sch.uk": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "bs": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "bs.it": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "bt": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "build": {
+      "train_rows": 5,
+      "phishing_share": 0.6
+    },
+    "builders": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "business": {
+      "train_rows": 2,
+      "phishing_share": 0.5
+    },
+    "buyshouses.net": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "buzz": {
+      "train_rows": 18,
+      "phishing_share": 1.0
+    },
+    "bw": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "by": {
+      "train_rows": 41,
+      "phishing_share": 0.3171
+    },
+    "bydgoszcz.pl": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "bz": {
+      "train_rows": 34,
+      "phishing_share": 0.8529
+    },
+    "ca": {
+      "train_rows": 1030,
+      "phishing_share": 0.0767
+    },
+    "ca.us": {
+      "train_rows": 13,
+      "phishing_share": 0.0
+    },
+    "cab": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "cable-modem.org": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "cafe": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "cam": {
+      "train_rows": 7,
+      "phishing_share": 1.0
+    },
+    "camdvr.org": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "camera": {
+      "train_rows": 4,
+      "phishing_share": 0.5
+    },
+    "campania.it": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "capital": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "cards": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "care": {
+      "train_rows": 5,
+      "phishing_share": 0.0
+    },
+    "careers": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "casa": {
+      "train_rows": 2,
+      "phishing_share": 0.5
+    },
+    "casacam.net": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "cash": {
+      "train_rows": 15,
+      "phishing_share": 0.7333
+    },
+    "cat": {
+      "train_rows": 75,
+      "phishing_share": 0.1067
+    },
+    "catania.it": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "catholic.edu.au": {
+      "train_rows": 3,
+      "phishing_share": 0.0
+    },
+    "cc": {
+      "train_rows": 259,
+      "phishing_share": 0.8456
+    },
+    "cci.fr": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "cd": {
+      "train_rows": 5,
+      "phishing_share": 0.2
+    },
+    "cdn.cloudflare.net": {
+      "train_rows": 3,
+      "phishing_share": 1.0
+    },
+    "cdn.digitaloceanspaces.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "ce.gov.br": {
+      "train_rows": 6,
+      "phishing_share": 0.1667
+    },
+    "cechire.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "center": {
+      "train_rows": 4,
+      "phishing_share": 1.0
+    },
+    "cern": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "cf": {
+      "train_rows": 846,
+      "phishing_share": 1.0
+    },
+    "cf-ipfs.com": {
+      "train_rows": 186,
+      "phishing_share": 1.0
+    },
+    "cfd": {
+      "train_rows": 69,
+      "phishing_share": 1.0
+    },
+    "cfolks.pl": {
+      "train_rows": 65,
+      "phishing_share": 1.0
+    },
+    "ch": {
+      "train_rows": 390,
+      "phishing_share": 0.1
+    },
+    "chat": {
+      "train_rows": 6,
+      "phishing_share": 0.5
+    },
+    "chiba.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "chigasaki.kanagawa.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "chikushino.fukuoka.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "chiyoda.gunma.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "chu.jp": {
+      "train_rows": 4,
+      "phishing_share": 1.0
+    },
+    "church": {
+      "train_rows": 6,
+      "phishing_share": 0.1667
+    },
+    "ci": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "ciscofreak.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "city": {
+      "train_rows": 4,
+      "phishing_share": 0.25
+    },
+    "cl": {
+      "train_rows": 205,
+      "phishing_share": 0.5268
+    },
+    "cleverapps.io": {
+      "train_rows": 10,
+      "phishing_share": 1.0
+    },
+    "click": {
+      "train_rows": 50,
+      "phishing_share": 0.96
+    },
+    "cloud": {
+      "train_rows": 69,
+      "phishing_share": 0.9275
+    },
+    "cloudaccess.host": {
+      "train_rows": 11,
+      "phishing_share": 1.0
+    },
+    "cloudflare-ipfs.com": {
+      "train_rows": 293,
+      "phishing_share": 1.0
+    },
+    "cloudfront.net": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "cloudfunctions.net": {
+      "train_rows": 41,
+      "phishing_share": 1.0
+    },
+    "cloudns.cl": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "cloudns.eu": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "cloudns.org": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "cloudns.ph": {
+      "train_rows": 5,
+      "phishing_share": 1.0
+    },
+    "club": {
+      "train_rows": 260,
+      "phishing_share": 0.9346
+    },
+    "cluster028.hosting.ovh.net": {
+      "train_rows": 3,
+      "phishing_share": 1.0
+    },
+    "cluster029.hosting.ovh.net": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "cm": {
+      "train_rows": 15,
+      "phishing_share": 0.8
+    },
+    "cn": {
+      "train_rows": 494,
+      "phishing_share": 0.8745
+    },
+    "cn.com": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "cn.ua": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "co": {
+      "train_rows": 1307,
+      "phishing_share": 0.7942
+    },
+    "co.ao": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "co.at": {
+      "train_rows": 9,
+      "phishing_share": 0.6667
+    },
+    "co.bw": {
+      "train_rows": 7,
+      "phishing_share": 0.2857
+    },
+    "co.cr": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "co.fk": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "co.gg": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "co.id": {
+      "train_rows": 58,
+      "phishing_share": 0.3966
+    },
+    "co.il": {
+      "train_rows": 133,
+      "phishing_share": 0.1203
+    },
+    "co.in": {
+      "train_rows": 102,
+      "phishing_share": 0.4216
+    },
+    "co.ir": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "co.it": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "co.jp": {
+      "train_rows": 582,
+      "phishing_share": 0.012
+    },
+    "co.ke": {
+      "train_rows": 30,
+      "phishing_share": 0.6667
+    },
+    "co.kr": {
+      "train_rows": 125,
+      "phishing_share": 0.296
+    },
+    "co.ls": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "co.me": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "co.mw": {
+      "train_rows": 2,
+      "phishing_share": 0.5
+    },
+    "co.mz": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "co.nz": {
+      "train_rows": 234,
+      "phishing_share": 0.1068
+    },
+    "co.pl": {
+      "train_rows": 23,
+      "phishing_share": 1.0
+    },
+    "co.rs": {
+      "train_rows": 6,
+      "phishing_share": 0.1667
+    },
+    "co.sz": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "co.th": {
+      "train_rows": 35,
+      "phishing_share": 0.1714
+    },
+    "co.tt": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "co.tz": {
+      "train_rows": 8,
+      "phishing_share": 0.375
+    },
+    "co.ua": {
+      "train_rows": 31,
+      "phishing_share": 1.0
+    },
+    "co.ug": {
+      "train_rows": 4,
+      "phishing_share": 0.25
+    },
+    "co.uk": {
+      "train_rows": 2869,
+      "phishing_share": 0.069
+    },
+    "co.us": {
+      "train_rows": 4,
+      "phishing_share": 0.0
+    },
+    "co.za": {
+      "train_rows": 286,
+      "phishing_share": 0.2902
+    },
+    "co.zm": {
+      "train_rows": 3,
+      "phishing_share": 0.3333
+    },
+    "co.zw": {
+      "train_rows": 24,
+      "phishing_share": 0.5417
+    },
+    "coach": {
+      "train_rows": 5,
+      "phishing_share": 1.0
+    },
+    "codes": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "coffee": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "college": {
+      "train_rows": 2,
+      "phishing_share": 0.5
+    },
+    "collegefan.org": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "com": {
+      "train_rows": 73274,
+      "phishing_share": 0.3413
+    },
+    "com.ar": {
+      "train_rows": 187,
+      "phishing_share": 0.492
+    },
+    "com.au": {
+      "train_rows": 1321,
+      "phishing_share": 0.1771
+    },
+    "com.bb": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "com.bd": {
+      "train_rows": 17,
+      "phishing_share": 0.3529
+    },
+    "com.bh": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "com.bn": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "com.bo": {
+      "train_rows": 5,
+      "phishing_share": 0.4
+    },
+    "com.br": {
+      "train_rows": 1089,
+      "phishing_share": 0.3967
+    },
+    "com.bt": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "com.by": {
+      "train_rows": 6,
+      "phishing_share": 1.0
+    },
+    "com.cm": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "com.cn": {
+      "train_rows": 99,
+      "phishing_share": 0.4444
+    },
+    "com.co": {
+      "train_rows": 42,
+      "phishing_share": 0.7619
+    },
+    "com.cy": {
+      "train_rows": 15,
+      "phishing_share": 0.0
+    },
+    "com.de": {
+      "train_rows": 31,
+      "phishing_share": 1.0
+    },
+    "com.do": {
+      "train_rows": 6,
+      "phishing_share": 0.3333
+    },
+    "com.ec": {
+      "train_rows": 5,
+      "phishing_share": 0.4
+    },
+    "com.ee": {
+      "train_rows": 4,
+      "phishing_share": 1.0
+    },
+    "com.eg": {
+      "train_rows": 7,
+      "phishing_share": 0.8571
+    },
+    "com.es": {
+      "train_rows": 7,
+      "phishing_share": 1.0
+    },
+    "com.ge": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "com.gh": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "com.gi": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "com.gr": {
+      "train_rows": 5,
+      "phishing_share": 0.2
+    },
+    "com.hk": {
+      "train_rows": 31,
+      "phishing_share": 0.2581
+    },
+    "com.hr": {
+      "train_rows": 5,
+      "phishing_share": 0.0
+    },
+    "com.ht": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "com.jo": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "com.kh": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "com.kw": {
+      "train_rows": 2,
+      "phishing_share": 0.5
+    },
+    "com.ky": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "com.kz": {
+      "train_rows": 9,
+      "phishing_share": 1.0
+    },
+    "com.lb": {
+      "train_rows": 5,
+      "phishing_share": 0.0
+    },
+    "com.lk": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "com.lr": {
+      "train_rows": 11,
+      "phishing_share": 0.9091
+    },
+    "com.ly": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "com.mk": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "com.mm": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "com.mt": {
+      "train_rows": 15,
+      "phishing_share": 0.4
+    },
+    "com.mv": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "com.mx": {
+      "train_rows": 164,
+      "phishing_share": 0.4451
+    },
+    "com.my": {
+      "train_rows": 73,
+      "phishing_share": 0.3014
+    },
+    "com.na": {
+      "train_rows": 4,
+      "phishing_share": 0.0
+    },
+    "com.ng": {
+      "train_rows": 68,
+      "phishing_share": 0.7647
+    },
+    "com.ni": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "com.np": {
+      "train_rows": 15,
+      "phishing_share": 0.5333
+    },
+    "com.pa": {
+      "train_rows": 2,
+      "phishing_share": 0.5
+    },
+    "com.pe": {
+      "train_rows": 18,
+      "phishing_share": 0.4444
+    },
+    "com.ph": {
+      "train_rows": 27,
+      "phishing_share": 0.1111
+    },
+    "com.pk": {
+      "train_rows": 45,
+      "phishing_share": 0.5778
+    },
+    "com.pl": {
+      "train_rows": 54,
+      "phishing_share": 0.7593
+    },
+    "com.pt": {
+      "train_rows": 4,
+      "phishing_share": 0.0
+    },
+    "com.py": {
+      "train_rows": 12,
+      "phishing_share": 0.6667
+    },
+    "com.qa": {
+      "train_rows": 4,
+      "phishing_share": 0.5
+    },
+    "com.ru": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "com.sa": {
+      "train_rows": 6,
+      "phishing_share": 0.5
+    },
+    "com.sb": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "com.se": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "com.sg": {
+      "train_rows": 80,
+      "phishing_share": 0.2375
+    },
+    "com.sy": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "com.tj": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "com.tm": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "com.tn": {
+      "train_rows": 3,
+      "phishing_share": 0.6667
+    },
+    "com.tr": {
+      "train_rows": 136,
+      "phishing_share": 0.4118
+    },
+    "com.tw": {
+      "train_rows": 81,
+      "phishing_share": 0.2222
+    },
+    "com.ua": {
+      "train_rows": 121,
+      "phishing_share": 0.719
+    },
+    "com.uy": {
+      "train_rows": 20,
+      "phishing_share": 0.2
+    },
+    "com.ve": {
+      "train_rows": 8,
+      "phishing_share": 0.25
+    },
+    "com.vn": {
+      "train_rows": 35,
+      "phishing_share": 0.5429
+    },
+    "com.ye": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "com.zm": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "community": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "company": {
+      "train_rows": 10,
+      "phishing_share": 0.7
+    },
+    "condos": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "consulting": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "cool": {
+      "train_rows": 18,
+      "phishing_share": 1.0
+    },
+    "coop": {
+      "train_rows": 25,
+      "phishing_share": 0.0
+    },
+    "cornwall.sch.uk": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "corsica": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "cprapid.com": {
+      "train_rows": 224,
+      "phishing_share": 1.0
+    },
+    "cr": {
+      "train_rows": 14,
+      "phishing_share": 0.7857
+    },
+    "croydon.sch.uk": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "csb.app": {
+      "train_rows": 15,
+      "phishing_share": 1.0
+    },
+    "ct.it": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "ct.us": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "cu": {
+      "train_rows": 9,
+      "phishing_share": 0.0
+    },
+    "cv": {
+      "train_rows": 6,
+      "phishing_share": 0.3333
+    },
+    "cx": {
+      "train_rows": 16,
+      "phishing_share": 0.875
+    },
+    "cy": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "cymru": {
+      "train_rows": 3,
+      "phishing_share": 0.0
+    },
+    "cyou": {
+      "train_rows": 35,
+      "phishing_share": 1.0
+    },
+    "cz": {
+      "train_rows": 411,
+      "phishing_share": 0.0998
+    },
+    "damnserver.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "date": {
+      "train_rows": 21,
+      "phishing_share": 1.0
+    },
+    "date.hokkaido.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "dd-dns.de": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "ddns.me": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "ddns.net": {
+      "train_rows": 10,
+      "phishing_share": 1.0
+    },
+    "ddnsfree.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "ddnsgeek.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "ddnsking.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "ddnss.de": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "de": {
+      "train_rows": 2729,
+      "phishing_share": 0.1491
+    },
+    "de.com": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "deca.jp": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "deci.jp": {
+      "train_rows": 3,
+      "phishing_share": 1.0
+    },
+    "dedyn.io": {
+      "train_rows": 7,
+      "phishing_share": 1.0
+    },
+    "delivery": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "deno.dev": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "desa.id": {
+      "train_rows": 7,
+      "phishing_share": 1.0
+    },
+    "design": {
+      "train_rows": 11,
+      "phishing_share": 0.2727
+    },
+    "dev": {
+      "train_rows": 72,
+      "phishing_share": 0.6944
+    },
+    "digital": {
+      "train_rows": 38,
+      "phishing_share": 0.9474
+    },
+    "direct": {
+      "train_rows": 3,
+      "phishing_share": 1.0
+    },
+    "diskstation.eu": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "diskstation.org": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "ditchyourip.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "dj": {
+      "train_rows": 4,
+      "phishing_share": 0.5
+    },
+    "dk": {
+      "train_rows": 240,
+      "phishing_share": 0.1292
+    },
+    "dn.ua": {
+      "train_rows": 2,
+      "phishing_share": 0.5
+    },
+    "dns-cloud.net": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "dnsalias.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "dnsalias.net": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "dnsalias.org": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "dnsdojo.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "dnsdojo.net": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "dnsdojo.org": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "dnsfor.me": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "dnshome.de": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "do": {
+      "train_rows": 3,
+      "phishing_share": 0.3333
+    },
+    "does-it.net": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "dog": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "domains": {
+      "train_rows": 2,
+      "phishing_share": 0.5
+    },
+    "doncaster.sch.uk": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "dontexist.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "dontexist.net": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "dontexist.org": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "doomdns.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "doomdns.org": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "download": {
+      "train_rows": 7,
+      "phishing_share": 1.0
+    },
+    "dp.ua": {
+      "train_rows": 3,
+      "phishing_share": 0.0
+    },
+    "duckdns.org": {
+      "train_rows": 446,
+      "phishing_share": 0.9978
+    },
+    "durham.sch.uk": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "dvrcam.info": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "dy.fi": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "dyn-vpn.de": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "dynalias.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "dynalias.net": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "dynalias.org": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "dynamisches-dns.de": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "dynathome.net": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "dyndns.ws": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "dynns.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "dynu.net": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "dynv6.net": {
+      "train_rows": 3,
+      "phishing_share": 1.0
+    },
+    "dynvpn.de": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "dz": {
+      "train_rows": 8,
+      "phishing_share": 0.375
+    },
+    "earth": {
+      "train_rows": 4,
+      "phishing_share": 0.0
+    },
+    "eastus.azurecontainer.io": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "eastus2.azurecontainer.io": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "ec": {
+      "train_rows": 6,
+      "phishing_share": 0.1667
+    },
+    "eco": {
+      "train_rows": 3,
+      "phishing_share": 0.0
+    },
+    "ed.jp": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "edu": {
+      "train_rows": 1261,
+      "phishing_share": 0.0032
+    },
+    "edu.ar": {
+      "train_rows": 29,
+      "phishing_share": 0.0
+    },
+    "edu.au": {
+      "train_rows": 87,
+      "phishing_share": 0.0575
+    },
+    "edu.az": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "edu.ba": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "edu.bb": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "edu.bd": {
+      "train_rows": 8,
+      "phishing_share": 0.375
+    },
+    "edu.bo": {
+      "train_rows": 3,
+      "phishing_share": 0.3333
+    },
+    "edu.br": {
+      "train_rows": 20,
+      "phishing_share": 0.7
+    },
+    "edu.bz": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "edu.cn": {
+      "train_rows": 44,
+      "phishing_share": 0.0227
+    },
+    "edu.co": {
+      "train_rows": 14,
+      "phishing_share": 0.1429
+    },
+    "edu.do": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "edu.ec": {
+      "train_rows": 5,
+      "phishing_share": 0.2
+    },
+    "edu.eg": {
+      "train_rows": 5,
+      "phishing_share": 0.0
+    },
+    "edu.ge": {
+      "train_rows": 3,
+      "phishing_share": 0.3333
+    },
+    "edu.gh": {
+      "train_rows": 3,
+      "phishing_share": 0.3333
+    },
+    "edu.gi": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "edu.gr": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "edu.hk": {
+      "train_rows": 19,
+      "phishing_share": 0.0
+    },
+    "edu.in": {
+      "train_rows": 30,
+      "phishing_share": 0.2
+    },
+    "edu.iq": {
+      "train_rows": 3,
+      "phishing_share": 0.3333
+    },
+    "edu.it": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "edu.jm": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "edu.jo": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "edu.kh": {
+      "train_rows": 5,
+      "phishing_share": 0.0
+    },
+    "edu.krd": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "edu.kw": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "edu.ky": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "edu.lb": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "edu.me": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "edu.mk": {
+      "train_rows": 3,
+      "phishing_share": 0.0
+    },
+    "edu.mn": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "edu.mt": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "edu.mx": {
+      "train_rows": 11,
+      "phishing_share": 0.2727
+    },
+    "edu.my": {
+      "train_rows": 23,
+      "phishing_share": 0.087
+    },
+    "edu.ng": {
+      "train_rows": 16,
+      "phishing_share": 0.125
+    },
+    "edu.ni": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "edu.np": {
+      "train_rows": 4,
+      "phishing_share": 0.5
+    },
+    "edu.om": {
+      "train_rows": 4,
+      "phishing_share": 0.0
+    },
+    "edu.pe": {
+      "train_rows": 17,
+      "phishing_share": 0.5882
+    },
+    "edu.ph": {
+      "train_rows": 10,
+      "phishing_share": 0.1
+    },
+    "edu.pk": {
+      "train_rows": 14,
+      "phishing_share": 0.2143
+    },
+    "edu.pl": {
+      "train_rows": 17,
+      "phishing_share": 0.0588
+    },
+    "edu.ps": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "edu.pt": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "edu.py": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "edu.qa": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "edu.sa": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "edu.sg": {
+      "train_rows": 13,
+      "phishing_share": 0.0
+    },
+    "edu.sv": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "edu.tr": {
+      "train_rows": 16,
+      "phishing_share": 0.0625
+    },
+    "edu.tw": {
+      "train_rows": 12,
+      "phishing_share": 0.0
+    },
+    "edu.ua": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "edu.uy": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "edu.vn": {
+      "train_rows": 6,
+      "phishing_share": 0.6667
+    },
+    "education": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "ee": {
+      "train_rows": 81,
+      "phishing_share": 0.1358
+    },
+    "eg": {
+      "train_rows": 3,
+      "phishing_share": 0.3333
+    },
+    "elblag.pl": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "elementor.cloud": {
+      "train_rows": 8,
+      "phishing_share": 1.0
+    },
+    "email": {
+      "train_rows": 26,
+      "phishing_share": 0.8846
+    },
+    "emilia-romagna.it": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "endofinternet.org": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "energy": {
+      "train_rows": 4,
+      "phishing_share": 0.25
+    },
+    "engineering": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "es": {
+      "train_rows": 506,
+      "phishing_share": 0.1838
+    },
+    "es.gov.br": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "est-a-la-maison.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "est-le-patron.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "eu": {
+      "train_rows": 689,
+      "phishing_share": 0.2816
+    },
+    "eu-west-1.compute.amazonaws.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "eu.com": {
+      "train_rows": 5,
+      "phishing_share": 0.4
+    },
+    "eu.ngrok.io": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "eu.org": {
+      "train_rows": 20,
+      "phishing_share": 0.85
+    },
+    "eu.pythonanywhere.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "eus": {
+      "train_rows": 11,
+      "phishing_share": 0.0909
+    },
+    "events": {
+      "train_rows": 4,
+      "phishing_share": 0.5
+    },
+    "ewr1.vultrobjects.com": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "exchange": {
+      "train_rows": 4,
+      "phishing_share": 0.75
+    },
+    "execute-api.us-west-2.amazonaws.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "expert": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "express": {
+      "train_rows": 2,
+      "phishing_share": 0.5
+    },
+    "family": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "fantasyleague.cc": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "farm": {
+      "train_rows": 2,
+      "phishing_share": 0.5
+    },
+    "fashion": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "fe.it": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "fi": {
+      "train_rows": 231,
+      "phishing_share": 0.0476
+    },
+    "fi.it": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "film": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "finance": {
+      "train_rows": 20,
+      "phishing_share": 1.0
+    },
+    "firebaseapp.com": {
+      "train_rows": 3925,
+      "phishing_share": 1.0
+    },
+    "firenze.it": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "fit": {
+      "train_rows": 5,
+      "phishing_share": 1.0
+    },
+    "fitness": {
+      "train_rows": 3,
+      "phishing_share": 0.6667
+    },
+    "fl.us": {
+      "train_rows": 6,
+      "phishing_share": 0.0
+    },
+    "fm": {
+      "train_rows": 62,
+      "phishing_share": 0.0806
+    },
+    "fo": {
+      "train_rows": 16,
+      "phishing_share": 0.5
+    },
+    "for-more.biz": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "for-our.info": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "for-some.biz": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "for-the.biz": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "forgot.her.name": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "forgot.his.name": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "forumz.info": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "fot.br": {
+      "train_rows": 4,
+      "phishing_share": 0.0
+    },
+    "foundation": {
+      "train_rows": 3,
+      "phishing_share": 0.0
+    },
+    "fr": {
+      "train_rows": 1286,
+      "phishing_share": 0.2776
+    },
+    "fra1.digitaloceanspaces.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "freeddns.org": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "from-ak.com": {
+      "train_rows": 3,
+      "phishing_share": 1.0
+    },
+    "from-al.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "from-az.net": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "from-ca.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "from-co.net": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "from-ct.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "from-dc.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "from-de.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "from-ga.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "from-hi.com": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "from-ia.com": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "from-id.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "from-il.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "from-ks.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "from-ky.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "from-la.net": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "from-ma.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "from-me.org": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "from-mi.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "from-mn.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "from-mo.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "from-ms.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "from-mt.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "from-nc.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "from-nd.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "from-ne.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "from-nh.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "from-nm.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "from-ny.net": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "from-oh.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "from-ok.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "from-or.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "from-sc.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "from-sd.com": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "from-tn.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "from-tx.com": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "from-va.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "from-vt.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "from-wa.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "from-wv.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "from-wy.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "ftpaccess.cc": {
+      "train_rows": 6,
+      "phishing_share": 1.0
+    },
+    "fuettertdasnetz.de": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "fukushima.fukushima.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "fukuyama.hiroshima.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "fun": {
+      "train_rows": 367,
+      "phishing_share": 0.9918
+    },
+    "fund": {
+      "train_rows": 9,
+      "phishing_share": 0.8889
+    },
+    "furniture": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "fussa.tokyo.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "fyi": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "ga": {
+      "train_rows": 781,
+      "phishing_share": 0.9974
+    },
+    "ga.us": {
+      "train_rows": 3,
+      "phishing_share": 0.0
+    },
+    "gal": {
+      "train_rows": 8,
+      "phishing_share": 0.0
+    },
+    "gallery": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "game": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "game-server.cc": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "games": {
+      "train_rows": 14,
+      "phishing_share": 0.2857
+    },
+    "garden": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "gay": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "gb.net": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "gc.ca": {
+      "train_rows": 12,
+      "phishing_share": 0.0
+    },
+    "gd": {
+      "train_rows": 173,
+      "phishing_share": 0.9827
+    },
+    "gdansk.pl": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "gdn": {
+      "train_rows": 3,
+      "phishing_share": 1.0
+    },
+    "ge": {
+      "train_rows": 22,
+      "phishing_share": 0.3182
+    },
+    "ge.it": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "geek.nz": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "geekgalaxy.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "gen.in": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "gen.tr": {
+      "train_rows": 3,
+      "phishing_share": 0.6667
+    },
+    "gets-it.net": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "gf": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "gg": {
+      "train_rows": 28,
+      "phishing_share": 0.5357
+    },
+    "gi": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "gift": {
+      "train_rows": 3,
+      "phishing_share": 1.0
+    },
+    "gifts": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "giize.com": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "github.io": {
+      "train_rows": 258,
+      "phishing_share": 1.0
+    },
+    "gitlab.io": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "gl": {
+      "train_rows": 4,
+      "phishing_share": 0.75
+    },
+    "gle": {
+      "train_rows": 30,
+      "phishing_share": 1.0
+    },
+    "gleeze.com": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "glitch.me": {
+      "train_rows": 361,
+      "phishing_share": 1.0
+    },
+    "global": {
+      "train_rows": 14,
+      "phishing_share": 0.0714
+    },
+    "global.prod.fastly.net": {
+      "train_rows": 3,
+      "phishing_share": 1.0
+    },
+    "global.ssl.fastly.net": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "gloomy.jp": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "gloucs.sch.uk": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "gmbh": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "go.cr": {
+      "train_rows": 6,
+      "phishing_share": 0.0
+    },
+    "go.gov.br": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "go.id": {
+      "train_rows": 209,
+      "phishing_share": 0.8517
+    },
+    "go.jp": {
+      "train_rows": 52,
+      "phishing_share": 0.0
+    },
+    "go.ke": {
+      "train_rows": 11,
+      "phishing_share": 0.0
+    },
+    "go.kr": {
+      "train_rows": 14,
+      "phishing_share": 0.0714
+    },
+    "go.th": {
+      "train_rows": 13,
+      "phishing_share": 0.4615
+    },
+    "go.tz": {
+      "train_rows": 15,
+      "phishing_share": 0.0667
+    },
+    "go.ug": {
+      "train_rows": 26,
+      "phishing_share": 0.1538
+    },
+    "gob.ar": {
+      "train_rows": 15,
+      "phishing_share": 0.2
+    },
+    "gob.bo": {
+      "train_rows": 5,
+      "phishing_share": 0.2
+    },
+    "gob.cl": {
+      "train_rows": 8,
+      "phishing_share": 0.0
+    },
+    "gob.cu": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "gob.do": {
+      "train_rows": 4,
+      "phishing_share": 0.0
+    },
+    "gob.ec": {
+      "train_rows": 11,
+      "phishing_share": 0.0
+    },
+    "gob.es": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "gob.gt": {
+      "train_rows": 3,
+      "phishing_share": 0.0
+    },
+    "gob.hn": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "gob.mx": {
+      "train_rows": 29,
+      "phishing_share": 0.0345
+    },
+    "gob.ni": {
+      "train_rows": 3,
+      "phishing_share": 0.0
+    },
+    "gob.pa": {
+      "train_rows": 6,
+      "phishing_share": 0.0
+    },
+    "gob.pe": {
+      "train_rows": 16,
+      "phishing_share": 0.4375
+    },
+    "gob.sv": {
+      "train_rows": 6,
+      "phishing_share": 0.0
+    },
+    "gob.ve": {
+      "train_rows": 3,
+      "phishing_share": 0.0
+    },
+    "gold": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "golf": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "google": {
+      "train_rows": 6,
+      "phishing_share": 0.0
+    },
+    "googleapis.com": {
+      "train_rows": 15,
+      "phishing_share": 1.0
+    },
+    "gos.pk": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "gotdns.ch": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "gotdns.com": {
+      "train_rows": 5,
+      "phishing_share": 1.0
+    },
+    "gotdns.org": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "gouv.fr": {
+      "train_rows": 11,
+      "phishing_share": 0.0
+    },
+    "gouv.ht": {
+      "train_rows": 3,
+      "phishing_share": 0.0
+    },
+    "gov": {
+      "train_rows": 785,
+      "phishing_share": 0.0
+    },
+    "gov.ac": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "gov.ae": {
+      "train_rows": 10,
+      "phishing_share": 0.3
+    },
+    "gov.af": {
+      "train_rows": 4,
+      "phishing_share": 0.0
+    },
+    "gov.al": {
+      "train_rows": 3,
+      "phishing_share": 0.0
+    },
+    "gov.ao": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "gov.ar": {
+      "train_rows": 10,
+      "phishing_share": 0.0
+    },
+    "gov.au": {
+      "train_rows": 99,
+      "phishing_share": 0.0
+    },
+    "gov.az": {
+      "train_rows": 6,
+      "phishing_share": 0.0
+    },
+    "gov.ba": {
+      "train_rows": 4,
+      "phishing_share": 0.0
+    },
+    "gov.bb": {
+      "train_rows": 4,
+      "phishing_share": 0.0
+    },
+    "gov.bd": {
+      "train_rows": 5,
+      "phishing_share": 0.2
+    },
+    "gov.bh": {
+      "train_rows": 4,
+      "phishing_share": 0.0
+    },
+    "gov.bn": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "gov.br": {
+      "train_rows": 6,
+      "phishing_share": 0.0
+    },
+    "gov.bt": {
+      "train_rows": 11,
+      "phishing_share": 0.0
+    },
+    "gov.bw": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "gov.by": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "gov.bz": {
+      "train_rows": 3,
+      "phishing_share": 0.0
+    },
+    "gov.ck": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "gov.cl": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "gov.cn": {
+      "train_rows": 30,
+      "phishing_share": 0.0333
+    },
+    "gov.co": {
+      "train_rows": 25,
+      "phishing_share": 0.0
+    },
+    "gov.cy": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "gov.dm": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "gov.do": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "gov.et": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "gov.fj": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "gov.ge": {
+      "train_rows": 5,
+      "phishing_share": 0.0
+    },
+    "gov.gh": {
+      "train_rows": 3,
+      "phishing_share": 0.0
+    },
+    "gov.gi": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "gov.gr": {
+      "train_rows": 10,
+      "phishing_share": 0.0
+    },
+    "gov.gy": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "gov.hk": {
+      "train_rows": 9,
+      "phishing_share": 0.0
+    },
+    "gov.il": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "gov.in": {
+      "train_rows": 107,
+      "phishing_share": 0.0187
+    },
+    "gov.iq": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "gov.it": {
+      "train_rows": 3,
+      "phishing_share": 0.0
+    },
+    "gov.jm": {
+      "train_rows": 4,
+      "phishing_share": 0.0
+    },
+    "gov.jo": {
+      "train_rows": 3,
+      "phishing_share": 0.0
+    },
+    "gov.kh": {
+      "train_rows": 7,
+      "phishing_share": 0.0
+    },
+    "gov.ki": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "gov.kw": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "gov.la": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "gov.lb": {
+      "train_rows": 6,
+      "phishing_share": 0.0
+    },
+    "gov.lc": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "gov.lk": {
+      "train_rows": 6,
+      "phishing_share": 0.0
+    },
+    "gov.lr": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "gov.ls": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "gov.mg": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "gov.mm": {
+      "train_rows": 5,
+      "phishing_share": 0.2
+    },
+    "gov.mn": {
+      "train_rows": 3,
+      "phishing_share": 0.0
+    },
+    "gov.mo": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "gov.mv": {
+      "train_rows": 3,
+      "phishing_share": 0.0
+    },
+    "gov.my": {
+      "train_rows": 21,
+      "phishing_share": 0.0
+    },
+    "gov.mz": {
+      "train_rows": 2,
+      "phishing_share": 0.5
+    },
+    "gov.na": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "gov.ng": {
+      "train_rows": 13,
+      "phishing_share": 0.0
+    },
+    "gov.np": {
+      "train_rows": 14,
+      "phishing_share": 0.0714
+    },
+    "gov.om": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "gov.pg": {
+      "train_rows": 6,
+      "phishing_share": 0.0
+    },
+    "gov.ph": {
+      "train_rows": 25,
+      "phishing_share": 0.04
+    },
+    "gov.pk": {
+      "train_rows": 13,
+      "phishing_share": 0.0
+    },
+    "gov.pl": {
+      "train_rows": 10,
+      "phishing_share": 0.0
+    },
+    "gov.pt": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "gov.py": {
+      "train_rows": 6,
+      "phishing_share": 0.0
+    },
+    "gov.qa": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "gov.rs": {
+      "train_rows": 10,
+      "phishing_share": 0.0
+    },
+    "gov.ru": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "gov.rw": {
+      "train_rows": 3,
+      "phishing_share": 0.0
+    },
+    "gov.sa": {
+      "train_rows": 7,
+      "phishing_share": 0.0
+    },
+    "gov.sb": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "gov.sc": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "gov.scot": {
+      "train_rows": 4,
+      "phishing_share": 0.0
+    },
+    "gov.sg": {
+      "train_rows": 32,
+      "phishing_share": 0.0
+    },
+    "gov.sh": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "gov.ss": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "gov.sy": {
+      "train_rows": 2,
+      "phishing_share": 0.5
+    },
+    "gov.tm": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "gov.to": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "gov.tr": {
+      "train_rows": 20,
+      "phishing_share": 0.0
+    },
+    "gov.tt": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "gov.tw": {
+      "train_rows": 16,
+      "phishing_share": 0.0
+    },
+    "gov.ua": {
+      "train_rows": 20,
+      "phishing_share": 0.0
+    },
+    "gov.uk": {
+      "train_rows": 209,
+      "phishing_share": 0.0
+    },
+    "gov.vn": {
+      "train_rows": 11,
+      "phishing_share": 0.2727
+    },
+    "gov.ws": {
+      "train_rows": 4,
+      "phishing_share": 0.0
+    },
+    "gov.za": {
+      "train_rows": 12,
+      "phishing_share": 0.0
+    },
+    "gov.zm": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "govt.nz": {
+      "train_rows": 60,
+      "phishing_share": 0.0
+    },
+    "gp": {
+      "train_rows": 59,
+      "phishing_share": 0.9831
+    },
+    "gq": {
+      "train_rows": 353,
+      "phishing_share": 1.0
+    },
+    "gr": {
+      "train_rows": 320,
+      "phishing_share": 0.1375
+    },
+    "gr.jp": {
+      "train_rows": 9,
+      "phishing_share": 0.0
+    },
+    "green": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "group": {
+      "train_rows": 4,
+      "phishing_share": 0.5
+    },
+    "gs": {
+      "train_rows": 11,
+      "phishing_share": 0.7273
+    },
+    "gt": {
+      "train_rows": 4,
+      "phishing_share": 0.5
+    },
+    "gub.uy": {
+      "train_rows": 5,
+      "phishing_share": 0.0
+    },
+    "guide": {
+      "train_rows": 2,
+      "phishing_share": 0.5
+    },
+    "guitars": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "guru": {
+      "train_rows": 13,
+      "phishing_share": 0.6154
+    },
+    "gv.at": {
+      "train_rows": 17,
+      "phishing_share": 0.0
+    },
+    "gy": {
+      "train_rows": 50,
+      "phishing_share": 0.98
+    },
+    "hachioji.tokyo.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "hair": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "ham-radio-op.net": {
+      "train_rows": 3,
+      "phishing_share": 1.0
+    },
+    "hamamatsu.shizuoka.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "hamburg": {
+      "train_rows": 3,
+      "phishing_share": 0.3333
+    },
+    "health": {
+      "train_rows": 9,
+      "phishing_share": 0.2222
+    },
+    "health-carereform.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "healthcare": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "help": {
+      "train_rows": 3,
+      "phishing_share": 0.6667
+    },
+    "her.jp": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "herokuapp.com": {
+      "train_rows": 44,
+      "phishing_share": 1.0
+    },
+    "herts.sch.uk": {
+      "train_rows": 6,
+      "phishing_share": 0.0
+    },
+    "hk": {
+      "train_rows": 35,
+      "phishing_share": 0.3429
+    },
+    "hn": {
+      "train_rows": 8,
+      "phishing_share": 0.375
+    },
+    "hobby-site.com": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "hobby-site.org": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "holdings": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "holiday": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "holy.jp": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "homedns.org": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "homeftp.net": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "homeftp.org": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "homelinux.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "homelinux.org": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "homes": {
+      "train_rows": 6,
+      "phishing_share": 1.0
+    },
+    "homesecuritymac.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "homesecuritypc.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "homeunix.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "homeunix.net": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "homeunix.org": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "hopto.org": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "host": {
+      "train_rows": 13,
+      "phishing_share": 1.0
+    },
+    "hosting": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "house": {
+      "train_rows": 4,
+      "phishing_share": 0.75
+    },
+    "hr": {
+      "train_rows": 122,
+      "phishing_share": 0.041
+    },
+    "ht": {
+      "train_rows": 84,
+      "phishing_share": 0.9881
+    },
+    "hu": {
+      "train_rows": 204,
+      "phishing_share": 0.1912
+    },
+    "hu.net": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "hyogo.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "ibaraki.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "ichinomiya.aichi.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "icu": {
+      "train_rows": 95,
+      "phishing_share": 1.0
+    },
+    "id": {
+      "train_rows": 170,
+      "phishing_share": 0.7941
+    },
+    "id.au": {
+      "train_rows": 7,
+      "phishing_share": 0.4286
+    },
+    "id.repl.co": {
+      "train_rows": 581,
+      "phishing_share": 1.0
+    },
+    "id.us": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "idv.tw": {
+      "train_rows": 5,
+      "phishing_share": 0.2
+    },
+    "ie": {
+      "train_rows": 309,
+      "phishing_share": 0.0291
+    },
+    "if.ua": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "ikeda.osaka.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "iki.fi": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "iki.nagasaki.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "il.us": {
+      "train_rows": 12,
+      "phishing_share": 0.0
+    },
+    "im": {
+      "train_rows": 15,
+      "phishing_share": 0.4667
+    },
+    "immo": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "in": {
+      "train_rows": 585,
+      "phishing_share": 0.5009
+    },
+    "in-the-band.net": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "in.rs": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "in.th": {
+      "train_rows": 6,
+      "phishing_share": 0.3333
+    },
+    "in.ua": {
+      "train_rows": 7,
+      "phishing_share": 0.5714
+    },
+    "in.us": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "ind.in": {
+      "train_rows": 2,
+      "phishing_share": 0.5
+    },
+    "industries": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "info": {
+      "train_rows": 1090,
+      "phishing_share": 0.555
+    },
+    "info.pl": {
+      "train_rows": 42,
+      "phishing_share": 1.0
+    },
+    "ingress-baronn.ewp.live": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "ingress-daribow.ewp.live": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "ingress-earth.ewp.live": {
+      "train_rows": 3,
+      "phishing_share": 1.0
+    },
+    "ingress-erytho.ewp.live": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "ink": {
+      "train_rows": 27,
+      "phishing_share": 0.9259
+    },
+    "institute": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "int": {
+      "train_rows": 31,
+      "phishing_share": 0.0
+    },
+    "international": {
+      "train_rows": 2,
+      "phishing_share": 0.5
+    },
+    "io": {
+      "train_rows": 843,
+      "phishing_share": 0.637
+    },
+    "ip.linodeusercontent.com": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "ipfs.dweb.link": {
+      "train_rows": 646,
+      "phishing_share": 1.0
+    },
+    "ipfs.nftstorage.link": {
+      "train_rows": 21,
+      "phishing_share": 1.0
+    },
+    "ipfs.w3s.link": {
+      "train_rows": 163,
+      "phishing_share": 1.0
+    },
+    "iq": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "ir": {
+      "train_rows": 162,
+      "phishing_share": 0.7778
+    },
+    "iruma.saitama.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "is": {
+      "train_rows": 70,
+      "phishing_share": 0.0857
+    },
+    "is-a-anarchist.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "is-a-blogger.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "is-a-bookkeeper.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "is-a-bruinsfan.org": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "is-a-candidate.org": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "is-a-caterer.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "is-a-chef.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "is-a-chef.net": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "is-a-chef.org": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "is-a-conservative.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "is-a-cpa.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "is-a-designer.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "is-a-doctor.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "is-a-financialadvisor.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "is-a-geek.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "is-a-geek.org": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "is-a-green.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "is-a-guru.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "is-a-hunter.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "is-a-knight.org": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "is-a-landscaper.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "is-a-liberal.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "is-a-libertarian.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "is-a-linux-user.org": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "is-a-llama.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "is-a-nascarfan.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "is-a-nurse.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "is-a-painter.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "is-a-patsfan.org": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "is-a-personaltrainer.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "is-a-player.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "is-a-republican.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "is-a-soxfan.org": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "is-a-student.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "is-a-teacher.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "is-an-accountant.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "is-an-actor.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "is-an-artist.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "is-an-engineer.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "is-an-entertainer.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "is-by.us": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "is-certified.com": {
+      "train_rows": 3,
+      "phishing_share": 1.0
+    },
+    "is-into-anime.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "is-into-cars.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "is-into-games.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "is-leet.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "is-not-certified.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "is-saved.org": {
+      "train_rows": 3,
+      "phishing_share": 1.0
+    },
+    "is-very-bad.org": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "is-very-evil.org": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "is-very-nice.org": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "is-very-sweet.org": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "is-with-theband.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "isa-geek.net": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "isa-geek.org": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "isa-hockeynut.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "isehara.kanagawa.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "issmarterthanyou.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "ist": {
+      "train_rows": 2,
+      "phishing_share": 0.5
+    },
+    "isteingeek.de": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "it": {
+      "train_rows": 1278,
+      "phishing_share": 0.1056
+    },
+    "itadinamicpy.my.canva.site": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "iwata.shizuoka.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "jdevcloud.com": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "je": {
+      "train_rows": 8,
+      "phishing_share": 0.5
+    },
+    "jo": {
+      "train_rows": 3,
+      "phishing_share": 0.3333
+    },
+    "jobs": {
+      "train_rows": 3,
+      "phishing_share": 0.0
+    },
+    "jor.br": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "jp": {
+      "train_rows": 454,
+      "phishing_share": 0.1189
+    },
+    "jp.net": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "jus.br": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "k12.al.us": {
+      "train_rows": 4,
+      "phishing_share": 0.0
+    },
+    "k12.ca.us": {
+      "train_rows": 6,
+      "phishing_share": 0.0
+    },
+    "k12.ct.us": {
+      "train_rows": 3,
+      "phishing_share": 0.0
+    },
+    "k12.fl.us": {
+      "train_rows": 5,
+      "phishing_share": 0.0
+    },
+    "k12.ia.us": {
+      "train_rows": 5,
+      "phishing_share": 0.0
+    },
+    "k12.il": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "k12.in.us": {
+      "train_rows": 8,
+      "phishing_share": 0.0
+    },
+    "k12.ma.us": {
+      "train_rows": 3,
+      "phishing_share": 0.0
+    },
+    "k12.mi.us": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "k12.mn.us": {
+      "train_rows": 3,
+      "phishing_share": 0.0
+    },
+    "k12.mo.us": {
+      "train_rows": 3,
+      "phishing_share": 0.0
+    },
+    "k12.mt.us": {
+      "train_rows": 4,
+      "phishing_share": 0.0
+    },
+    "k12.nc.us": {
+      "train_rows": 4,
+      "phishing_share": 0.0
+    },
+    "k12.nj.us": {
+      "train_rows": 8,
+      "phishing_share": 0.0
+    },
+    "k12.ny.us": {
+      "train_rows": 3,
+      "phishing_share": 0.0
+    },
+    "k12.oh.us": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "k12.ok.us": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "k12.or.us": {
+      "train_rows": 5,
+      "phishing_share": 0.0
+    },
+    "k12.pa.us": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "k12.sc.us": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "k12.tx.us": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "k12.va.us": {
+      "train_rows": 3,
+      "phishing_share": 0.0
+    },
+    "k12.wa.us": {
+      "train_rows": 4,
+      "phishing_share": 0.0
+    },
+    "k12.wi.us": {
+      "train_rows": 3,
+      "phishing_share": 0.0
+    },
+    "kalisz.pl": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "kamakura.kanagawa.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "katowice.pl": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "kawasaki.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "ke": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "kg": {
+      "train_rows": 11,
+      "phishing_share": 0.5455
+    },
+    "kh.ua": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "kharkov.ua": {
+      "train_rows": 3,
+      "phishing_share": 0.0
+    },
+    "ki": {
+      "train_rows": 2,
+      "phishing_share": 0.5
+    },
+    "kicks-ass.net": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "kicks-ass.org": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "kiev.ua": {
+      "train_rows": 7,
+      "phishing_share": 0.4286
+    },
+    "kim": {
+      "train_rows": 2,
+      "phishing_share": 0.5
+    },
+    "kinghost.net": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "kitchen": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "kiwi": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "km.ua": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "kn": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "knowsitall.info": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "kochi.kochi.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "kodaira.tokyo.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "koeln": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "kokubunji.tokyo.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "komaki.aichi.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "kommune.no": {
+      "train_rows": 39,
+      "phishing_share": 0.0
+    },
+    "koryo.nara.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "kosai.shizuoka.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "kozow.com": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "kr": {
+      "train_rows": 36,
+      "phishing_share": 0.4444
+    },
+    "kr.ua": {
+      "train_rows": 2,
+      "phishing_share": 0.5
+    },
+    "krakow.pl": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "kunitachi.tokyo.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "kurashiki.okayama.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "kurume.fukuoka.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "ky": {
+      "train_rows": 5,
+      "phishing_share": 0.0
+    },
+    "kyoto.jp": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "kz": {
+      "train_rows": 44,
+      "phishing_share": 0.4545
+    },
+    "la": {
+      "train_rows": 37,
+      "phishing_share": 0.8649
+    },
+    "la.us": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "land": {
+      "train_rows": 18,
+      "phishing_share": 1.0
+    },
+    "land-4-sale.us": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "lat": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "law": {
+      "train_rows": 2,
+      "phishing_share": 0.5
+    },
+    "lc": {
+      "train_rows": 42,
+      "phishing_share": 0.9762
+    },
+    "lecco.it": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "leg.br": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "legal": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "leitungsen.de": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "lewisham.sch.uk": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "lg.jp": {
+      "train_rows": 59,
+      "phishing_share": 0.0
+    },
+    "lg.ua": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "lgbt": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "li": {
+      "train_rows": 44,
+      "phishing_share": 0.8182
+    },
+    "lib.co.us": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "lib.ia.us": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "lib.il.us": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "lib.in.us": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "lib.la.us": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "lib.me.us": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "lib.ms.us": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "lib.oh.us": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "lib.tx.us": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "lib.wi.us": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "life": {
+      "train_rows": 51,
+      "phishing_share": 0.7843
+    },
+    "lighting": {
+      "train_rows": 2,
+      "phishing_share": 0.5
+    },
+    "liguria.it": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "likescandy.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "lima-city.de": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "limo": {
+      "train_rows": 3,
+      "phishing_share": 1.0
+    },
+    "lincs.sch.uk": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "link": {
+      "train_rows": 152,
+      "phishing_share": 0.9605
+    },
+    "live": {
+      "train_rows": 117,
+      "phishing_share": 0.8974
+    },
+    "live-website.com": {
+      "train_rows": 10,
+      "phishing_share": 1.0
+    },
+    "livorno.it": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "lk": {
+      "train_rows": 38,
+      "phishing_share": 0.0526
+    },
+    "loan": {
+      "train_rows": 7,
+      "phishing_share": 1.0
+    },
+    "lodi.it": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "loginto.me": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "lol": {
+      "train_rows": 19,
+      "phishing_share": 1.0
+    },
+    "london": {
+      "train_rows": 11,
+      "phishing_share": 0.1818
+    },
+    "loseyourip.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "love": {
+      "train_rows": 5,
+      "phishing_share": 0.6
+    },
+    "lpages.co": {
+      "train_rows": 5,
+      "phishing_share": 1.0
+    },
+    "lt": {
+      "train_rows": 120,
+      "phishing_share": 0.1917
+    },
+    "ltd": {
+      "train_rows": 12,
+      "phishing_share": 0.8333
+    },
+    "ltd.uk": {
+      "train_rows": 4,
+      "phishing_share": 0.0
+    },
+    "lu": {
+      "train_rows": 48,
+      "phishing_share": 0.1458
+    },
+    "lucca.it": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "lundbeck": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "lv": {
+      "train_rows": 52,
+      "phishing_share": 0.2885
+    },
+    "lviv.ua": {
+      "train_rows": 3,
+      "phishing_share": 0.0
+    },
+    "ly": {
+      "train_rows": 242,
+      "phishing_share": 0.9835
+    },
+    "ma": {
+      "train_rows": 28,
+      "phishing_share": 0.4643
+    },
+    "ma.gov.br": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "ma.us": {
+      "train_rows": 4,
+      "phishing_share": 0.0
+    },
+    "machida.tokyo.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "main.jp": {
+      "train_rows": 6,
+      "phishing_share": 1.0
+    },
+    "malbork.pl": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "management": {
+      "train_rows": 2,
+      "phishing_share": 0.5
+    },
+    "marche.it": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "market": {
+      "train_rows": 5,
+      "phishing_share": 0.8
+    },
+    "marketing": {
+      "train_rows": 4,
+      "phishing_share": 0.25
+    },
+    "matsudo.chiba.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "matsue.shimane.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "matsumoto.nagano.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "matsuyama.ehime.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "matsuzaki.shizuoka.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "mazury.pl": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "mb.ca": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "mc": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "md": {
+      "train_rows": 20,
+      "phishing_share": 0.05
+    },
+    "me": {
+      "train_rows": 332,
+      "phishing_share": 0.6867
+    },
+    "me.uk": {
+      "train_rows": 8,
+      "phishing_share": 0.375
+    },
+    "me.us": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "med.br": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "media": {
+      "train_rows": 11,
+      "phishing_share": 0.2727
+    },
+    "meguro.tokyo.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "menu": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "merseine.nu": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "mg": {
+      "train_rows": 3,
+      "phishing_share": 0.3333
+    },
+    "mg.gov.br": {
+      "train_rows": 4,
+      "phishing_share": 0.0
+    },
+    "mi.it": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "mi.us": {
+      "train_rows": 8,
+      "phishing_share": 0.0
+    },
+    "miami": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "mil": {
+      "train_rows": 146,
+      "phishing_share": 0.0
+    },
+    "mil.ar": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "mil.bd": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "mil.br": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "mil.do": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "mil.gt": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "mil.id": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "mil.nz": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "milano.it": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "minamiawaji.hyogo.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "minato.tokyo.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "mine.nu": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "misconfused.org": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "mishima.shizuoka.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "miyagi.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "mk": {
+      "train_rows": 11,
+      "phishing_share": 0.1818
+    },
+    "ml": {
+      "train_rows": 706,
+      "phishing_share": 1.0
+    },
+    "mlbfan.org": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "mn": {
+      "train_rows": 22,
+      "phishing_share": 0.5909
+    },
+    "mn.it": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "mn.us": {
+      "train_rows": 11,
+      "phishing_share": 0.0
+    },
+    "mo.us": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "mobi": {
+      "train_rows": 39,
+      "phishing_share": 0.3333
+    },
+    "modena.it": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "moe": {
+      "train_rows": 2,
+      "phishing_share": 0.5
+    },
+    "mom": {
+      "train_rows": 20,
+      "phishing_share": 1.0
+    },
+    "money": {
+      "train_rows": 3,
+      "phishing_share": 0.6667
+    },
+    "monster": {
+      "train_rows": 4,
+      "phishing_share": 1.0
+    },
+    "mortgage": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "movie": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "mp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "mp.br": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "mq": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "mr": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "ms": {
+      "train_rows": 17,
+      "phishing_share": 1.0
+    },
+    "ms.gov.br": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "ms.us": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "msk.ru": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "mt": {
+      "train_rows": 21,
+      "phishing_share": 0.9048
+    },
+    "mt.us": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "mu": {
+      "train_rows": 11,
+      "phishing_share": 0.0909
+    },
+    "muni.il": {
+      "train_rows": 5,
+      "phishing_share": 0.0
+    },
+    "museum": {
+      "train_rows": 7,
+      "phishing_share": 0.0
+    },
+    "mv": {
+      "train_rows": 3,
+      "phishing_share": 0.0
+    },
+    "mw": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "mx": {
+      "train_rows": 126,
+      "phishing_share": 0.4841
+    },
+    "my": {
+      "train_rows": 31,
+      "phishing_share": 0.2903
+    },
+    "my-gateway.de": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "my.id": {
+      "train_rows": 89,
+      "phishing_share": 0.9775
+    },
+    "myactivedirectory.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "myddns.rocks": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "mydissent.net": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "myds.me": {
+      "train_rows": 6,
+      "phishing_share": 1.0
+    },
+    "myeffect.net": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "myfirewall.org": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "myftp.biz": {
+      "train_rows": 3,
+      "phishing_share": 1.0
+    },
+    "myftp.org": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "myiphost.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "mymediapc.net": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "mypets.ws": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "mypsx.net": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "mysecuritycamera.net": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "myshopify.com": {
+      "train_rows": 40,
+      "phishing_share": 1.0
+    },
+    "myspreadshop.fr": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "myvnc.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "mywire.org": {
+      "train_rows": 3,
+      "phishing_share": 1.0
+    },
+    "n5zdn.vps.myjino.ru": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "na": {
+      "train_rows": 3,
+      "phishing_share": 0.0
+    },
+    "na.it": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "nagasaki.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "nagoya": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "naha.okinawa.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "nakano.nagano.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "name": {
+      "train_rows": 24,
+      "phishing_share": 0.7917
+    },
+    "name.tr": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "namie.fukushima.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "nara.jp": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "naruto.tokushima.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "nat.tn": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "nc": {
+      "train_rows": 3,
+      "phishing_share": 0.0
+    },
+    "nc.us": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "ne": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "ne.jp": {
+      "train_rows": 19,
+      "phishing_share": 0.0526
+    },
+    "neat-url.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "nemuro.hokkaido.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "nerdpol.ovh": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "nerima.tokyo.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "net": {
+      "train_rows": 4772,
+      "phishing_share": 0.412
+    },
+    "net-freaks.com": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "net.ar": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "net.au": {
+      "train_rows": 38,
+      "phishing_share": 0.1053
+    },
+    "net.bd": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "net.br": {
+      "train_rows": 11,
+      "phishing_share": 0.6364
+    },
+    "net.cn": {
+      "train_rows": 7,
+      "phishing_share": 0.7143
+    },
+    "net.co": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "net.id": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "net.in": {
+      "train_rows": 3,
+      "phishing_share": 0.6667
+    },
+    "net.lb": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "net.my": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "net.np": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "net.nz": {
+      "train_rows": 6,
+      "phishing_share": 0.1667
+    },
+    "net.pk": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "net.pl": {
+      "train_rows": 32,
+      "phishing_share": 0.9375
+    },
+    "net.ru": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "net.ua": {
+      "train_rows": 3,
+      "phishing_share": 0.0
+    },
+    "net.uk": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "net.vn": {
+      "train_rows": 2,
+      "phishing_share": 0.5
+    },
+    "netlify.app": {
+      "train_rows": 201,
+      "phishing_share": 1.0
+    },
+    "network": {
+      "train_rows": 101,
+      "phishing_share": 0.901
+    },
+    "neustar": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "news": {
+      "train_rows": 31,
+      "phishing_share": 0.1935
+    },
+    "nf": {
+      "train_rows": 6,
+      "phishing_share": 1.0
+    },
+    "nf.ca": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "nflfan.org": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "ng": {
+      "train_rows": 16,
+      "phishing_share": 0.5
+    },
+    "ngo": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "ngrok.app": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "ngrok.io": {
+      "train_rows": 30,
+      "phishing_share": 1.0
+    },
+    "nh.us": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "nhlfan.net": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "nhs.uk": {
+      "train_rows": 46,
+      "phishing_share": 0.0
+    },
+    "nic.in": {
+      "train_rows": 20,
+      "phishing_share": 0.05
+    },
+    "nieruchomosci.pl": {
+      "train_rows": 7,
+      "phishing_share": 1.0
+    },
+    "ninja": {
+      "train_rows": 5,
+      "phishing_share": 0.2
+    },
+    "nj.us": {
+      "train_rows": 7,
+      "phishing_share": 0.0
+    },
+    "nl": {
+      "train_rows": 1206,
+      "phishing_share": 0.1177
+    },
+    "nl.ca": {
+      "train_rows": 4,
+      "phishing_share": 0.0
+    },
+    "nm.us": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "no": {
+      "train_rows": 214,
+      "phishing_share": 0.0514
+    },
+    "no-ip.biz": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "no-ip.co.uk": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "no-ip.info": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "no-ip.net": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "noip.me": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "noip.us": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "nom.co": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "nottingham.sch.uk": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "notts.sch.uk": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "now-dns.net": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "nrw": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "ns.ca": {
+      "train_rows": 3,
+      "phishing_share": 0.0
+    },
+    "nsw.edu.au": {
+      "train_rows": 7,
+      "phishing_share": 0.1429
+    },
+    "nt.ca": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "ntdll.top": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "ntt": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "nu": {
+      "train_rows": 63,
+      "phishing_share": 0.5556
+    },
+    "nu.ca": {
+      "train_rows": 3,
+      "phishing_share": 0.0
+    },
+    "numazu.shizuoka.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "nv.us": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "ny.us": {
+      "train_rows": 9,
+      "phishing_share": 0.0
+    },
+    "nyc": {
+      "train_rows": 13,
+      "phishing_share": 0.0769
+    },
+    "nysa.pl": {
+      "train_rows": 2,
+      "phishing_share": 0.5
+    },
+    "nyuzen.toyama.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "nz": {
+      "train_rows": 15,
+      "phishing_share": 0.4
+    },
+    "oa.r.appspot.com": {
+      "train_rows": 87,
+      "phishing_share": 1.0
+    },
+    "od.ua": {
+      "train_rows": 3,
+      "phishing_share": 0.6667
+    },
+    "office-on-the.net": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "ofunato.iwate.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "oh.us": {
+      "train_rows": 8,
+      "phishing_share": 0.0
+    },
+    "ok.us": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "okayama.jp": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "okinawa.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "okinawa.okinawa.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "om": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "on-the-web.tv": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "on.ca": {
+      "train_rows": 29,
+      "phishing_share": 0.0
+    },
+    "ondigitalocean.app": {
+      "train_rows": 6,
+      "phishing_share": 1.0
+    },
+    "one": {
+      "train_rows": 89,
+      "phishing_share": 0.9213
+    },
+    "ong.br": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "online": {
+      "train_rows": 186,
+      "phishing_share": 0.9247
+    },
+    "onomichi.hiroshima.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "onrender.com": {
+      "train_rows": 11,
+      "phishing_share": 1.0
+    },
+    "onthewifi.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "ooguy.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "ooo": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "opoczno.pl": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "opole.pl": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "or.at": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "or.id": {
+      "train_rows": 12,
+      "phishing_share": 0.1667
+    },
+    "or.jp": {
+      "train_rows": 126,
+      "phishing_share": 0.0079
+    },
+    "or.ke": {
+      "train_rows": 6,
+      "phishing_share": 0.0
+    },
+    "or.kr": {
+      "train_rows": 23,
+      "phishing_share": 0.3913
+    },
+    "or.th": {
+      "train_rows": 7,
+      "phishing_share": 0.0
+    },
+    "or.tz": {
+      "train_rows": 8,
+      "phishing_share": 0.5
+    },
+    "or.ug": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "or.us": {
+      "train_rows": 5,
+      "phishing_share": 0.0
+    },
+    "org": {
+      "train_rows": 12556,
+      "phishing_share": 0.0791
+    },
+    "org.ai": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "org.ar": {
+      "train_rows": 18,
+      "phishing_share": 0.1111
+    },
+    "org.au": {
+      "train_rows": 260,
+      "phishing_share": 0.0385
+    },
+    "org.bd": {
+      "train_rows": 5,
+      "phishing_share": 0.4
+    },
+    "org.bh": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "org.bo": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "org.br": {
+      "train_rows": 57,
+      "phishing_share": 0.193
+    },
+    "org.bt": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "org.bw": {
+      "train_rows": 3,
+      "phishing_share": 0.0
+    },
+    "org.cn": {
+      "train_rows": 23,
+      "phishing_share": 0.087
+    },
+    "org.co": {
+      "train_rows": 2,
+      "phishing_share": 0.5
+    },
+    "org.cy": {
+      "train_rows": 5,
+      "phishing_share": 0.0
+    },
+    "org.do": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "org.eg": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "org.fj": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "org.gg": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "org.gt": {
+      "train_rows": 5,
+      "phishing_share": 0.4
+    },
+    "org.hk": {
+      "train_rows": 17,
+      "phishing_share": 0.0
+    },
+    "org.hu": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "org.il": {
+      "train_rows": 49,
+      "phishing_share": 0.0612
+    },
+    "org.im": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "org.in": {
+      "train_rows": 30,
+      "phishing_share": 0.3
+    },
+    "org.ir": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "org.jm": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "org.jo": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "org.kh": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "org.kw": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "org.kz": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "org.la": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "org.lb": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "org.ls": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "org.me": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "org.mk": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "org.mo": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "org.mt": {
+      "train_rows": 5,
+      "phishing_share": 0.0
+    },
+    "org.mx": {
+      "train_rows": 14,
+      "phishing_share": 0.0
+    },
+    "org.my": {
+      "train_rows": 13,
+      "phishing_share": 0.0769
+    },
+    "org.na": {
+      "train_rows": 3,
+      "phishing_share": 0.0
+    },
+    "org.ng": {
+      "train_rows": 2,
+      "phishing_share": 0.5
+    },
+    "org.np": {
+      "train_rows": 5,
+      "phishing_share": 0.4
+    },
+    "org.nz": {
+      "train_rows": 87,
+      "phishing_share": 0.046
+    },
+    "org.pe": {
+      "train_rows": 3,
+      "phishing_share": 0.0
+    },
+    "org.ph": {
+      "train_rows": 4,
+      "phishing_share": 0.25
+    },
+    "org.pk": {
+      "train_rows": 10,
+      "phishing_share": 0.2
+    },
+    "org.pl": {
+      "train_rows": 8,
+      "phishing_share": 0.125
+    },
+    "org.qa": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "org.ro": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "org.rs": {
+      "train_rows": 6,
+      "phishing_share": 0.0
+    },
+    "org.ru": {
+      "train_rows": 12,
+      "phishing_share": 0.75
+    },
+    "org.sa": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "org.sg": {
+      "train_rows": 16,
+      "phishing_share": 0.0625
+    },
+    "org.sv": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "org.sz": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "org.tr": {
+      "train_rows": 25,
+      "phishing_share": 0.12
+    },
+    "org.tw": {
+      "train_rows": 22,
+      "phishing_share": 0.0455
+    },
+    "org.ua": {
+      "train_rows": 11,
+      "phishing_share": 0.2727
+    },
+    "org.uk": {
+      "train_rows": 946,
+      "phishing_share": 0.0095
+    },
+    "org.uy": {
+      "train_rows": 6,
+      "phishing_share": 0.1667
+    },
+    "org.vn": {
+      "train_rows": 3,
+      "phishing_share": 0.0
+    },
+    "org.za": {
+      "train_rows": 36,
+      "phishing_share": 0.0833
+    },
+    "ota.gunma.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "ovh": {
+      "train_rows": 6,
+      "phishing_share": 0.8333
+    },
+    "ownip.net": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "pa.us": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "padova.it": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "page": {
+      "train_rows": 17,
+      "phishing_share": 1.0
+    },
+    "pages.dev": {
+      "train_rows": 89,
+      "phishing_share": 1.0
+    },
+    "pantheonsite.io": {
+      "train_rows": 606,
+      "phishing_share": 1.0
+    },
+    "paris": {
+      "train_rows": 6,
+      "phishing_share": 0.0
+    },
+    "parliament.nz": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "parts": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "party": {
+      "train_rows": 4,
+      "phishing_share": 0.75
+    },
+    "pd.it": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "pe": {
+      "train_rows": 35,
+      "phishing_share": 0.8286
+    },
+    "pe.ca": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "pe.gov.br": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "pe.kr": {
+      "train_rows": 4,
+      "phishing_share": 0.75
+    },
+    "pe.leg.br": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "pet": {
+      "train_rows": 17,
+      "phishing_share": 0.9412
+    },
+    "pgafan.net": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "ph": {
+      "train_rows": 36,
+      "phishing_share": 0.2222
+    },
+    "photo": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "photography": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "photos": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "pics": {
+      "train_rows": 14,
+      "phishing_share": 0.9286
+    },
+    "piemonte.it": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "pink": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "pk": {
+      "train_rows": 48,
+      "phishing_share": 0.5208
+    },
+    "pl": {
+      "train_rows": 610,
+      "phishing_share": 0.5164
+    },
+    "place": {
+      "train_rows": 6,
+      "phishing_share": 1.0
+    },
+    "plesk.page": {
+      "train_rows": 162,
+      "phishing_share": 1.0
+    },
+    "plus": {
+      "train_rows": 6,
+      "phishing_share": 0.3333
+    },
+    "pm": {
+      "train_rows": 20,
+      "phishing_share": 0.95
+    },
+    "pn": {
+      "train_rows": 2,
+      "phishing_share": 0.5
+    },
+    "podzone.net": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "podzone.org": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "point2this.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "pointto.us": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "police.uk": {
+      "train_rows": 6,
+      "phishing_share": 0.0
+    },
+    "poznan.pl": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "pp.ru": {
+      "train_rows": 4,
+      "phishing_share": 1.0
+    },
+    "pp.se": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "pp.ua": {
+      "train_rows": 6,
+      "phishing_share": 0.6667
+    },
+    "pr.gov.br": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "pr.it": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "press": {
+      "train_rows": 9,
+      "phishing_share": 0.6667
+    },
+    "press.ma": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "pro": {
+      "train_rows": 81,
+      "phishing_share": 0.8642
+    },
+    "pro.br": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "pro.vn": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "promo": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "ps": {
+      "train_rows": 15,
+      "phishing_share": 0.3333
+    },
+    "psc.br": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "pt": {
+      "train_rows": 194,
+      "phishing_share": 0.2577
+    },
+    "pub": {
+      "train_rows": 3,
+      "phishing_share": 0.3333
+    },
+    "pw": {
+      "train_rows": 53,
+      "phishing_share": 0.9434
+    },
+    "px7zm.vps.myjino.ru": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "pya.jp": {
+      "train_rows": 3,
+      "phishing_share": 1.0
+    },
+    "pythonanywhere.com": {
+      "train_rows": 5,
+      "phishing_share": 1.0
+    },
+    "pz.it": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "qa": {
+      "train_rows": 5,
+      "phishing_share": 0.4
+    },
+    "qc.ca": {
+      "train_rows": 30,
+      "phishing_share": 0.0
+    },
+    "qld.edu.au": {
+      "train_rows": 6,
+      "phishing_share": 0.0
+    },
+    "qld.gov.au": {
+      "train_rows": 40,
+      "phishing_share": 0.0
+    },
+    "quicksytes.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "r2.dev": {
+      "train_rows": 78,
+      "phishing_share": 1.0
+    },
+    "ra.it": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "radio": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "ras.ru": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "re": {
+      "train_rows": 6,
+      "phishing_share": 0.0
+    },
+    "re.it": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "re.kr": {
+      "train_rows": 4,
+      "phishing_share": 0.0
+    },
+    "read-books.org": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "readmyblog.org": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "recipes": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "red": {
+      "train_rows": 2,
+      "phishing_share": 0.5
+    },
+    "redirectme.net": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "rentals": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "repair": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "repl.co": {
+      "train_rows": 2008,
+      "phishing_share": 1.0
+    },
+    "report": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "res.in": {
+      "train_rows": 15,
+      "phishing_share": 0.0
+    },
+    "rest": {
+      "train_rows": 6,
+      "phishing_share": 1.0
+    },
+    "review": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "reviews": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "rimini.it": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "rip": {
+      "train_rows": 2,
+      "phishing_share": 0.5
+    },
+    "rj.gov.br": {
+      "train_rows": 4,
+      "phishing_share": 0.0
+    },
+    "rn.gov.br": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "ro": {
+      "train_rows": 412,
+      "phishing_share": 0.3277
+    },
+    "rocks": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "roma.it": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "roros.no": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "rovno.ua": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "rs": {
+      "train_rows": 75,
+      "phishing_share": 0.1733
+    },
+    "rs.ba": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "rs.gov.br": {
+      "train_rows": 26,
+      "phishing_share": 0.0
+    },
+    "rs.leg.br": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "ru": {
+      "train_rows": 2851,
+      "phishing_share": 0.7934
+    },
+    "ru.com": {
+      "train_rows": 10,
+      "phishing_share": 1.0
+    },
+    "rugby": {
+      "train_rows": 4,
+      "phishing_share": 0.0
+    },
+    "ruhr": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "ruhr-uni-bochum.de": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "run": {
+      "train_rows": 9,
+      "phishing_share": 0.8889
+    },
+    "rw": {
+      "train_rows": 4,
+      "phishing_share": 0.25
+    },
+    "ryd.wafaicloud.com": {
+      "train_rows": 4,
+      "phishing_share": 1.0
+    },
+    "s3-us-west-1.amazonaws.com": {
+      "train_rows": 3,
+      "phishing_share": 1.0
+    },
+    "s3-website-us-west-1.amazonaws.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "s3-website.us-east-2.amazonaws.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "s3.amazonaws.com": {
+      "train_rows": 10,
+      "phishing_share": 1.0
+    },
+    "s3.ap-northeast-1.amazonaws.com": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "s3.ap-northeast-2.amazonaws.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "s3.ap-south-1.amazonaws.com": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "s3.ca-central-1.amazonaws.com": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "s3.eu-central-1.amazonaws.com": {
+      "train_rows": 32,
+      "phishing_share": 1.0
+    },
+    "s3.eu-north-1.amazonaws.com": {
+      "train_rows": 13,
+      "phishing_share": 1.0
+    },
+    "s3.eu-west-1.amazonaws.com": {
+      "train_rows": 3,
+      "phishing_share": 1.0
+    },
+    "s3.eu-west-2.amazonaws.com": {
+      "train_rows": 3,
+      "phishing_share": 1.0
+    },
+    "s3.eu-west-3.amazonaws.com": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "s3.fr-par.scw.cloud": {
+      "train_rows": 4,
+      "phishing_share": 1.0
+    },
+    "s3.nl-ams.scw.cloud": {
+      "train_rows": 6,
+      "phishing_share": 1.0
+    },
+    "s3.pl-waw.scw.cloud": {
+      "train_rows": 3,
+      "phishing_share": 1.0
+    },
+    "s3.sa-east-1.amazonaws.com": {
+      "train_rows": 3,
+      "phishing_share": 1.0
+    },
+    "s3.us-east-1.amazonaws.com": {
+      "train_rows": 3,
+      "phishing_share": 1.0
+    },
+    "s3.us-east-2.amazonaws.com": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "s3.us-west-1.amazonaws.com": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "s3.us-west-2.amazonaws.com": {
+      "train_rows": 4,
+      "phishing_share": 1.0
+    },
+    "sa": {
+      "train_rows": 11,
+      "phishing_share": 0.4545
+    },
+    "sa.au": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "sa.com": {
+      "train_rows": 14,
+      "phishing_share": 1.0
+    },
+    "sa.edu.au": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "sa.gov.au": {
+      "train_rows": 23,
+      "phishing_share": 0.0
+    },
+    "sado.niigata.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "saijo.ehime.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "saitama.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "sakura.ne.jp": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "sb": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "sbs": {
+      "train_rows": 16,
+      "phishing_share": 1.0
+    },
+    "sc": {
+      "train_rows": 4,
+      "phishing_share": 0.25
+    },
+    "sc.gov.br": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "sch.id": {
+      "train_rows": 6,
+      "phishing_share": 1.0
+    },
+    "school": {
+      "train_rows": 2,
+      "phishing_share": 0.5
+    },
+    "school.nz": {
+      "train_rows": 8,
+      "phishing_share": 0.125
+    },
+    "sci.eg": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "science": {
+      "train_rows": 5,
+      "phishing_share": 0.4
+    },
+    "scot": {
+      "train_rows": 12,
+      "phishing_share": 0.0
+    },
+    "scrapper-site.net": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "sd.us": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "se": {
+      "train_rows": 521,
+      "phishing_share": 0.1612
+    },
+    "seika.kyoto.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "selfip.biz": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "selfip.com": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "selfip.net": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "sells-for-less.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "sells-for-u.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "sells-it.net": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "servebbs.com": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "servebbs.net": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "servebbs.org": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "servebeer.com": {
+      "train_rows": 4,
+      "phishing_share": 1.0
+    },
+    "serveblog.net": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "servecounterstrike.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "serveftp.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "serveftp.org": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "servegame.org": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "servehalflife.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "servehttp.com": {
+      "train_rows": 3,
+      "phishing_share": 1.0
+    },
+    "servehumour.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "serveirc.com": {
+      "train_rows": 4,
+      "phishing_share": 1.0
+    },
+    "servep2p.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "servepics.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "service.gov.uk": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "services": {
+      "train_rows": 16,
+      "phishing_share": 0.9375
+    },
+    "sexy": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "sfo2.digitaloceanspaces.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "sfo3.digitaloceanspaces.com": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "sg": {
+      "train_rows": 48,
+      "phishing_share": 0.2083
+    },
+    "sh": {
+      "train_rows": 89,
+      "phishing_share": 0.8989
+    },
+    "sh.cn": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "sharp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "shoes": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "shop": {
+      "train_rows": 147,
+      "phishing_share": 0.9184
+    },
+    "show": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "si": {
+      "train_rows": 124,
+      "phishing_share": 0.1048
+    },
+    "sicilia.it": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "site": {
+      "train_rows": 155,
+      "phishing_share": 0.9677
+    },
+    "sk": {
+      "train_rows": 145,
+      "phishing_share": 0.1034
+    },
+    "sk.ca": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "ski": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "skin": {
+      "train_rows": 4,
+      "phishing_share": 1.0
+    },
+    "sklep.pl": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "slupsk.pl": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "slz.br": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "sm": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "sn": {
+      "train_rows": 12,
+      "phishing_share": 0.8333
+    },
+    "so": {
+      "train_rows": 7,
+      "phishing_share": 0.5714
+    },
+    "so.it": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "social": {
+      "train_rows": 9,
+      "phishing_share": 1.0
+    },
+    "soeda.fukuoka.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "software": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "solutions": {
+      "train_rows": 6,
+      "phishing_share": 0.5
+    },
+    "somerset.sch.uk": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "sopot.pl": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "soundcast.me": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "soy": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "sp.gov.br": {
+      "train_rows": 4,
+      "phishing_share": 0.0
+    },
+    "sp.leg.br": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "space": {
+      "train_rows": 48,
+      "phishing_share": 0.8542
+    },
+    "spb.ru": {
+      "train_rows": 8,
+      "phishing_share": 0.125
+    },
+    "spdns.de": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "sport": {
+      "train_rows": 4,
+      "phishing_share": 0.0
+    },
+    "square.site": {
+      "train_rows": 837,
+      "phishing_share": 1.0
+    },
+    "sr": {
+      "train_rows": 2,
+      "phishing_share": 0.5
+    },
+    "srv.br": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "st": {
+      "train_rows": 21,
+      "phishing_share": 0.8095
+    },
+    "storage.yandexcloud.net": {
+      "train_rows": 22,
+      "phishing_share": 1.0
+    },
+    "store": {
+      "train_rows": 61,
+      "phishing_share": 0.8033
+    },
+    "stream": {
+      "train_rows": 12,
+      "phishing_share": 1.0
+    },
+    "studio": {
+      "train_rows": 11,
+      "phishing_share": 0.2727
+    },
+    "study": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "stuff-4-sale.us": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "stufftoread.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "su": {
+      "train_rows": 60,
+      "phishing_share": 0.8667
+    },
+    "supply": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "support": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "surrey.sch.uk": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "sv": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "swiss": {
+      "train_rows": 4,
+      "phishing_share": 0.25
+    },
+    "sx": {
+      "train_rows": 3,
+      "phishing_share": 0.6667
+    },
+    "sy": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "syd1.digitaloceanspaces.com": {
+      "train_rows": 3,
+      "phishing_share": 1.0
+    },
+    "synology-diskstation.de": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "synology.me": {
+      "train_rows": 3,
+      "phishing_share": 1.0
+    },
+    "systems": {
+      "train_rows": 9,
+      "phishing_share": 0.6667
+    },
+    "sytes.net": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "sz": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "szczecin.pl": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "taiji.wakayama.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "taipei": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "takasaki.gunma.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "taranto.it": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "tas.edu.au": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "tas.gov.au": {
+      "train_rows": 18,
+      "phishing_share": 0.0
+    },
+    "tatar": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "tateyama.chiba.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "tattoo": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "tax": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "taxi": {
+      "train_rows": 2,
+      "phishing_share": 0.5
+    },
+    "tc": {
+      "train_rows": 21,
+      "phishing_share": 0.9524
+    },
+    "teaches-yoga.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "team": {
+      "train_rows": 7,
+      "phishing_share": 0.5714
+    },
+    "tech": {
+      "train_rows": 68,
+      "phishing_share": 0.8088
+    },
+    "technology": {
+      "train_rows": 6,
+      "phishing_share": 0.5
+    },
+    "tel": {
+      "train_rows": 3,
+      "phishing_share": 1.0
+    },
+    "tempurl.host": {
+      "train_rows": 6,
+      "phishing_share": 1.0
+    },
+    "tf": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "tg": {
+      "train_rows": 6,
+      "phishing_share": 0.5
+    },
+    "theater": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "tips": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "tirol": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "tj": {
+      "train_rows": 4,
+      "phishing_share": 0.25
+    },
+    "tk": {
+      "train_rows": 154,
+      "phishing_share": 0.9805
+    },
+    "tl": {
+      "train_rows": 18,
+      "phishing_share": 0.9444
+    },
+    "tm": {
+      "train_rows": 4,
+      "phishing_share": 0.75
+    },
+    "tn": {
+      "train_rows": 27,
+      "phishing_share": 0.8889
+    },
+    "tn.it": {
+      "train_rows": 4,
+      "phishing_share": 0.0
+    },
+    "tn.us": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "to": {
+      "train_rows": 71,
+      "phishing_share": 0.831
+    },
+    "today": {
+      "train_rows": 15,
+      "phishing_share": 0.8
+    },
+    "tokyo": {
+      "train_rows": 12,
+      "phishing_share": 0.5
+    },
+    "tokyo.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "tools": {
+      "train_rows": 9,
+      "phishing_share": 0.4444
+    },
+    "top": {
+      "train_rows": 1597,
+      "phishing_share": 0.9994
+    },
+    "toride.ibaraki.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "torino.it": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "torun.pl": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "toscana.it": {
+      "train_rows": 3,
+      "phishing_share": 0.0
+    },
+    "tours": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "town": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "toyama.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "toyama.toyama.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "toyota.aichi.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "toys": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "trade": {
+      "train_rows": 8,
+      "phishing_share": 1.0
+    },
+    "trading": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "traeumtgerade.de": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "training": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "translate.goog": {
+      "train_rows": 25,
+      "phishing_share": 1.0
+    },
+    "travel": {
+      "train_rows": 30,
+      "phishing_share": 0.0333
+    },
+    "trento.it": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "trieste.it": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "tt": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "tur.br": {
+      "train_rows": 2,
+      "phishing_share": 0.5
+    },
+    "tuxfamily.org": {
+      "train_rows": 3,
+      "phishing_share": 0.3333
+    },
+    "tv": {
+      "train_rows": 202,
+      "phishing_share": 0.1436
+    },
+    "tv.tr": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "tw": {
+      "train_rows": 22,
+      "phishing_share": 0.3636
+    },
+    "tx.us": {
+      "train_rows": 14,
+      "phishing_share": 0.0
+    },
+    "ua": {
+      "train_rows": 32,
+      "phishing_share": 0.3438
+    },
+    "uc.r.appspot.com": {
+      "train_rows": 4,
+      "phishing_share": 1.0
+    },
+    "ue.r.appspot.com": {
+      "train_rows": 17,
+      "phishing_share": 1.0
+    },
+    "ufcfan.org": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "ug": {
+      "train_rows": 9,
+      "phishing_share": 0.8889
+    },
+    "uji.kyoto.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "uk": {
+      "train_rows": 54,
+      "phishing_share": 0.3333
+    },
+    "uk.com": {
+      "train_rows": 14,
+      "phishing_share": 0.0
+    },
+    "uk.net": {
+      "train_rows": 4,
+      "phishing_share": 0.25
+    },
+    "uk.r.appspot.com": {
+      "train_rows": 61,
+      "phishing_share": 1.0
+    },
+    "uno": {
+      "train_rows": 2,
+      "phishing_share": 0.5
+    },
+    "uphold-login.my.canva.site": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "us": {
+      "train_rows": 568,
+      "phishing_share": 0.581
+    },
+    "us-east-1.linodeobjects.com": {
+      "train_rows": 8,
+      "phishing_share": 1.0
+    },
+    "us-southeast-1.linodeobjects.com": {
+      "train_rows": 5,
+      "phishing_share": 1.0
+    },
+    "us-west-1.compute.amazonaws.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "us.com": {
+      "train_rows": 4,
+      "phishing_share": 1.0
+    },
+    "uw.r.appspot.com": {
+      "train_rows": 3,
+      "phishing_share": 1.0
+    },
+    "uy": {
+      "train_rows": 7,
+      "phishing_share": 0.7143
+    },
+    "uz": {
+      "train_rows": 13,
+      "phishing_share": 0.3077
+    },
+    "va": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "va.us": {
+      "train_rows": 4,
+      "phishing_share": 0.0
+    },
+    "vc": {
+      "train_rows": 9,
+      "phishing_share": 0.3333
+    },
+    "vc.it": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "vda.it": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "ve": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "vegas": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "veneto.it": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "venezia.it": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "ventures": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "vercel.app": {
+      "train_rows": 51,
+      "phishing_share": 1.0
+    },
+    "vet": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "vg": {
+      "train_rows": 14,
+      "phishing_share": 0.9286
+    },
+    "vi": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "vic.edu.au": {
+      "train_rows": 8,
+      "phishing_share": 0.0
+    },
+    "vic.gov.au": {
+      "train_rows": 35,
+      "phishing_share": 0.0
+    },
+    "vicenza.it": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "video": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "vip": {
+      "train_rows": 48,
+      "phishing_share": 0.9792
+    },
+    "vix.br": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "vn": {
+      "train_rows": 134,
+      "phishing_share": 0.6045
+    },
+    "vote": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "vu": {
+      "train_rows": 2,
+      "phishing_share": 0.5
+    },
+    "wa.edu.au": {
+      "train_rows": 5,
+      "phishing_share": 0.0
+    },
+    "wa.gov.au": {
+      "train_rows": 45,
+      "phishing_share": 0.0
+    },
+    "wa.us": {
+      "train_rows": 3,
+      "phishing_share": 0.0
+    },
+    "wajima.ishikawa.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "walbrzych.pl": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "wales": {
+      "train_rows": 13,
+      "phishing_share": 0.0
+    },
+    "warszawa.pl": {
+      "train_rows": 15,
+      "phishing_share": 1.0
+    },
+    "watch": {
+      "train_rows": 2,
+      "phishing_share": 0.5
+    },
+    "waw.pl": {
+      "train_rows": 4,
+      "phishing_share": 0.25
+    },
+    "web.app": {
+      "train_rows": 4087,
+      "phishing_share": 1.0
+    },
+    "web.id": {
+      "train_rows": 6,
+      "phishing_share": 0.6667
+    },
+    "weber": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "webflow.io": {
+      "train_rows": 160,
+      "phishing_share": 1.0
+    },
+    "webhop.biz": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "webhop.info": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "webhop.me": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "webhop.net": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "webhop.org": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "weblike.jp": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "webredirect.org": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "website": {
+      "train_rows": 35,
+      "phishing_share": 0.9429
+    },
+    "website.yandexcloud.net": {
+      "train_rows": 4,
+      "phishing_share": 1.0
+    },
+    "websitebuilder.online": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "wf": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "wi.us": {
+      "train_rows": 5,
+      "phishing_share": 0.0
+    },
+    "wiki": {
+      "train_rows": 7,
+      "phishing_share": 0.4286
+    },
+    "wilts.sch.uk": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "win": {
+      "train_rows": 71,
+      "phishing_share": 0.9859
+    },
+    "wine": {
+      "train_rows": 4,
+      "phishing_share": 0.75
+    },
+    "wixsite.com": {
+      "train_rows": 336,
+      "phishing_share": 1.0
+    },
+    "wm.r.appspot.com": {
+      "train_rows": 3,
+      "phishing_share": 1.0
+    },
+    "work": {
+      "train_rows": 242,
+      "phishing_share": 0.9752
+    },
+    "workers.dev": {
+      "train_rows": 1004,
+      "phishing_share": 1.0
+    },
+    "works": {
+      "train_rows": 6,
+      "phishing_share": 0.5
+    },
+    "world": {
+      "train_rows": 31,
+      "phishing_share": 0.6774
+    },
+    "worse-than.tv": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "wpdevcloud.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "wpenginepowered.com": {
+      "train_rows": 3,
+      "phishing_share": 1.0
+    },
+    "writesthisblog.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "wroc.pl": {
+      "train_rows": 3,
+      "phishing_share": 0.0
+    },
+    "wroclaw.pl": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "ws": {
+      "train_rows": 240,
+      "phishing_share": 0.9208
+    },
+    "wtf": {
+      "train_rows": 5,
+      "phishing_share": 0.8
+    },
+    "xn--6frz82g": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "xn--mk1bu44c": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "xn--p1ai": {
+      "train_rows": 26,
+      "phishing_share": 1.0
+    },
+    "xyz": {
+      "train_rows": 1039,
+      "phishing_share": 0.9836
+    },
+    "yachts": {
+      "train_rows": 2,
+      "phishing_share": 1.0
+    },
+    "yahiko.niigata.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "yamagata.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "yoga": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "yokohama.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "yokosuka.kanagawa.jp": {
+      "train_rows": 1,
+      "phishing_share": 0.0
+    },
+    "yolasite.com": {
+      "train_rows": 177,
+      "phishing_share": 1.0
+    },
+    "youtube": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "yt": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "za.com": {
+      "train_rows": 1,
+      "phishing_share": 1.0
+    },
+    "zm": {
+      "train_rows": 2,
+      "phishing_share": 0.0
+    },
+    "zone": {
+      "train_rows": 6,
+      "phishing_share": 0.8333
+    }
+  }
+}
