@@ -50,7 +50,8 @@ def test_website_api():
         assert result["domain"] == "mail.yahoo.com"
         assert len(result["char_scores"]) == len("mail.yahoo.com")
         assert set(result["models"]) == {"hybrid", "ngram"}
-        assert result["warnings"]
+        assert result["warnings"] and result["lookalike"] is None
+        assert client.post("/api/check", json={"url": "http://paypa1.com/x"}).json()["lookalike"]["site"] == "paypal.com"
 
         for bad in ["", "   ", "not a link", "x" * 3000]:
             response = client.post("/api/check", json={"url": bad})
@@ -58,4 +59,5 @@ def test_website_api():
 
         numbers = client.get("/api/numbers").json()
         assert len(numbers["accuracy"]) == 9 and "suffix_priors" not in numbers
+        assert [r["domain"] for r in numbers["brand_examples"]][:2] == ["google.com", "g0ogle.com"]
         assert client.get("/").status_code == 200

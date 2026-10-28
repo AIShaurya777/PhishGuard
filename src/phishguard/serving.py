@@ -22,6 +22,7 @@ from phishguard.evaluate import best_threshold, evaluate
 from phishguard.experiment import load_record
 from phishguard.explain import explain_url
 from phishguard.features import extract_features
+from phishguard.lookalike import LookAlikeRule
 from phishguard.modeling import char_ngram_model
 from phishguard.robustness import LEGIT_SUBDOMAINS, add_subdomain, all_edits, external_sites, https_www_root, switch_to_https
 from phishguard.split import get_splits, site_owner
@@ -32,6 +33,9 @@ HYBRID_PATH = MODELS_DIR / "hybrid_domain_only.pt"
 NGRAM_PATH = MODELS_DIR / "ngram_domain_only.joblib"
 OWNERS_PATH = MODELS_DIR / "train_owners.csv.gz"
 NUMBERS_PATH = MODELS_DIR / "site_numbers.json"
+
+# Real and look-alike brand domains, scored by both models (shown on the website).
+BRAND_EXAMPLES = ["google.com", "g0ogle.com", "goog1e.com", "paypal.com", "paypa1.com"]
 
 MAX_URL_LENGTH = 2000
 # A suffix "leans" one way when it has enough training rows and a lopsided label share.
@@ -133,6 +137,23 @@ def build(seed: int = 42) -> dict:
             "after": float((raw.predict_proba(after)[:, 1] >= raw_threshold).mean()),
         }
 
+    # Real brands vs look-alikes: the models never learned what a brand is.
+    examples = pd.Series(BRAND_EXAMPLES)
+    numbers["brand_examples"] = [{"domain": d, **{m: float(p) for m, p in zip(predict, ps)}}
+                                 for d, *ps in zip(examples, *(predict[m](examples) for m in predict))]
+
+    # The look-alike rule (not a model): how often it fires on phishing and on popular real sites.
+    rule = LookAlikeRule.from_tranco()
+
+    def fires(domains):
+        return float(pd.Series(domains).map(rule.match).notna().mean())
+
+    numbers["lookalike_rule"] = {
+        "PhiUSIIL test phishing": fires(phish),
+        "PhiUSIIL test legitimate": fires(legit),
+        **{name: fires(hosts) for name, hosts in sites.items() if name.startswith("CrUX") and len(hosts) > 100},
+    }
+
     # Per-suffix phishing share in training: the "country prior" behind many false alarms.
     train_suffix = domain.loc[train_idx].map(lambda h: TLD_EXTRACT(h).suffix)
     by_suffix = y.loc[train_idx].groupby(train_suffix.to_numpy()).agg(["size", "mean"])
@@ -141,7 +162,8 @@ def build(seed: int = 42) -> dict:
 
     # Site owners seen in training: a check on those sites says nothing about new sites.
     owners = y.loc[train_idx].groupby(site_owner(df.loc[train_idx, "URL"]).to_numpy()).agg(["size", "mean"])
-    owners.rename_axis("owner").rename(columns={"size": "rows", "mean": "phishing_share"}).round(4).to_csv(OWNERS_PATH)
+    owners.rename_axis("owner").rename(columns={"size": "rows", "mean": "phishing_share"}).round(4).to_csv(
+        OWNERS_PATH, compression={"method": "gzip", "mtime": 0})  # mtime 0: same data, same file
 
     joblib.dump(ngram, NGRAM_PATH)
     NUMBERS_PATH.write_text(json.dumps(numbers, indent=2) + "\n")
@@ -156,8 +178,9 @@ def _hybrid_proba(hybrid: CharURLClassifier, domains: pd.Series) -> np.ndarray:
 class Checker:
     """Checks one link the way the website shows it. Load once, then call check(url)."""
 
-    def __init__(self, hybrid, ngram, numbers: dict, owners: pd.DataFrame):
+    def __init__(self, hybrid, ngram, numbers: dict, owners: pd.DataFrame, lookalike: LookAlikeRule | None = None):
         self.hybrid, self.ngram, self.numbers, self.owners = hybrid, ngram, numbers, owners
+        self.lookalike = lookalike
 
     @classmethod
     def load(cls, models_dir=MODELS_DIR) -> "Checker":
@@ -169,6 +192,7 @@ class Checker:
             ngram=joblib.load(models_dir / NGRAM_PATH.name),
             numbers=json.loads((models_dir / NUMBERS_PATH.name).read_text()),
             owners=pd.read_csv(models_dir / OWNERS_PATH.name, index_col="owner", keep_default_na=False),
+            lookalike=LookAlikeRule.from_tranco(),
         )
 
     def check(self, url: str) -> dict:
@@ -202,6 +226,7 @@ class Checker:
             "features": [{"name": FEATURE_LABELS.get(name, name.replace("_", " ")),
                           "value": round(float(values[name]), 2), "score": round(float(score), 3)}
                          for name, score in top.items()],
+            "lookalike": self.lookalike_note(domain),
             "warnings": self.warnings(domain, hybrid_p >= models["hybrid"]["threshold"],
                                       ngram_p >= models["ngram"]["threshold"]),
         }
@@ -236,6 +261,18 @@ class Checker:
         if hybrid_says_phishing != ngram_says_phishing:
             notes.append("The two models disagree. Treat this result as uncertain.")
         return notes
+
+
+    def lookalike_note(self, domain: str) -> dict | None:
+        """The look-alike rule's finding (a rule, not a model), with how often the rule fires."""
+        found = self.lookalike.match(domain) if self.lookalike else None
+        if found is None:
+            return None
+        site, how = found
+        rates = self.numbers["lookalike_rule"]
+        return {"site": site, "how": how,
+                "caught_phishing": rates["PhiUSIIL test phishing"],
+                "popular_sites_flagged": max(v for k, v in rates.items() if k.startswith("CrUX"))}
 
 
 def display_parts(url: str, domain: str) -> list[dict]:

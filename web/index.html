@@ -117,6 +117,13 @@
             <p>The labels add to it. All 782 <code>google.com</code> links in the dataset are labelled phishing: they are
               phishing pages hosted on Google Docs and Sites, and 7 are on <code>accounts.google.com</code> itself. A model
               that reads only the domain can’t tell those apart from Google’s real sign-in page.</p>
+            <p>It also means the models never learned what a brand is. Both score the real <code>google.com</code> as more
+              phishing than the fake <code>g0ogle.com</code>. The hybrid passes <code>goog1e.com</code> and
+              <code>paypa1.com</code> as legitimate. The n-gram model flags them, but it flags the real Google too. The
+              dataset has almost no look-alike phishing to learn from.</p>
+            <div id="brand-table"></div>
+            <p>The link checker adds a simple look-alike rule for this, labelled as a rule. It isn’t machine
+              learning, and we report how rarely it helps on this dataset.</p>
             <p>Independent audits of this dataset report the same shortcuts and the same false alarm on
               <code>accounts.google.com</code>. Our <a href="https://github.com/AIShaurya777/PhishGuard/blob/main/docs/references.md">reference
               list</a> cites them.</p>

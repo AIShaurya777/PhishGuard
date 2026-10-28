@@ -228,6 +228,12 @@ code { font-size: 0.92em; padding: 0.05em 0.3em; border-radius: 4px; background:
 .attacks td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
 .attacks td:nth-child(2), .attacks td:last-child { white-space: nowrap; }
 .attacks .drop { color: var(--phish); font-weight: 700; }
+.attacks .is-phish { color: var(--phish); }
+.attacks .is-legit { color: var(--legit); }
+
+.lookalike { margin-top: 1.75rem; padding: 1rem 1.2rem; border: 2px solid var(--ink); border-radius: 10px; }
+.lookalike h3 { font-size: var(--step-1); }
+.lookalike p { margin-top: 0.4rem; max-width: 46rem; font-size: var(--step--1); color: var(--muted); }
 
 /* Method */
 .method-list { margin: 2rem 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr)); gap: 1.75rem 3rem; }

@@ -48,7 +48,23 @@ Nothing on the page is typed by hand:
 ## What we found while building it
 Every `google.com` link in PhiUSIIL (782 of them) is labelled **phishing**. They are phishing pages hosted on Google Docs, Google Sites and Cloud Storage, and 7 are on `accounts.google.com` itself. So when the model flags `accounts.google.com`, it is partly doing what the labels taught it. A model that sees only the domain can't tell a phishing form on Google Docs from Google's real sign-in page.
 
+## The models don't know brands (D17)
+| Domain | Hybrid | n-gram |
+|---|---|---|
+| `google.com` (real) | 81.5% phishing | 95.3% phishing |
+| `g0ogle.com` | 70.4% phishing | 87.8% phishing |
+| `goog1e.com` | 46.4%, legitimate | 73.7% phishing |
+| `paypal.com` (real) | 33.3%, legitimate | 44.6%, legitimate |
+| `paypa1.com` | 38.3%, legitimate | 75.7% phishing |
+
+The real Google scores *higher* than the fake one. So when `g0ogle.com` is flagged, the model isn't detecting a look-alike: it's reacting to the letters "google", which were always phishing in training. In the letter shading, the `0` is even blue.
+
+So the site adds a **look-alike rule** (`src/phishguard/lookalike.py`) in its own box, clearly labelled as a rule, not ML. It compares the name with the 1,000 most popular sites: `goog1e` → google.com, `gooogle` → google.com, `paypal-login.top` → paypal.com. Honest numbers: it catches only 1.9% of PhiUSIIL's phishing (the dataset has few look-alikes) and fires on 1.6–2.8% of popular real sites (often a company's own regional site, like `google.fr`).
+
 ## Likely viva questions
+**Q: Your model flagged `g0ogle.com`. So it detects look-alikes?**
+A: No. The real `google.com` scores even higher (81.5%), because every google.com link in the training data is phishing. `goog1e.com` and `paypa1.com` pass the hybrid as legitimate. The look-alike box on the site is a separate rule, and it says so.
+
 **Q: Why a website and not Streamlit?**
 A: We wanted to show the link letter by letter, with the ignored parts crossed out. That needs control over the layout. FastAPI plus a plain HTML page gives that with no build tools. The logic is in Python (`serving.py`) and tested. The page only displays it.
 

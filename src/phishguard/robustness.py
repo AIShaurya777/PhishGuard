@@ -20,7 +20,7 @@ from phishguard.split import site_owner
 from phishguard.urls import TLD_EXTRACT, URL_VIEWS, split_url
 
 _IP = re.compile(r"^\d{1,3}(\.\d{1,3}){3}$")
-_LOOK_ALIKE = str.maketrans("0134578", "oleastb")
+LOOK_ALIKE = str.maketrans("0134578", "oleastb")
 
 
 def _parts(domain: str):
@@ -72,7 +72,7 @@ def look_alike_letters(domain: str) -> str | None:
     if parts is None:
         return None
     sub, name, suffix, _ = parts
-    edited = _join(sub.translate(_LOOK_ALIKE), name.translate(_LOOK_ALIKE), suffix)
+    edited = _join(sub.translate(LOOK_ALIKE), name.translate(LOOK_ALIKE), suffix)
     return edited if edited != domain else None
 
 

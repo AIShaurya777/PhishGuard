@@ -87,6 +87,39 @@
       "after": 0.17755579553635709
     }
   },
+  "brand_examples": [
+    {
+      "domain": "google.com",
+      "hybrid": 0.8151471018791199,
+      "ngram": 0.9525892663922065
+    },
+    {
+      "domain": "g0ogle.com",
+      "hybrid": 0.7041056752204895,
+      "ngram": 0.877989542909909
+    },
+    {
+      "domain": "goog1e.com",
+      "hybrid": 0.46394097805023193,
+      "ngram": 0.7374323056125047
+    },
+    {
+      "domain": "paypal.com",
+      "hybrid": 0.3334795832633972,
+      "ngram": 0.4464779473857294
+    },
+    {
+      "domain": "paypa1.com",
+      "hybrid": 0.3830990493297577,
+      "ngram": 0.7565414705274778
+    }
+  ],
+  "lookalike_rule": {
+    "PhiUSIIL test phishing": 0.018601446779193936,
+    "PhiUSIIL test legitimate": 0.0032632880098887517,
+    "CrUX top 10k: bare domain": 0.015564853556485356,
+    "CrUX top 10k: with a subdomain": 0.02825077399380805
+  },
   "suffix_priors": {
     "123hjemmeside.no": {
       "train_rows": 1,

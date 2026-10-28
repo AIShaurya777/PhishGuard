@@ -219,6 +219,28 @@ Add yours in the same format and link the evidence. This file becomes the
 - **Found while building it:** all 782 `google.com` rows in PhiUSIIL are labelled phishing. They are phishing pages hosted on `docs.google.com` (526), `sites.google.com` (180) and Google Cloud Storage, plus 7 on `accounts.google.com` itself. So the hybrid's 0.999 on `accounts.google.com` (D14) isn't only the subdomain shortcut: in the domain-only view, the training labels say exactly that. A domain-only model can't separate a phishing form on Google Docs from Google's own sign-in page.
 - **Safety:** the page says on every screen that it's a course project and can't tell whether a link is safe. The server only listens on `127.0.0.1`. The n-gram model is a pickle (joblib), so only load files we built ourselves.
 
+## D17 · The models don't know brands; a separate look-alike rule, labelled as a rule (Milestone 8)
+- **Finding** (seed-42 models, `models/site_numbers.json` → `brand_examples`):
+
+  | Domain | Hybrid | n-gram |
+  |---|---|---|
+  | `google.com` (real) | 81.5% phishing | 95.3% phishing |
+  | `g0ogle.com` | 70.4% phishing | 87.8% phishing |
+  | `goog1e.com` | 46.4%, legitimate | 73.7% phishing |
+  | `paypal.com` (real) | 33.3%, legitimate | 44.6%, legitimate |
+  | `paypa1.com` | 38.3%, legitimate | 75.7% phishing |
+
+  The real `google.com` scores higher than the fake, because every `google.com` row in training is phishing (D16). Character occlusion even marks the `0` in `g0ogle.com` as pushing *towards legitimate*: blanking it makes the name closer to "google". The models learned letter patterns of this dataset, not "this imitates a brand". PhiUSIIL has very few look-alike domains to learn that from.
+- **Decision:** don't retrain. Add `phishguard.lookalike.LookAlikeRule`, a hand-written rule kept outside the models. It compares the domain's name with the 1,000 top Tranco sites and fires on:
+  - digits written for letters (`goog1e`);
+  - one letter added, removed or changed (names of 6+ letters: `gooogle`);
+  - a brand name as a separate word (`paypal-login.top`, `accounts.google.com.evil.top`).
+
+  The real sites and their subdomains never fire.
+- **Measured** (`models/site_numbers.json` → `lookalike_rule`): it fires on **1.9%** of PhiUSIIL test phishing domains (the dataset has few look-alikes) and 0.3% of its legitimate ones. On popular sites outside PhiUSIIL it fires on **1.6%** (CrUX bare) and **2.8%** (CrUX with subdomain). Most of those are a company's own regional or sister sites (`amazon.com.mx`, `google.fr`) or common words used as names (`static`, `mobile`).
+- **On the website:** shown in its own box, which says that it is a rule, not machine learning, and gives the two numbers above. The ML results in this log never include it.
+- **Evidence:** `src/phishguard/lookalike.py`, `tests/test_lookalike.py`, `phishguard.serving.build`.
+
 ## Reporting protocol from Milestone 4 on (fixed in advance)
 To avoid choosing what to report after seeing test results, every new model reports exactly this, and nothing is dropped if it looks bad:
 - **raw URL, domain only, registered domain** views (D10)

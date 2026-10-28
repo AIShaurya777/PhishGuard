@@ -110,6 +110,13 @@ function showResult(result) {
     ? el("ul", { class: "warnings" }, result.warnings.map((w) => el("li", {}, w)))
     : el("p", { class: "no-warnings" }, "None of our known weak spots apply to this link. That still doesn’t make it safe.");
 
+  const lookalike = result.lookalike
+    ? el("aside", { class: "lookalike" },
+        el("h3", {}, `Looks like ${result.lookalike.site}`),
+        el("p", {}, `${result.lookalike.how[0].toUpperCase()}${result.lookalike.how.slice(1)}. This comes from a simple rule, not the models: it compares the domain with the 1,000 most popular sites. `,
+          `It catches only ${pct(result.lookalike.caught_phishing, 1)} of the dataset’s phishing, and it flags up to ${pct(result.lookalike.popular_sites_flagged, 1)} of popular real sites, often a company’s own regional site.`))
+    : null;
+
   resultBox.replaceChildren(
     specimen(result),
     el("p", { class: "specimen-key" },
@@ -119,6 +126,7 @@ function showResult(result) {
     el("div", { class: "verdicts" },
       verdict("Hybrid model", result.models.hybrid),
       verdict("Character n-gram model", result.models.ngram)),
+    lookalike,
     el("div", { class: "result-columns" },
       el("div", {},
         el("h3", {}, "Read this result with care"),
@@ -224,9 +232,24 @@ function attacksTable(numbers) {
     )));
 }
 
+function brandTable(examples) {
+  const call = (p, threshold) => el("td", { class: `num ${p >= threshold ? "is-phish" : "is-legit"}` },
+    `${pct(p, 1)} ${p >= threshold ? "phishing" : "legitimate"}`);
+  document.querySelector("#brand-table").replaceChildren(el("table", { class: "attacks" },
+    el("caption", {}, "Real brands and look-alikes, scored by both models"),
+    el("thead", {}, el("tr", {},
+      el("th", { scope: "col" }, "Domain"), el("th", { scope: "col" }, "Hybrid"), el("th", { scope: "col" }, "Character n-grams"))),
+    el("tbody", {}, examples.rows.map((r) => el("tr", {},
+      el("th", { scope: "row" }, el("code", {}, r.domain)),
+      call(r.hybrid, examples.thresholds.hybrid),
+      call(r.ngram, examples.thresholds.ngram))))));
+}
+
 fetch("/api/numbers")
   .then((response) => response.json())
   .then((numbers) => {
+    brandTable({ rows: numbers.brand_examples,
+                 thresholds: { hybrid: numbers.models.hybrid.threshold, ngram: numbers.models.ngram.threshold } });
     accuracyChart(numbers.accuracy);
     realSitesChart(numbers);
     attacksTable(numbers);
