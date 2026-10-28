@@ -126,7 +126,7 @@ function showResult(result) {
     el("div", { class: "verdicts" },
       verdict("Hybrid model", result.models.hybrid),
       verdict("Character n-gram model", result.models.ngram)),
-    lookalike,
+    lookalike ?? "",
     el("div", { class: "result-columns" },
       el("div", {},
         el("h3", {}, "Read this result with care"),
