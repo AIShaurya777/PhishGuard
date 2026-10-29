@@ -1,6 +1,6 @@
 # Walkthrough: notebooks 02 and 03
 
-A guide for presenting these two notebooks. It explains what each part does and why, in the order the cells appear. Open the notebooks in VS Code next to this file.
+A guide for presenting these two notebooks. The notebooks themselves now explain every step in plain words; this file adds what to say, and answers to likely questions. The step numbers match the headings in the notebooks.
 
 **Don't re-run them live.** They train hundreds of models (several settings × 5 splits) and take a long time. All outputs are already saved in the notebooks. If asked to run something, run the first cell or `.venv/bin/pytest`.
 
@@ -69,14 +69,14 @@ Mistakes come in two kinds:
 
 **Goal:** reproduce the published results. The original paper reports 99.79%; a 2026 paper reports 99.99% with Random Forest.
 
-### Cell 1: load the data and pick the columns
+### Step 1: load the data and pick the columns
 ```python
 X = df.drop(columns=TARGET).select_dtypes("number")
 # → 50 numeric columns (the 4 text columns URL, Domain, TLD, Title are left out)
 ```
 **Say:** "We give the models every numeric column the dataset provides: 50 of them. These include columns about the URL, columns counted from the downloaded web page (like lines of code or number of images), and a similarity score."
 
-### Model 1: Logistic Regression (cells 2–3)
+### Step 2: Logistic Regression
 ```python
 make_pipeline(StandardScaler(), LogisticRegression(C=C, max_iter=2000))
 ```
@@ -87,7 +87,7 @@ make_pipeline(StandardScaler(), LogisticRegression(C=C, max_iter=2000))
 
 **Output:** per split, 1–6 mistakes out of ~35,000 test links (99.98–99.99%).
 
-### Model 2: Random Forest (cells 4–5)
+### Step 3: Random Forest
 ```python
 RandomForestClassifier(n_estimators=300, max_depth=..., min_samples_leaf=...)
 ```
@@ -98,7 +98,7 @@ RandomForestClassifier(n_estimators=300, max_depth=..., min_samples_leaf=...)
 
 **Output:** 0 mistakes on every split.
 
-### Model 3: XGBoost (cells 6–7)
+### Step 4: XGBoost
 ```python
 XGBClassifier(max_depth=..., n_estimators=..., learning_rate=0.1)
 ```
@@ -110,23 +110,23 @@ XGBClassifier(max_depth=..., n_estimators=..., learning_rate=0.1)
 
 **Output:** 0 mistakes on every split.
 
-### Cell 9: the results table
+### Step 5: the results table
 | Model | Accuracy (5 splits) |
 |---|---|
 | Logistic Regression | 99.99 ± 0.00% |
 | Random Forest | 100.00 ± 0.00% |
 | XGBoost | 100.00 ± 0.00% |
 
-**How to read it (cell 10):**
+**How to read it:**
 - A handful of errors out of 35,130 is noise. We **don't rank** these three models; we say all three are indistinguishable from perfect.
 - **The rule of three:** even 0 errors in 35,130 only proves accuracy is above about 99.99% (3 / 35,130) with 95% confidence.
 
-### Cell 11: which columns the models rely on
+### Step 6: which columns the models rely on
 A bar chart of feature importance from Random Forest and XGBoost.
 - **Feature importance:** how much each column helped the trees make their decisions.
 - At the top are columns like `URLSimilarityIndex` (similarity to a list of known legitimate sites) and page counts like `LineOfCode`.
 
-### Cell 12: the conclusion
+### What we learned: the conclusion
 **Say:**
 - "We reproduced the published 99.9%+, on all 5 splits, even with logistic regression, and with site owners kept out of more than one split."
 - "But when even a linear model is nearly perfect, it usually means a few columns give the answer away."
@@ -142,7 +142,7 @@ The "why is it so perfect?" question is Milestone 3. You can say "we'll investig
 
 **Published comparison:** a 2026 paper reports XGBoost at 99.74% on URL features. It used a different split, so the comparison is only indicative.
 
-### Cell 1: turn every URL into 40 numbers
+### Step 1: turn every URL into 40 numbers
 ```python
 from phishguard.features import extract_features
 X = extract_features(df["URL"])     # → (234204, 40)
@@ -151,7 +151,7 @@ X = extract_features(df["URL"])     # → (234204, 40)
 
 Open `src/phishguard/features.py` in VS Code if she wants to see the code.
 
-### Cell 2: the 40 features, in groups
+### Step 1, continued: the 40 features, in groups
 | Group | Examples | The idea |
 |---|---|---|
 | Size | `url_length`, `host_length`, `path_length` | Phishing links are often long, to hide the real domain |
@@ -175,7 +175,7 @@ extract_features(pd.Series(["http://192.168.0.1:8080/secure/login.php?id=1"])).T
 # has_ip=1, has_port=1, is_https=0, path_depth=2, num_query_params=1, suspicious_words=2 ...
 ```
 
-### Cells 4–6: how do the two classes differ? (EDA)
+### Steps 2–3: how do the two classes differ? (EDA)
 Six histograms, plus a table of the average of each feature per class:
 
 | Feature (average) | Legitimate | Phishing |
@@ -190,15 +190,15 @@ Six histograms, plus a table of the average of each feature per class:
 
 Then point out the odd thing: `path_length` is **exactly 0** for every legitimate link. "Every legitimate link in this dataset is just a homepage. We'll come back to why that matters." That's the hook for Milestone 3.
 
-### Model 1: Random Forest (cell 8)
+### Step 4: Random Forest
 Same as in notebook 02, now on our 40 features. Settings: `max_depth` unlimited or 30; `min_samples_leaf` 1 or 3.
 
-### Model 2: XGBoost (cells 9–10)
+### Step 5: XGBoost
 A slightly wider search than in notebook 02:
 - **`subsample=0.8`, `colsample_bytree=0.8`:** each tree sees a random 80% of rows and columns. That adds variety and reduces overfitting.
 - **`min_child_weight`:** 1 or 5. It stops trees from splitting on just a handful of links.
 
-### Cell 10: the results
+### Step 5: the results
 | Model | Accuracy (5 splits) | ROC-AUC | Seed 42 [95% CI] |
 |---|---|---|---|
 | Random Forest | 99.63 ± 0.04% | 0.9972 | 99.70% [99.63, 99.76] |
@@ -206,10 +206,10 @@ A slightly wider search than in notebook 02:
 
 **Say:** "From the link text alone, our own features get 99.6%, close to the 99.74% a 2026 paper reports. It's slightly below the all-columns models, which makes sense: we have less information."
 
-### Cell 11: top 15 features of XGBoost
+### Step 6: top 15 features of XGBoost
 Point out which features the model uses most. You'll see `is_https` and `has_www` near the top. Remember that for next week.
 
-### Cells 12–13: what does it still get wrong? (error analysis)
+### Step 7: what does it still get wrong? (error analysis)
 We look at the mistakes on the **validation** set, never test, because test is only for the final score.
 ```
 missed phishing URLs on validation: 117
@@ -219,7 +219,7 @@ Examples: `https://www.netflix-vn.com`, `https://www.lglsvy.top`, `https://www.k
 
 **Say:** "Every phishing link the model missed looks exactly like a legitimate link in this dataset: `https://www.` plus a domain, no path. For these, the only clue left is the domain name itself, like the fake `netflix-vn.com` or a cheap `.top` domain."
 
-### Cell 14: conclusion, and what comes next
+### What we learned: conclusion, and what comes next
 "Character-level models can read the domain name directly. That's notebook 04."
 
 ---
