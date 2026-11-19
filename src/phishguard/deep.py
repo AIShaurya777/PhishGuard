@@ -37,7 +37,9 @@ PAD, UNK = 0, 1     # id 0 fills short URLs up to the batch length; id 1 = a cha
 
 
 def pick_device() -> torch.device:
-    """The Apple GPU (MPS) if there is one, else the CPU."""
+    """An NVIDIA GPU (CUDA) if there is one, else the Apple GPU (MPS), else the CPU."""
+    if torch.cuda.is_available():
+        return torch.device("cuda")
     return torch.device("mps" if torch.backends.mps.is_available() else "cpu")
 
 
