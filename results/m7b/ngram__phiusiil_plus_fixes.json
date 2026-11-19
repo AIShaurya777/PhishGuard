@@ -1,0 +1,358 @@
+{
+  "model": "ngram",
+  "variant": "PhiUSIIL + fixes",
+  "seeds": [
+    42,
+    0,
+    1,
+    2,
+    3
+  ],
+  "pools": {
+    "tranco_train": 8510,
+    "pdb_train": 25000,
+    "tranco_test": 8330,
+    "crux_bare": 3851,
+    "crux_subdomain": 1448,
+    "phishtank_new": 7518
+  },
+  "settings": {
+    "train_prefixes": [
+      "app",
+      "docs",
+      "support",
+      "news",
+      "m",
+      "en",
+      "help",
+      "store",
+      "portal",
+      "status"
+    ],
+    "augment_share": 0.25,
+    "pdb_sample": 25000,
+    "phishtank_from": "2025-01-01",
+    "val_share": 0.15
+  },
+  "summary": {
+    "phiusiil_accuracy": {
+      "mean": 0.8573788236200164,
+      "sd": 0.009328961647677051
+    },
+    "phiusiil_roc_auc": {
+      "mean": 0.912109548091955,
+      "sd": 0.00657515558298194
+    },
+    "crux_bare": {
+      "mean": 0.17195533627629186,
+      "sd": 0.03699239496855376
+    },
+    "crux_subdomain": {
+      "mean": 0.38729281767955803,
+      "sd": 0.04465888486830103
+    },
+    "tranco_test": {
+      "mean": 0.15673469387755098,
+      "sd": 0.03825018885529405
+    },
+    "phishtank_new": {
+      "mean": 0.8134078212290502,
+      "sd": 0.021412667410701147
+    },
+    "phiusiil_legit_plus_mail": {
+      "mean": 0.6582929828753754,
+      "sd": 0.06388443268980981
+    },
+    "phiusiil_phish_all_edits": {
+      "mean": 0.38706478061165095,
+      "sd": 0.030986295823048127
+    }
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "params": {
+        "C": 3.0
+      },
+      "threshold": 0.54,
+      "train_rows": 225928,
+      "train_phishing_share": 0.43785188201550934,
+      "phiusiil_test": {
+        "accuracy": 0.8679191574153146,
+        "precision": 0.911818984193212,
+        "recall": 0.7624287151962429,
+        "f1": 0.8304589301373867,
+        "mcc": 0.7314597146412961,
+        "balanced_accuracy": 0.8540450127279113,
+        "roc_auc": 0.9176938326749263,
+        "pr_auc": 0.9223113931596241,
+        "tpr_at_fpr_1pct": 0.6636699094263669,
+        "tpr_at_fpr_0_1pct": 0.5508218718550821,
+        "brier": 0.10131104406283545,
+        "log_loss": 0.3265421090038659,
+        "tn": 19126,
+        "fp": 1099,
+        "fn": 3541,
+        "tp": 11364
+      },
+      "crux_bare": {
+        "domains": 3851,
+        "label": 0,
+        "flagged": 0.19293689950662166
+      },
+      "crux_subdomain": {
+        "domains": 1448,
+        "label": 0,
+        "flagged": 0.4074585635359116
+      },
+      "tranco_test": {
+        "domains": 8330,
+        "label": 0,
+        "flagged": 0.17418967587034814
+      },
+      "phishtank_new": {
+        "domains": 7518,
+        "label": 1,
+        "flagged": 0.8226922053737696
+      },
+      "phiusiil_legit_plus_mail": {
+        "domains": 20220,
+        "label": 0,
+        "flagged": 0.7044015825914935
+      },
+      "phiusiil_phish_all_edits": {
+        "domains": 9531,
+        "label": 1,
+        "flagged": 0.415801070192005
+      }
+    },
+    {
+      "seed": 0,
+      "params": {
+        "C": 3.0
+      },
+      "threshold": 0.48,
+      "train_rows": 225727,
+      "train_phishing_share": 0.43733359323430515,
+      "phiusiil_test": {
+        "accuracy": 0.8525192143467122,
+        "precision": 0.8787572029278928,
+        "recall": 0.7569253471057751,
+        "f1": 0.8133040250801773,
+        "mcc": 0.6978072194004671,
+        "balanced_accuracy": 0.8399630939079639,
+        "roc_auc": 0.9110940878396011,
+        "pr_auc": 0.9144143885356402,
+        "tpr_at_fpr_1pct": 0.6304245757596083,
+        "tpr_at_fpr_0_1pct": 0.5025152592393856,
+        "brier": 0.10725659829246158,
+        "log_loss": 0.34203097993756537,
+        "tn": 18664,
+        "fp": 1557,
+        "fn": 3624,
+        "tp": 11285
+      },
+      "crux_bare": {
+        "domains": 3851,
+        "label": 0,
+        "flagged": 0.2274733835367437
+      },
+      "crux_subdomain": {
+        "domains": 1448,
+        "label": 0,
+        "flagged": 0.4544198895027624
+      },
+      "tranco_test": {
+        "domains": 8330,
+        "label": 0,
+        "flagged": 0.21608643457382953
+      },
+      "phishtank_new": {
+        "domains": 7518,
+        "label": 1,
+        "flagged": 0.8467677573822825
+      },
+      "phiusiil_legit_plus_mail": {
+        "domains": 20213,
+        "label": 0,
+        "flagged": 0.7431356057982487
+      },
+      "phiusiil_phish_all_edits": {
+        "domains": 10793,
+        "label": 1,
+        "flagged": 0.42268136755304364
+      }
+    },
+    {
+      "seed": 1,
+      "params": {
+        "C": 3.0
+      },
+      "threshold": 0.63,
+      "train_rows": 225843,
+      "train_phishing_share": 0.4376225962283533,
+      "phiusiil_test": {
+        "accuracy": 0.8550218840289499,
+        "precision": 0.9414937380016455,
+        "recall": 0.6993277653289875,
+        "f1": 0.802540325722746,
+        "mcc": 0.7110067992993595,
+        "balanced_accuracy": 0.8338457907218344,
+        "roc_auc": 0.9107827076284841,
+        "pr_auc": 0.9134150313010715,
+        "tpr_at_fpr_1pct": 0.6228695593128267,
+        "tpr_at_fpr_0_1pct": 0.46920621986826916,
+        "brier": 0.10745549882487308,
+        "log_loss": 0.34369495649906967,
+        "tn": 19590,
+        "fp": 640,
+        "fn": 4428,
+        "tp": 10299
+      },
+      "crux_bare": {
+        "domains": 3851,
+        "label": 0,
+        "flagged": 0.14593612048818488
+      },
+      "crux_subdomain": {
+        "domains": 1448,
+        "label": 0,
+        "flagged": 0.35290055248618785
+      },
+      "tranco_test": {
+        "domains": 8330,
+        "label": 0,
+        "flagged": 0.1262905162064826
+      },
+      "phishtank_new": {
+        "domains": 7518,
+        "label": 1,
+        "flagged": 0.7954243149773876
+      },
+      "phiusiil_legit_plus_mail": {
+        "domains": 20227,
+        "label": 0,
+        "flagged": 0.6284669006773125
+      },
+      "phiusiil_phish_all_edits": {
+        "domains": 10438,
+        "label": 1,
+        "flagged": 0.35083349300632305
+      }
+    },
+    {
+      "seed": 2,
+      "params": {
+        "C": 3.0
+      },
+      "threshold": 0.62,
+      "train_rows": 225809,
+      "train_phishing_share": 0.4375467762578108,
+      "phiusiil_test": {
+        "accuracy": 0.8657748813811239,
+        "precision": 0.9377611420612814,
+        "recall": 0.7301748678324522,
+        "f1": 0.8210502248304246,
+        "mcc": 0.7306648306579999,
+        "balanced_accuracy": 0.8474174062373017,
+        "roc_auc": 0.9186647274696078,
+        "pr_auc": 0.921635469459688,
+        "tpr_at_fpr_1pct": 0.6524332384438118,
+        "tpr_at_fpr_0_1pct": 0.4825132167547784,
+        "brier": 0.10206083543729234,
+        "log_loss": 0.3292423089036703,
+        "tn": 19517,
+        "fp": 715,
+        "fn": 3981,
+        "tp": 10773
+      },
+      "crux_bare": {
+        "domains": 3851,
+        "label": 0,
+        "flagged": 0.146455466112698
+      },
+      "crux_subdomain": {
+        "domains": 1448,
+        "label": 0,
+        "flagged": 0.3453038674033149
+      },
+      "tranco_test": {
+        "domains": 8330,
+        "label": 0,
+        "flagged": 0.13013205282112844
+      },
+      "phishtank_new": {
+        "domains": 7518,
+        "label": 1,
+        "flagged": 0.7991487097632349
+      },
+      "phiusiil_legit_plus_mail": {
+        "domains": 20224,
+        "label": 0,
+        "flagged": 0.5853935917721519
+      },
+      "phiusiil_phish_all_edits": {
+        "domains": 10802,
+        "label": 1,
+        "flagged": 0.36863543788187375
+      }
+    },
+    {
+      "seed": 3,
+      "params": {
+        "C": 3.0
+      },
+      "threshold": 0.59,
+      "train_rows": 225686,
+      "train_phishing_share": 0.4372712529798038,
+      "phiusiil_test": {
+        "accuracy": 0.8456589809279818,
+        "precision": 0.9264692646926469,
+        "recall": 0.6909188536143366,
+        "f1": 0.7915417147251057,
+        "mcc": 0.6913596945960117,
+        "balanced_accuracy": 0.8252676419225853,
+        "roc_auc": 0.9023123848471558,
+        "pr_auc": 0.9058875021194595,
+        "tpr_at_fpr_1pct": 0.5913819719444258,
+        "tpr_at_fpr_0_1pct": 0.4739244244580173,
+        "brier": 0.11306475386921076,
+        "log_loss": 0.35960978619772616,
+        "tn": 19414,
+        "fp": 817,
+        "fn": 4605,
+        "tp": 10294
+      },
+      "crux_bare": {
+        "domains": 3851,
+        "label": 0,
+        "flagged": 0.1469748117372111
+      },
+      "crux_subdomain": {
+        "domains": 1448,
+        "label": 0,
+        "flagged": 0.3763812154696133
+      },
+      "tranco_test": {
+        "domains": 8330,
+        "label": 0,
+        "flagged": 0.1369747899159664
+      },
+      "phishtank_new": {
+        "domains": 7518,
+        "label": 1,
+        "flagged": 0.8030061186485767
+      },
+      "phiusiil_legit_plus_mail": {
+        "domains": 20228,
+        "label": 0,
+        "flagged": 0.6300672335376706
+      },
+      "phiusiil_phish_all_edits": {
+        "domains": 10748,
+        "label": 1,
+        "flagged": 0.3773725344250093
+      }
+    }
+  ]
+}
